@@ -24,5 +24,11 @@ public class Variable {
 		long f= 25L;
 		System.out.println("f="+f);
 		
+		float g= 43.8f;
+		System.out.println(g);
+		
+		double h = 43.8;
+		System.out.println(h);
+		
 	}
 }
