@@ -1,9 +1,0 @@
-package instance;
-
-public class CompTest {
-
-	public static void main(String[] args) {
-		
-		
-	}
-}
