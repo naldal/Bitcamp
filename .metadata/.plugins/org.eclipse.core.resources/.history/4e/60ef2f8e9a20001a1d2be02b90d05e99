@@ -1,0 +1,16 @@
+package instance;
+
+public class Practice1 {
+
+	public static void main(String[] args) {
+		String name = "현빈";
+		String department = "개발부";
+		String position = "대리";
+		String salary = 1500000원";
+		
+		System.out.println(name);
+		System.out.println(department);
+		System.out.println(position);
+		System.out.println(salary);
+	}
+}

@@ -1,0 +1,14 @@
+package instance;
+
+public class CompTest {
+
+	public static void main(String[] args) {
+		int score=60;
+
+		String result = score>=80 && score<=100 ? "м問":"碳м問";
+		System.out.println("唸婁="+result);
+		
+		result = score%2==0 ? "礎熱" : "�汝�";
+		System.out.println(result);
+	}
+}

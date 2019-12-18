@@ -1,0 +1,18 @@
+package instance;
+
+public class CompTest {
+
+	public static void main(String[] args) {
+		
+		int a=5;
+		int b= a++; 
+		//a=6
+		//b=5 (후위연산자보다 =이 먼저 들어감)
+		System.out.println("a="+a+"\t b="+b); 
+		
+		int c = ++a - b--; //a=6 b=5
+		System.out.println("a="+a+"\t b="+b+"\t c="+c);
+		
+	}
+	
+}

@@ -1,0 +1,17 @@
+package instance;
+
+public class Variable2 {
+	//필드변수
+	int a;//초기값 0
+	static int b;
+	//int a=5 불가능. 설정만 가능하고 선언 불가능
+	
+	public static void main(String[] args) {
+		Variable2 var2 = new Variable2();
+		int a = 10; //local variable 지역변수, 쓰레기값 초기화(선언)
+		System.out.println("지역 a="+a);
+		System.out.println("필드 a="+var2.a);
+		System.out.println("필드 b="+b);
+	}
+	
+}
