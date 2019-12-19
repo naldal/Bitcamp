@@ -8,16 +8,15 @@ public class IfTest2 {
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
 		System.out.println("a값 입력");
 		int a = Integer.parseInt(br.readLine());
 		System.out.println("b값 입력");
 		int b = Integer.parseInt(br.readLine());
 		System.out.println("c값 입력");
 		int c = Integer.parseInt(br.readLine());
-		
-		int tmp1=0;
-		int tmp2=0;
-		int tmp3=0;
+
+		int tmp1=0, tmp2=0, tmp3=0;
 		
 		if(a>=b) {
 			tmp1=a;
