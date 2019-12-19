@@ -46,7 +46,7 @@ public class MethodTest4 {
 		
 		int realAge = 2019-age+1;
 		
-		System.out.println(name + "님은 " + gender + "이고 " + realAge + "살 입니다.");
+		System.out.println(name+"님은 "+gender+"이고 "+realAge+"살 입니다.");
 	
 		
 		
