@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 //[문제6]
 //문제5번에서 조건2, 조건3의 if문으로 처리한 것을 switch로 바꾸시오
 
-public class Test3 {
+public class Practice6 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int input1, input2, input3, input4;

@@ -31,7 +31,7 @@ import java.io.InputStreamReader;
 //Æò°¡=excellent
 //
 
-public class Test2 {
+public class Practice5 {
 	public static void main(String[] args) throws IOException {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

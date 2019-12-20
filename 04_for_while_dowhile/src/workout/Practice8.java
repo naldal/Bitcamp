@@ -4,11 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Test5 {
+public class Practice8 {
 	static int total;
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		Test5 t5 = new Test5();
+		Practice8 t5 = new Practice8();
 		String a;
 		String b="aa";
 		

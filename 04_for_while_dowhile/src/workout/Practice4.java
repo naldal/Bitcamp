@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Test1 {
+public class Practice4 {
 
 //	덧셈 공부
 //	10~99 사이의 난수를 2개(a,b) 발생하여 합을 맞추는 게임
