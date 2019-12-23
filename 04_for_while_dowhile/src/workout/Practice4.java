@@ -6,22 +6,6 @@ import java.io.InputStreamReader;
 
 public class Practice4 {
 
-//	덧셈 공부
-//	10~99 사이의 난수를 2개(a,b) 발생하여 합을 맞추는 게임
-//	문제수는 총 5문제를 제공한다
-//	1문제당 점수 20점씩 계산
-//	만약 틀리면 기회를 1번 더 제공한다
-//	[실행결과]
-//			[1] 25 + 36 = 45
-//			틀렸다
-//			[1] 25 + 36 = 61
-//			딩동뎅
-//
-//			[2] 78 + 10 = 100
-//			틀렸다
-//			[2] 78 + 10 = 95
-//			틀렸다...정답 :
-//			...
 	public static void main(String[] args) throws IOException{
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -32,7 +16,7 @@ public class Practice4 {
 		boolean flag = false;
 		
 		
-		while(true) {
+		LOOP:while(true) {
 			a=(int)(Math.random()*99)+11;
 			b=(int)(Math.random()*99)+11;
 			
@@ -72,16 +56,12 @@ public class Practice4 {
 						break;
 					} else if (yn.equals("N")||yn.equals("n")) {
 						System.out.println("시스템 종료");
-						flag=true;
-						break;
+						break LOOP; //continue LOOP도 됨;
 					} else {
 						System.out.println("다시 입력하세요");
 						continue;
 					}
 				}
-			}
-			if(flag==true) {
-				break;
 			}
 		}//while
 	}
