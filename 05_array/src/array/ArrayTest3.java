@@ -25,14 +25,13 @@ public class ArrayTest3 {
 		
 	}
 	
-	public int input() throws IOException {
+	public void input() throws IOException {
 		sum = 0;
 		for(int i=0; i<arr.length ; i++) {
 			System.out.print("arr["+i+"] : ");
 			arr[i] = Integer.parseInt(br.readLine());
 			sum+=arr[i];
 		}
-		return sum;
 	}
 	
 	public int big() {
