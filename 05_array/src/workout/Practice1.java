@@ -11,7 +11,7 @@ public class Practice1 {
 			int ran = (int)(Math.random()*26)+65;
 			arr[i-1]=ran;
 			System.out.print((char)arr[i-1]+" ");
-
+			
 			if(i%10==0) {
 				System.out.println();
 			}
@@ -23,9 +23,9 @@ public class Practice1 {
 			for(int j=0; j<arr.length; j++) {
 				if(i==arr[j]) {
 					cnt++;
-					System.out.println((char)i+": "+cnt);
 				}
 			}
+			System.out.println((char)i+": "+cnt);
 			cnt=0;
 		}
 		

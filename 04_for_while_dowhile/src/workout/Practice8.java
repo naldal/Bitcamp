@@ -9,11 +9,8 @@ public class Practice8 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Practice8 t5 = new Practice8();
-		String a;
-		String b="aa";
-		
 		int input;
-		int money, thorwAway = 0;
+		int thorwAway = 0;
 		
 		while(true) {
 			System.out.println("***********");

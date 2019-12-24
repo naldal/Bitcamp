@@ -22,13 +22,13 @@ public class Practice2 {
 				String tmp2="";
 				int cnt=0;
 				
-				while(true) {
-					int portion = dec/2;	
-					int remain = dec%2;		
-					
-					tmp += remain;		
-					dec = portion;		
-					tmp2 = tmp;			
+				while(true) { //10
+					int portion = dec/2; //portion = 5    2    1   
+					int remain = dec%2;		// remain = 0   1    0     1
+					 
+					tmp += remain;		// tmp=0   1    0    1
+					dec = portion;		//dec==5   2    1    x
+					tmp2 = tmp;			//tmp2=0   1    0    1
 					
 					if(portion == 1) {
 						tmp2 += portion;
