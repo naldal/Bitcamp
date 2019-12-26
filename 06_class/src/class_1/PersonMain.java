@@ -13,18 +13,14 @@ package class_1;
 
 class Person {
 
-	private String name;
+	private String name; //필드, 초기값이 정해져있음
 	private int age;
 	
-	public String getName() {
-		return name;
-	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getAge() {
-		return age;
-	}
+
 	public void setAge(int age) {
 		this.age = age;
 	}
@@ -33,6 +29,18 @@ class Person {
 		this.name=name;
 		this.age=age;
 	}
+	
+	public void setData() {
+		
+	}
+	
+	public int getAge() {
+		return age;
+	}
+	
+	public String getName() {
+		return name;
+	}
 }
 
 //----------------------------------------------
@@ -40,24 +48,27 @@ class Person {
 public class PersonMain {
 
 	public static void main(String[] args) {
-		Person aa;
-		aa = new Person();
-		System.out.println(aa.toString());
-			
+		Person aa = new Person();
+		System.out.println("주솟값="+aa.toString());
 		aa.setName("홍길동");
 		aa.setAge(25);
 		System.out.println("이름="+aa.getName()+"\t 나이="+aa.getAge());
 		
 		Person bb = new Person();
-		System.out.println(bb.toString());
+		System.out.println("주솟값="+bb.toString());
 		bb.setAge(16);
 		bb.setName("코난");
 		System.out.println("이름="+bb.getName()+"\t 나이="+bb.getAge());
 		
 		Person cc = new Person();
-		System.out.println(cc.toString());
+		System.out.println("주솟값="+cc.toString());
 		cc.setData("또치", 30);
 		System.out.println("이름="+cc.getName()+"\t 나이="+cc.getAge());
+		
+		Person dd = new Person();
+		System.out.println("주솟값="+dd.toString());
+		cc.setData();
+		System.out.println("이름="+dd.getName()+"\t 나이="+dd.getAge());
 		System.out.println();
 	}
 }

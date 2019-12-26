@@ -8,6 +8,13 @@ public class MultiArray6 {
 
 	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int person;
+		
+		while(true) {
+			System.out.print("ÀÎ¿ø¼ö:");
+			
+		}
+		
 	}
 }
 
