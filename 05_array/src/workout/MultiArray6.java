@@ -43,15 +43,12 @@ public class MultiArray6 {
 					ar[i+1][k+1] = jumsu+"";
 					
 					sum+=jumsu;
-						
 				}
-				
 				ar[i+1][subjectCnt+1]=sum+"";
-				
 				avg = (double)sum/subjectCnt;
+			
 				sum=0;
-				ar[i+1][subjectCnt+2] = String.format("%.2f",avg);
-				
+				ar[i+1][subjectCnt+2] = String.format("%.2f",avg);	
 			}//for i
 			
 			for(int i=0; i<ar.length; i++) {
@@ -60,39 +57,5 @@ public class MultiArray6 {
 				}
 				System.out.println();
 			}
-			
 		}	
 	} 
-
-
-
-/*
- 인원수를 입력하여 인원수만큼 데이터를 입력받고 총점과 평균을 구하시오
- 평균은 소수이하 2째자리까지 출력 (가변길이 배열 사용)
- 
- [실행결과]
- 인원수:2 (cnt)
- 
- 이름입력: 홍길동(name)
- 과목수입력:2 (subjectCnt)
- 과목명입력:국어  (subject) 
- 과목명 입력:영어
- 국어 점수 입력:95 (jumsu)
- 영어 점수 입력:100
-------------------------
- 이름입력: 이기자(name)
- 과목수입력:3 (subjectCnt)
- 과목명입력:국어  (subject) 
- 과목명 입력: 영어
- 과목명 입력: 과학
- 국어 점수 입력:95 (jumsu)
- 영어 점수 입력:100
- 
-... 
- -----------------
-  이름  국어  영어   총점     평균
- 홍길동 95 100 xxx xx.xx
- 
-  이름   국어 영어  과학   총점   평균
- 이기자 95 100 90 xxx xx.xx
- */

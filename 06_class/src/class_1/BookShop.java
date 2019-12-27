@@ -10,6 +10,7 @@ public class BookShop {
 		return bookName;
 	}
 	public void setBookName(String bookName) {
+		System.out.println(this);
 		this.bookName = bookName;
 	}
 	public String getAuthor() {
