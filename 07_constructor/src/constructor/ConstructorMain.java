@@ -9,10 +9,12 @@ class ConstructorTest{
 	}
 	
 	public ConstructorTest(String name) {
+		this(); //Overload된 다른 생성자를 호출
 		this.name=name;
 	}
 	
 	public ConstructorTest(int age) {
+		this("코난");
 		this.age=age;
 	}										//생성자 오버로드
 	
@@ -22,6 +24,7 @@ class ConstructorTest{
 	
 	public int getAge() {
 		return age;
+		
 	}
 
 }
