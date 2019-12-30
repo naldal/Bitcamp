@@ -13,11 +13,11 @@ public class MemberMain {
 		
 		while(true) {
 			System.out.println("***********");
-			System.out.println("  1. 가입");
-			System.out.println("  2. 출력");
-			System.out.println("  3. 수정");
-			System.out.println("  4. 탈퇴");
-			System.out.println("  5. 끝내기");
+			System.out.println("  1. 가입       ");
+			System.out.println("  2. 출력       ");
+			System.out.println("  3. 수정       ");
+			System.out.println("  4. 탈퇴       ");
+			System.out.println("  5. 끝내기    ");
 			System.out.println("***********");
 			System.out.print("번호 : ");
 			inputInt = sc.nextInt();
@@ -64,9 +64,10 @@ public class MemberMain {
 			System.out.println("1 row created");
 			System.out.println(dto.length-cnt+"자리 남았습니다");
 			cnt++;
+			System.out.println("cnt의 값"+cnt);
 			break;
 		}
-	}
+	} //insert
 	
 	
 	public void list() { //전체회원
@@ -77,13 +78,12 @@ public class MemberMain {
 			System.out.println();
 		}
 		System.out.println();
-	}
+	} //list
 	
 	public MemberDTO update() {
 		System.out.println("핸드폰 번호 입력 :");
 		String tmpUpdate = sc.next();
 		int i;
-		//MemberDTO dtoUpdate = new MemberDTO();
 		
 		for(i=0; i<cnt-1; i++) {
 			if(dto[i].getPhone().equals(tmpUpdate)) {
@@ -108,8 +108,9 @@ public class MemberMain {
 				System.out.println("찾는 회원이 없습니다.");
 			}
 		}
+		System.out.println("1 row updated");
 		return dto[i];
-	}
+	} //update
 	
 	public void delete() {
 		System.out.println("핸드폰 번호 입력 :");
@@ -117,12 +118,19 @@ public class MemberMain {
 		int i;
 		for(i=0; i<cnt; i++) {
 			if(dto[i].getPhone().equals(tmpDelete)) {
-				dto[i]=dto[i+1];
-				cnt--;
+				if(i<=3) {
+					for(int j=i; j<cnt-1; j++) {
+						dto[i]=dto[i+1];
+						cnt--;
+					}
+				} else {
+					cnt--;
+				}
 				System.out.println("탈퇴되셨습니다.");
 			} else {
 				System.out.println("찾는 회원이 없다");
 			}
 		}
-	}
+		System.out.println("1 row deleted");
+	} //delete
 }
