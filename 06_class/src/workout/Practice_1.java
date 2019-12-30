@@ -12,7 +12,7 @@ public class Practice_1 {
 		System.out.println("문자열 입력 :");
 		input = sc.next();
 		input = input.toLowerCase();
-		tmp =input;
+		tmp = input;
 		
 		System.out.println("현재 문자열 입력 : ");
 		now = sc.next();
@@ -23,7 +23,7 @@ public class Practice_1 {
 		while(true) {
 			if(input.indexOf(now)!=-1) {
 				cnt++;
-				input = input.substring(input.indexOf(now)+now.length());
+				input = input.substring(input.indexOf(now)+now.length()); 
 			} else {
 				break;
 			}
@@ -35,7 +35,6 @@ public class Practice_1 {
 			System.out.println("치환불가");
 		} else {
 			System.out.println(cnt+"번 치환");
-			input = input.replace(now, old);
 			System.out.println(tmp.replace(now, old));
 		}
 	}

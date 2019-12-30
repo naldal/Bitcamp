@@ -5,7 +5,7 @@ public class SuperTest {
 	protected double weight, height;
 	
 	public SuperTest() {
-		System.out.println("super test default constructor");
+		System.out.println("SuperTest 기본 생성자");
 	}
 	
 	public SuperTest(double weight, double height){

@@ -1,6 +1,5 @@
 package class_2;
 
-<<<<<<< HEAD
 import java.util.StringTokenizer;
 
 public class Token {
@@ -24,13 +23,4 @@ public class Token {
 			System.out.println(data);
 		}
 	}
-	
-=======
-public class Token {
-	
-	public static void main(String[] args) {
-		
-	}
-
->>>>>>> bda7df6def07a15597cfb465f556beb9fb391344
 }
