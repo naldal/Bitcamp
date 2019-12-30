@@ -26,7 +26,7 @@ public class MemberMain_1 {
 			System.out.print("  ¹øÈ£ : ");
 			num=sc.nextInt();
 			if(num==5) break;
-			if(num==1) this.insert();
+			if(num==1) insert();
 			if(num==2) this.list();
 			if(num==3) this.update();
 			if(num==4) delete();
