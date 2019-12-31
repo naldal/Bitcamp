@@ -1,7 +1,7 @@
 package inheritance;
 
 class AA {
-	public int a =3;
+	public int a = 3;
 	public void disp() {
 		a += 5;
 		System.out.println("AA : "+a+" ");
@@ -25,5 +25,11 @@ public class TestMain2 {
 		System.out.println();
 		
 		AA aa = new BB(); //부모 = 자식
+		aa.disp(); //BB : 13(a)
+		System.out.println(aa.a); //변수는 오버라이드가 없다, 3
+		
+		BB bb2 = (BB) aa; //다운 캐스팅
+		System.out.println(bb2.a);
+		
 	}
 }
