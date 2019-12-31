@@ -6,7 +6,7 @@ public class Practice_1 {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in); 
-		String input, now, old, tmp;
+		String input, now, change, tmp;
 		int cnt=0;
 
 		System.out.println("문자열 입력 :");
@@ -18,7 +18,7 @@ public class Practice_1 {
 		now = sc.next();
 		
 		System.out.println("바꿀 문자열 입력 :");
-		old = sc.next();
+		change = sc.next();
 		
 		while(true) {
 			if(input.indexOf(now)!=-1) {
@@ -35,7 +35,7 @@ public class Practice_1 {
 			System.out.println("치환불가");
 		} else {
 			System.out.println(cnt+"번 치환");
-			System.out.println(tmp.replace(now, old));
+			System.out.println(tmp.replace(now, change));
 		}
 	}
 }
