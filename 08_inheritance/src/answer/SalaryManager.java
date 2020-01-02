@@ -50,8 +50,7 @@ public class SalaryManager {
 				System.out.println("======================================================");
 				System.out.println("name\tposition\tbasepay\tbenefit\ttaxrate\tsalary");
 				System.out.println("======================================================");
-				System.out.println(emp[i].getName() + "\t" + emp[i].getPosition() + "\t\t" + emp[i].getBasePay() + "\t"
-						+ emp[i].getBenefit() + "\t" + emp[i].getTaxRate() + "\t" + emp[i].getSalary());
+				System.out.println(emp[i].toString());
 
 			}
 		}
@@ -73,8 +72,6 @@ public class SalaryManager {
 		for (i = 0; i < emp.length; i++) {
 			if (emp[i] != null && emp[i].getName().equals(name) && emp[i].getPosition().equals(position)) {
 
-				System.out.print("수정 할 이름 입력 : ");
-				emp[i].setName(scan.next());
 				System.out.print("수정 할 직급 입력 : ");
 				emp[i].setPosition(scan.next());
 				System.out.print("수정 할 기본급 입력 : ");
