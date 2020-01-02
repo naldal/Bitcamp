@@ -20,8 +20,5 @@ public class ExamMain {
 			System.out.print("\t"+ex[i].getScore());
 			System.out.println();
 		}
-		
-		
 	}
-
 }

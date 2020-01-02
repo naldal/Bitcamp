@@ -76,12 +76,9 @@ public class SalaryManage {
 				System.out.println(dto[i].getName()+" "+dto[i].getDepartment()+" "+dto[i].getBasepay()+" "+dto[i].getTaxrate()+" "+dto[i].getSal());
 			}
 		}
-		
 	}
 	
 	public void exit() {
 		System.out.println("프로그램 종료");
-		
 	}
-	
 }

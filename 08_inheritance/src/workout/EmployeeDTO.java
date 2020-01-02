@@ -58,11 +58,10 @@ public class EmployeeDTO {
 		sal = basepay+benefit-(basepay+benefit)*taxrate;
 		return taxrate;
 	}
+	
 	public void setTaxrate(double taxrate) {
 		this.taxrate = taxrate;
 	}
-
-	
 	
 	
 }
