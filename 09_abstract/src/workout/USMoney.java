@@ -5,6 +5,7 @@ import java.util.Locale;
 
 public class USMoney extends Money{
 	NumberFormat numberformat = NumberFormat.getCurrencyInstance(Locale.US);
+	NumberFormat numberformat2 = NumberFormat.getCurrencyInstance(Locale.KOREA);
 	
 	double usMoney;
 
@@ -15,9 +16,11 @@ public class USMoney extends Money{
 
 	@Override
 	public void dispMoney(int cash) {
-		System.out.println(usMoney);
 		numberformat.setMaximumFractionDigits(2);
-		System.out.println(cash+"-->"+numberformat.format(usMoney));
+		numberformat.setMinimumFractionDigits(0);
+		numberformat2.setMaximumFractionDigits(2);
+		numberformat2.setMinimumFractionDigits(0);
+		System.out.println(numberformat2.format(cash)+"-->"+numberformat.format(usMoney));
 	}
 
 }
