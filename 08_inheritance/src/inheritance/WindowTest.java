@@ -1,6 +1,6 @@
 package inheritance;
 
-import java.awt.Color;
+import java.awt.Color; 
 import java.awt.Frame;
 import java.awt.Graphics;
 
