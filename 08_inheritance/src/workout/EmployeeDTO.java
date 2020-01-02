@@ -46,6 +46,7 @@ public class EmployeeDTO {
 	public void setBenefit(int benefit) {
 		this.benefit = benefit;
 	}
+	
 	public double getTaxrate() {
 		if(basepay<2000000) {
 			taxrate = 0.01;
