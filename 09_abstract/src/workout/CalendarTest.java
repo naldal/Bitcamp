@@ -31,16 +31,16 @@ public class CalendarTest {
             cal.set(Calendar.MONTH, month-1); //month : 0~11
             cal.set(Calendar.DATE, 1); //처음 숫자는 무조건 1로 시작
             
-            startDay = cal.get(Calendar.DAY_OF_WEEK); //시작위치값 일요일- 1
-            lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+            startDay = cal.get(Calendar.DAY_OF_WEEK); //시작위치값 일1 월2 화3 수4 목5 금6 토7
+            lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH); //월의 마지막 날짜
             
         }
 	}
 	
 	public void calculator() {
-     // 2차 배열에 날짜 입력
+		// 2차 배열에 날짜 입력
         int row = 0;
-        for(int i=1; inputDate<=lastDay; i++){
+        for(int i=1; inputDate<=lastDay; i++){	//1~월 마지막 날짜
         	
             // 시작 요일이 오기전에는 공백 대입
             if(i<startDay) {

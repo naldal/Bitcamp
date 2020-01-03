@@ -1,4 +1,4 @@
-package if_switch;
+package workout;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

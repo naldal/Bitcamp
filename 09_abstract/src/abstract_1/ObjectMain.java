@@ -60,25 +60,3 @@ public class ObjectMain /*extends Object*/{
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

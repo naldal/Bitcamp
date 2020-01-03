@@ -1,4 +1,4 @@
-package temp;
+package workout;
 
 public class Practice2 {
 	//주사위를 2번 던져서 나온 값의 합을 구하시오
