@@ -16,9 +16,7 @@ public class USMoney extends Money{
 
 	@Override
 	public void dispMoney(int cash) {
-		numberformat.setMaximumFractionDigits(2);
 		numberformat.setMinimumFractionDigits(0);
-		numberformat2.setMaximumFractionDigits(2);
 		numberformat2.setMinimumFractionDigits(0);
 		System.out.println(numberformat2.format(cash)+"-->"+numberformat.format(usMoney));
 	}

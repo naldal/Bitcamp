@@ -7,7 +7,7 @@ public class MoneyMain{
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int korMoney, input;
-		Money money;
+		Money money = null;
 		
 		System.out.println("현금입력");
 		korMoney = sc.nextInt();
@@ -18,19 +18,15 @@ public class MoneyMain{
 		switch (input) {
 			case 1 : 
 				money = new USMoney();
-				money.calcMoney(korMoney);
-				money.dispMoney(korMoney);
 				break;
 			case 2 : 
 				money = new JapanMoney();
-				money.calcMoney(korMoney);
-				money.dispMoney(korMoney);
 				break;
 			case 3 : 
 				money = new ChinaMoney();
-				money.calcMoney(korMoney);
-				money.dispMoney(korMoney);
 				break;
 		}
+		money.calcMoney(korMoney);
+		money.dispMoney(korMoney);
 	}
 }
