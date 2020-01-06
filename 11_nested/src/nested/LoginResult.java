@@ -25,5 +25,6 @@ public class LoginResult extends JFrame {
 	
 	public static void main(String[] args) {
 		LoginResult loginResult = new LoginResult();
+		
 	}
 }

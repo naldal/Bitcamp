@@ -72,9 +72,8 @@ public class Login extends JFrame implements ActionListener{ //SwingÀº x¹öÆ° - Ç
 		}
 		
 		if(e.getSource()==loginB) {
-			if(idT.getText()=="angel") {
-				LoginResult lr = new LoginResult();
-			}
+			LoginResult lr = new LoginResult(idT.getText(), pwdT.getText());
+			
 		}
 	}
 
