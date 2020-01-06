@@ -1,8 +1,10 @@
 package workout;
 
 import java.awt.Container;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -10,18 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
- 
- /*
- 숙제.
- 1. 취소 버튼 누르면 JTextField(idT, pwdT)의 내용 초기화
- 
- 2. LoginResult(로그인버튼) 로그인 성공 / 로그인 실패 창 뜨게함 , X버튼 누르면 다시 원래 창으로
- - LoginResult.java가 생성
- - LoginResult.java에서 아이디와 비밀번호 비교(id: "angel", pwd: "1004")가 들어오면 성공, 아니면 실패
- - LoginResult 에서 종료버튼을 누르면 다시 로그인 창으로 가줘야함 
- */
 
-public class Login extends JFrame implements WindowListener, ActionListener{ //Swing은 x버튼 - 프로세스 종료되지 않음 (히든임)
+public class Login extends JFrame implements ActionListener{ //Swing은 x버튼 - 프로세스 종료되지 않음 (히든임)
 	private JLabel idL, pwdL;
 	private JTextField idT, pwdT;
 	private JButton loginB, cancelB;
@@ -61,16 +53,15 @@ public class Login extends JFrame implements WindowListener, ActionListener{ //S
 		setVisible(true);
 		
 		//events
-		this.addWindowListener(this);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
 		loginB.addActionListener(this);
 		cancelB.addActionListener(this);
 	}
-	
-	public static void main(String[] args) {
-		new Login();
-		
-	}
-
 	
 	//action listener override
 	@Override
@@ -79,51 +70,15 @@ public class Login extends JFrame implements WindowListener, ActionListener{ //S
 			idT.setText("");
 			pwdT.setText("");
 		}
-	}
-	
-	
-	// window listener overrides
-	@Override
-	public void windowActivated(WindowEvent e) {
-		// TODO Auto-generated method stub
 		
+		if(e.getSource()==loginB) {
+			if(idT.getText()=="angel") {
+				LoginResult lr = new LoginResult();
+			}
+		}
 	}
 
-	@Override
-	public void windowClosed(WindowEvent e) {
-		// TODO Auto-generated method stub
-
+	public static void main(String[] args) {
+		new Login();
 	}
-
-	@Override
-	public void windowClosing(WindowEvent e) {
-		// TODO Auto-generated method stub
-		System.exit(0);
-	}
-
-	@Override
-	public void windowDeactivated(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowDeiconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowIconified(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void windowOpened(WindowEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
 }

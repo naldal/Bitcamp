@@ -21,8 +21,6 @@ public class WindowTest extends Frame implements MouseListener, MouseMotionListe
 	
 	public static void main(String[] args) {
 		new WindowTest();
-		
-		
 	} //main
 
 	
