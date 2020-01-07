@@ -11,11 +11,13 @@ import java.awt.event.WindowListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class Login extends JFrame implements ActionListener{ //SwingÀº x¹öÆ° - ÇÁ·Î¼¼½º Á¾·áµÇÁö ¾ÊÀ½ (È÷µçÀÓ)
 	private JLabel idL, pwdL;
-	private JTextField idT, pwdT;
+	private JTextField idT;
+	private JTextField pwdT;
 	private JButton loginB, cancelB;
 	
 	public Login() {
@@ -25,7 +27,7 @@ public class Login extends JFrame implements ActionListener{ //SwingÀº x¹öÆ° - Ç
 		pwdL = new JLabel("ºñ¹Ð¹øÈ£");
 		
 		idT = new JTextField();
-		pwdT = new JTextField();
+		pwdT = new JPasswordField();
 		
 		loginB = new JButton("·Î±×ÀÎ");
 		cancelB = new JButton("Ãë¼Ò");
@@ -66,13 +68,13 @@ public class Login extends JFrame implements ActionListener{ //SwingÀº x¹öÆ° - Ç
 	//action listener override
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==cancelB) {
+		if(e.getActionCommand()=="Ãë¼Ò") {
 			idT.setText("");
 			pwdT.setText("");
 		}
 		
 		if(e.getSource()==loginB) {
-			LoginResult lr = new LoginResult(idT.getText(), pwdT.getText());
+			new LoginResult(idT.getText(), pwdT.getText());
 			
 		}
 	}
