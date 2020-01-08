@@ -1,7 +1,6 @@
 package workout;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
@@ -26,7 +25,6 @@ public class SungJukService {
 			System.out.println("번호 선택 : ");
 			input=sc.nextInt();
 			if(input==6) {
-				System.out.println("프로그램을 종료합니다");
 				break;
 			} else if (input==1) {
 				insertArticle();
@@ -94,7 +92,7 @@ public class SungJukService {
 		for(int i=0; i<arraylist.size(); i++) {
 			if(name.equals(arraylist.get(i).getName())){
 				arraylist.remove(i);
-				i=0;
+				i--;
 			}
 		}
 		System.out.println("데이터가 삭제되었습니다.");
