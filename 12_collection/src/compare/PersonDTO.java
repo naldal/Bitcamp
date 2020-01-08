@@ -1,4 +1,4 @@
-package person;
+package compare;
 
 public class PersonDTO implements Comparable<PersonDTO>{
 	

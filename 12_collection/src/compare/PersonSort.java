@@ -1,4 +1,4 @@
-package person;
+package compare;
 
 import java.util.ArrayList;
 import java.util.Arrays;
