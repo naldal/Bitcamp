@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+@SuppressWarnings("serial")
 public class Cal_2 extends JFrame implements ActionListener{
 
 	boolean flag = false; // 연산자체크
@@ -25,7 +26,7 @@ public class Cal_2 extends JFrame implements ActionListener{
 	private String show=""; //디스플레이용 버퍼 to 스트링
 	private String tmp="";
 	private String tmp2="";
-	private String operVal="";
+	private String operVal="";	
 	private String strResult;
 	private String setNum;
 	
