@@ -82,4 +82,5 @@ public class WindowTest_1 extends JFrame implements MouseListener, MouseMotionLi
 	public void mouseMoved(MouseEvent e) {
 	
 	}
+	
 }
