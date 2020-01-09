@@ -80,19 +80,20 @@ public class SungJukDTO implements Comparable<SungJukDTO> {
 				+math+"\t"
 				+new DecimalFormat("#.##").format(avg)+"\t"
 				+tot;
-				
 	}
-
-	//
+	
 	@Override
 	public int compareTo(SungJukDTO dto) {
-		if(tot > dto.getTot()) {
-			return -1; 
-		} else if(tot == dto.getTot()) {
-			return 0;
-		} else {
-			return 1;
-		}	
+//		if(tot > dto.getTot()) {
+//			return -1; 
+//		} else if(tot == dto.getTot()) {
+//			return 0;
+//		} else {
+//			return 1;
+//		}
+		return tot>dto.tot?-1:1;
+		
+		// return name.compare(dto.getName()); 이름으로 비교는 훨씬 쉽다.
 	}
 	
 	
