@@ -1,5 +1,7 @@
 package workout;
 
+import java.text.DecimalFormat;
+
 public class SungJukDTO implements Comparable<SungJukDTO> {
 
 	private int num;
@@ -58,7 +60,7 @@ public class SungJukDTO implements Comparable<SungJukDTO> {
 	}
 
 	public void setAvg() {
-		this.avg = (kor+eng+math)/3;
+		this.avg = (double)(kor+eng+math)/3;
 	}
 
 	public double getTot() {
@@ -67,6 +69,18 @@ public class SungJukDTO implements Comparable<SungJukDTO> {
 
 	public void setTot() {
 		this.tot = kor+eng+math;
+	}
+	
+	@Override
+	public String toString() {
+		return num+"\t"
+				+name+"\t"
+				+kor+"\t"
+				+eng+"\t"
+				+math+"\t"
+				+new DecimalFormat("#.##").format(avg)+"\t"
+				+tot;
+				
 	}
 
 	//
@@ -78,7 +92,7 @@ public class SungJukDTO implements Comparable<SungJukDTO> {
 			return 0;
 		} else {
 			return 1;
-		}
+		}	
 	}
 	
 	

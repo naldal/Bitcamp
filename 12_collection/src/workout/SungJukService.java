@@ -3,6 +3,7 @@ package workout;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class SungJukService {
@@ -58,42 +59,46 @@ public class SungJukService {
 		dto.setTot();
 		arraylist.add(dto);
 		
+		System.out.println("입력 완료!!");
 		return arraylist;
 	} //putIn()
 	
 	public void display() {
 		System.out.println("번호 \t 이름 \t 국어 \t 영어 \t 수학 \t 평균 \t 총점");
 		for(SungJukDTO dto : arraylist) {
-			System.out.println(dto.getNum()+"\t"+dto.getName()+"\t"+dto.getKor()+"\t"+dto.getEng()+"\t"+dto.getMath()+"\t"+dto.getAvg()+"\t"+dto.getTot());
+			System.out.println(dto);
 		}
 	}
 	
 	public void searchArticle() {
 		System.out.println("검색 할 이름 입력 :");
 		String name = sc.next();
-		
-		System.out.println("번호 \t 이름 \t 국어 \t 영어 \t 수학 \t 평균 \t 총점");
-		for(int i=0; i<arraylist.size(); i++) {
-			if(name.equals(arraylist.get(i).getName())){
-				System.out.println(arraylist.get(i).getNum()+"\t"+
-						arraylist.get(i).getName()+"\t"+arraylist.get(i).getKor()+
-						"\t"+arraylist.get(i).getEng()+"\t"+arraylist.get(i).getMath()+
-						"\t"+arraylist.get(i).getAvg()+"\t"+arraylist.get(i).getTot());
-			} else {
-				System.out.println("찾는 이름이 없습니다.");
-			}
+		int count=0;
+	
+		for(SungJukDTO dto : arraylist) {
+			if(dto.getName().equals(name)){
+				System.out.println(dto);
+				count++;
+			} 
+
+			if(count==0) System.out.println("찾는 이름이 없습니다.");
 		}
 	} //3
 	
 	public void deleteArticle() {
 		System.out.println("삭제 할 이름 입력 :");
 		String name = sc.next();
+		int count=0;
 		
-		for(int i=0; i<arraylist.size(); i++) {
-			if(name.equals(arraylist.get(i).getName())){
-				arraylist.remove(i);
-				i--;
+		Iterator<SungJukDTO> it = arraylist.iterator();
+		while(it.hasNext()) {
+			SungJukDTO dto = it.next();
+			if(dto.getName().equals(name)) {
+				it.remove(); //it.next()가 반환한 값을 지운다
+				count++;
 			}
+			
+			
 		}
 		System.out.println("데이터가 삭제되었습니다.");
 	}//4
@@ -106,20 +111,20 @@ public class SungJukService {
 			Collections.sort(arraylist);
 			System.out.println("번호 \t 이름 \t 국어 \t 영어 \t 수학 \t 평균 \t 총점");
 			for(SungJukDTO dto : arraylist) {
-				System.out.println(dto.getNum()+"\t"+dto.getName()+"\t"+dto.getKor()+"\t"+dto.getEng()+"\t"+dto.getMath()+"\t"+dto.getAvg()+"\t"+dto.getTot());
+				System.out.println(dto);
 			}
 		} else if(input==1) {
 			Comparator<SungJukDTO> newdto = new Comparator<SungJukDTO>() {
 				
 				@Override
-				public int compare(SungJukDTO dto1, SungJukDTO dto2) {
+				public int compare(SungJukDTO dto1, SungJukDTO dto2) { //오름차순. 순서바꾸면 내림차순.
 					return dto1.getName().compareTo(dto2.getName());
 				}
 			};
 			Collections.sort(arraylist, newdto);
 			System.out.println("번호 \t 이름 \t 국어 \t 영어 \t 수학 \t 평균 \t 총점");
 			for(SungJukDTO dto : arraylist) {
-				System.out.println(dto.getNum()+"\t"+dto.getName()+"\t"+dto.getKor()+"\t"+dto.getEng()+"\t"+dto.getMath()+"\t"+dto.getAvg()+"\t"+dto.getTot());
+				System.out.println(dto);
 			}
 		}
 		
