@@ -19,13 +19,12 @@ public class MethodTest3 {
 	}
 
 	/*
-	public double calcAvg(int i, int j, int k) {
-		return (double) (i + j + k) / 3;
-	}
-	*/
-	
+	 * public double calcAvg(int i, int j, int k) { return (double) (i + j + k) / 3;
+	 * }
+	 */
+
 	public double calcAvg(int tot) {
-		return tot/3.0;
+		return tot / 3.0;
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -42,12 +41,12 @@ public class MethodTest3 {
 		MethodTest3 method3 = new MethodTest3();
 
 		int tot = method3.calcTot(kor, eng, math);
-		//double avg = method3.calcAvg(kor, eng, math);
+		// double avg = method3.calcAvg(kor, eng, math);
 		double avg = method3.calcAvg(tot);
 
 		System.out.println("*** " + name + "의 성적표 ***");
 		System.out.println("국어\t영어\t수학\t총점\t평균");
 		System.out.println(kor + "점\t" + eng + "점\t" + math + "점\t" + tot + "점\t" + String.format("%.2f", avg) + "점");
-		
+
 	}
 }

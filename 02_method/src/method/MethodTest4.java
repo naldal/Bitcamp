@@ -18,38 +18,35 @@ import java.io.InputStreamReader;
  */
 
 public class MethodTest4 {
-	
+
 	public String comp(String id) {
-		
-		String result = id.charAt(7)=='1' || id.charAt(7)=='3' ? "남자" : "여자";
+
+		String result = id.charAt(7) == '1' || id.charAt(7) == '3' ? "남자" : "여자";
 		return result;
 	}
-	
+
 	public String calcAge(String tnum) {
-		int num = Integer.parseInt(tnum.substring(0, 2)); 
-		String age = num <= 99 && num > 19 ? "19"+num :"20"+num;
+		int num = Integer.parseInt(tnum.substring(0, 2));
+		String age = num <= 99 && num > 19 ? "19" + num : "20" + num;
 		return age;
 	}
 
-	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		MethodTest4 mt4 = new MethodTest4();
-		
+
 		System.out.print("이름을 입력하세요 : ");
 		String name = br.readLine();
 		System.out.print("주민번호를 입력하세요 : ");
 		String num = br.readLine();
-			
+
 		String gender = mt4.comp(num);
 		int age = Integer.parseInt(mt4.calcAge(num));
-		
-		int realAge = 2019-age+1;
-		
-		System.out.println(name+"님은 "+gender+"이고 "+realAge+"살 입니다.");
-	
-		
-		
+
+		int realAge = 2019 - age + 1;
+
+		System.out.println(name + "님은 " + gender + "이고 " + realAge + "살 입니다.");
+
 	}
 
 }

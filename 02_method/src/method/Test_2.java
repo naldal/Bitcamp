@@ -16,19 +16,20 @@ import java.io.InputStreamReader;
 public class Test_2 {
 
 	public int dice() {
-		int ran = (int)(Math.random()*6)+1;
+		int ran = (int) (Math.random() * 6) + 1;
 		return ran;
 	}
-	
+
 	public int add(int dice1, int dice2) {
-		int sum = dice1+dice2;
+		int sum = dice1 + dice2;
 		return sum;
-		
+
 	}
+
 	public static void main(String[] args) {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Test_2 t2 = new Test_2();
-		
+
 		System.out.print("첫번째 주사위 값 :");
 		int dice1 = t2.dice();
 		System.out.print(dice1);
@@ -36,7 +37,7 @@ public class Test_2 {
 		System.out.print("두번째 주사위 값 :");
 		int dice2 = t2.dice();
 		System.out.print(dice2);
-		
+
 		int sum = t2.add(dice1, dice2);
 		System.out.println();
 		System.out.println(sum);

@@ -19,6 +19,6 @@ public class Practice1 {
 		System.out.println("2진수 = " + Integer.toBinaryString(dec));
 		System.out.println("8진수 = " + Integer.toOctalString(dec));
 		System.out.println("16진수 = " + Integer.toHexString(dec));
-		
+
 	}
 }

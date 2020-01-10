@@ -8,7 +8,6 @@ public class MethodTest2 {
 	public void output() {
 		System.out.println("non-static method");
 	}
-	
 
 	public static void main(String[] args) {
 		// 호출
@@ -27,30 +26,29 @@ public class MethodTest2 {
 		int sub = method2.minus(25, 36);
 		int mul = method2.multiply(25, 36);
 		double div = method2.divide(25, 36);
-		
+
 		System.out.println("25 + 36 = " + sum);
 		System.out.println("25 - 36 = " + sub);
 		System.out.println("25 * 36 = " + mul);
 		System.out.println("25 / 36 = " + String.format("%.2f", div));
-		
-		
+
 	}
-	
+
 	public int plus(int i, int j) {
 		return i + j;
 	}
-	
+
 	public int minus(int i, int j) {
 		return i - j;
 	}
-	
+
 	public int multiply(int i, int j) {
 		return i * j;
 	}
-	
+
 	public double divide(int i, int j) {
-		return (double)i / (double)j;
+		return (double) i / (double) j;
 	}
-	
-	//Overload 똑같은 이름의 메소드를 여러가지 만들어 주는 것, 자기의 정확한 형을 찾아가게 하기 위해
+
+	// Overload 똑같은 이름의 메소드를 여러가지 만들어 주는 것, 자기의 정확한 형을 찾아가게 하기 위해
 }

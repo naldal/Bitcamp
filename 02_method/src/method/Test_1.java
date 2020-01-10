@@ -19,18 +19,17 @@ Integer클래스 메소드를 이용하시오
  */
 public class Test_1 {
 	public static void main(String[] args) throws IOException {
-	
+
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
+
 		int dec = Integer.parseInt(br.readLine());
-		String a2 = Integer.toBinaryString(dec);  // 10진수 -> 2진수
-		String a8= Integer.toOctalString(dec);    // 10진수 -> 8진수
+		String a2 = Integer.toBinaryString(dec); // 10진수 -> 2진수
+		String a8 = Integer.toOctalString(dec); // 10진수 -> 8진수
 		String a16 = Integer.toHexString(dec);
 
 		System.out.println("2 진수 : " + a2);
 		System.out.println("8 진수 : " + a8);
 		System.out.println("16 진수 : " + a16);
 
-	
 	}
 }

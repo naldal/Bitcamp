@@ -1,9 +1,9 @@
 package workout;
 
 public class Practice2 {
-	//주사위를 2번 던져서 나온 값의 합을 구하시오
-	//주사위는 input()에서 1~6사이의 난수를 발생하여 리턴한다
-	//합은 add()에서 구하여 리턴 받는다
+	// 주사위를 2번 던져서 나온 값의 합을 구하시오
+	// 주사위는 input()에서 1~6사이의 난수를 발생하여 리턴한다
+	// 합은 add()에서 구하여 리턴 받는다
 	public int input() {
 		int su = (int) (Math.random() * 6 + 1);
 		return su;
