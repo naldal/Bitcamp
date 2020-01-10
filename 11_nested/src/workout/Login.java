@@ -14,35 +14,35 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class Login extends JFrame implements ActionListener{ //SwingÀº x¹öÆ° - ÇÁ·Î¼¼½º Á¾·áµÇÁö ¾ÊÀ½ (È÷µçÀÓ)
+public class Login extends JFrame implements ActionListener { // SwingÀº x¹öÆ° - ÇÁ·Î¼¼½º Á¾·áµÇÁö ¾ÊÀ½ (È÷µçÀÓ)
 	private JLabel idL, pwdL;
 	private JTextField idT;
 	private JTextField pwdT;
 	private JButton loginB, cancelB;
-	
+
 	public Login() {
-		this.setLayout(null); //border·¹ÀÌ¾Æ¿ô(µ¿¼­³²ºÏ)À» ±ú¹ö¸² - Á÷Á¢ÁÂÇ¥ ÀÔ·ÂÇØ¾ßÇÔ
-				
+		this.setLayout(null); // border·¹ÀÌ¾Æ¿ô(µ¿¼­³²ºÏ)À» ±ú¹ö¸² - Á÷Á¢ÁÂÇ¥ ÀÔ·ÂÇØ¾ßÇÔ
+
 		idL = new JLabel("¾ÆÀÌµð");
 		pwdL = new JLabel("ºñ¹Ð¹øÈ£");
-		
+
 		idT = new JTextField();
 		pwdT = new JPasswordField();
-		
+
 		loginB = new JButton("·Î±×ÀÎ");
 		cancelB = new JButton("Ãë¼Ò");
-		
+
 //		idL.setLocation(50, 80);
 //		idL.setSize(50,30); //50,80 À§Ä¡¿¡  50,30 Å©±âÀÇ ¹Ú½º¸¦ Àâ¾ÆÁÜ
 		idL.setBounds(50, 80, 50, 30);
 		idT.setBounds(120, 80, 100, 30);
-		
+
 		pwdL.setBounds(50, 130, 70, 30);
 		pwdT.setBounds(120, 130, 100, 30);
-		
+
 		loginB.setBounds(60, 200, 80, 30);
 		cancelB.setBounds(160, 200, 80, 30);
-		
+
 		Container c = this.getContentPane();
 		c.add(idL);
 		c.add(idT);
@@ -50,11 +50,11 @@ public class Login extends JFrame implements ActionListener{ //SwingÀº x¹öÆ° - Ç
 		c.add(pwdT);
 		c.add(loginB);
 		c.add(cancelB);
-		
-		setBounds(900,100,300,300);
+
+		setBounds(900, 100, 300, 300);
 		setVisible(true);
-		
-		//events
+
+		// events
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -64,18 +64,18 @@ public class Login extends JFrame implements ActionListener{ //SwingÀº x¹öÆ° - Ç
 		loginB.addActionListener(this);
 		cancelB.addActionListener(this);
 	}
-	
-	//action listener override
+
+	// action listener override
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand()=="Ãë¼Ò") {
+		if (e.getActionCommand() == "Ãë¼Ò") {
 			idT.setText("");
 			pwdT.setText("");
 		}
-		
-		if(e.getSource()==loginB) {
+
+		if (e.getSource() == loginB) {
 			new LoginResult(idT.getText(), pwdT.getText());
-			
+
 		}
 	}
 

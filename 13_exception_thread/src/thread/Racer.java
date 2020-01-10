@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-public class Racer extends Canvas implements Runnable{ //¸» ÇÑ¸¶¸®
+public class Racer extends Canvas implements Runnable{ 
 	
 	private Image horse;
 	private int pos;
@@ -26,17 +26,19 @@ public class Racer extends Canvas implements Runnable{ //¸» ÇÑ¸¶¸®
 
 	@Override
 	public void run() {
+	
 		for(int i=0; i<600; i+=(int)(Math.random()*10+1)) {
 			pos = i;
 			repaint();
 		
 			try {
-				Thread.sleep(10);
+				Thread.sleep(50);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		System.out.println(Thread.currentThread().getName());
+		System.out.println(RunRace.cnt+"ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ :"+Thread.currentThread().getName());
+		RunRace.cnt++;
 	}
 }

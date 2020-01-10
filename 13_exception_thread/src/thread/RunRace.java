@@ -19,8 +19,11 @@ public class RunRace extends Frame implements ActionListener {
 	private Button btn;
 	private Racer[] r;
 	static String finName;
+	public static int cnt =1;
+	
 	
 	public RunRace(int count, String [] name) {
+		
 		this.count = count;
 		this.name = name;
 		btn = new Button(" √‚πﬂ  ");
@@ -35,7 +38,6 @@ public class RunRace extends Frame implements ActionListener {
 			p2.add(r[i]);
 		}
 		
-		
 		add("South", p);
 		add("Center", p2);
 		
@@ -48,6 +50,8 @@ public class RunRace extends Frame implements ActionListener {
 				System.exit(0);
 			}
 		});
+		
+		
 		
 		btn.addActionListener(this);
 	}

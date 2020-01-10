@@ -14,48 +14,47 @@ package abstract_1;
  * }
  * 
  * 
- */ 
-class Test extends Object{
-	
+ */
+class Test extends Object {
+
 	@Override
 	public String toString() {
-		return getClass()+"@dddd";
+		return getClass() + "@dddd";
 	}
 }
 
-
 //-------------------------
-public class ObjectMain /*extends Object*/{
-	
+public class ObjectMain /* extends Object */ {
+
 	public static void main(String[] args) {
 		Test t = new Test();
-		System.out.println("°´Ã¼ t = "+t); // === toString
-		System.out.println("°´Ã¼ t = "+t.toString());
-		System.out.println("°´Ã¼ t = "+t.hashCode()); //toString 16Áø¼ö °ªÀ» 10Áø¼ö·Î ¹Ù²Û°Í
+		System.out.println("°´Ã¼ t = " + t); // === toString
+		System.out.println("°´Ã¼ t = " + t.toString());
+		System.out.println("°´Ã¼ t = " + t.hashCode()); // toString 16Áø¼ö °ªÀ» 10Áø¼ö·Î ¹Ù²Û°Í
 		System.out.println();
-		
+
 		String str = "apple";
-		System.out.println("°´Ã¼ t = "+str); 
-		System.out.println("°´Ã¼ t = "+str.toString());
-		System.out.println("°´Ã¼ t = "+str.hashCode());
+		System.out.println("°´Ã¼ t = " + str);
+		System.out.println("°´Ã¼ t = " + str.toString());
+		System.out.println("°´Ã¼ t = " + str.hashCode());
 		System.out.println();
-		
+
 		String aa = new String("apple");
 		String bb = new String("apple");
-		System.out.println("aa==bb : "+(aa==bb));
-		System.out.println("aa.equals(bb) : "+aa.equals(bb));
+		System.out.println("aa==bb : " + (aa == bb));
+		System.out.println("aa.equals(bb) : " + aa.equals(bb));
 		System.out.println();
-		
+
 		Object cc = new Object();
 		Object dd = new Object();
-		System.out.println("cc==dd : "+(cc==dd));
-		System.out.println("cc.equals(dd) : "+cc.equals(dd));
+		System.out.println("cc==dd : " + (cc == dd));
+		System.out.println("cc.equals(dd) : " + cc.equals(dd));
 		System.out.println();
-		
+
 		Object ee = new String("apple");
 		Object ff = new String("apple");
-		System.out.println("ee==ff : "+(ee==ff));
-		System.out.println("cc.equals(dd) : "+ee.equals(ff));
+		System.out.println("ee==ff : " + (ee == ff));
+		System.out.println("cc.equals(dd) : " + ee.equals(ff));
 		System.out.println();
 	}
 

@@ -12,6 +12,4 @@ public abstract class AbstractTest { //POJO(plain old java object) == 누구에게도
 	public String getName() {
 		return name;
 	}
-	
-	
 }

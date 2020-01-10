@@ -18,8 +18,9 @@ public class Packman extends Frame implements KeyListener, Runnable{
 	private int sel=2;
 	private int x=225, y=225;
 	private int mx, my;
-	private int foodx1, foody1, foodx2, foody2, foodx3, foody3, foodx4, foody4, foodx5, foody5;
-	private int packx1, packx2, packy1;
+	private int foody1, foodx2, foody2, foodx3, foody3, foodx4, foody4, foodx5, foody5;
+	public int[] xValue = new int[5];
+	public int[] yValue = new int[5];
 	
 	public Packman() {
 		packman = Toolkit.getDefaultToolkit().getImage("packman.jpg");
@@ -29,7 +30,7 @@ public class Packman extends Frame implements KeyListener, Runnable{
 		setVisible(true);
 		setResizable(true);
 		
-		//¸ÔÀÌ (20,50) (480,480) »çÀÌ¿¡ »Ñ¸°´Ù, ¸ÔÀÌÀÇ Å©±â´Â 20,20
+		//ï¿½ï¿½ï¿½ï¿½ (20,50) (480,480) ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½Ñ¸ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ï¿½ 20,20
 		
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -46,74 +47,65 @@ public class Packman extends Frame implements KeyListener, Runnable{
 	
 	@Override
 	public void paint(Graphics g) {
-		g.drawImage(packman, x, y, x+50, y+50,	//È­¸éÀ§Ä¡
-					sel*50, 0 , sel*50+50, 50,	//Æå¸à¸ð½À »óÇÏÁÂ¿ì
+		g.drawImage(packman, x, y, x+50, y+50,
+					sel*50, 0 , sel*50+50, 50,	
 					this);
 		
-		g.drawImage(food, foodx1, foody1, this);
-		g.drawImage(food, foodx2, foody2, this);
-		g.drawImage(food, foodx3, foody3, this);
-		g.drawImage(food, foodx4, foody4, this);
-		g.drawImage(food, foodx5, foody5, this);
+		g.drawImage(food, xValue[0], yValue[0], this);
+		g.drawImage(food, xValue[1], yValue[1], this);
+		g.drawImage(food, xValue[2], yValue[2], this);
+		g.drawImage(food, xValue[3], yValue[3], this);
+		g.drawImage(food, xValue[4], yValue[4], this);
 		
 	}
 	
 	// runnable
 	@Override
 	public void run() {
-		foodx1 = (int)(Math.random()*461)+20;
-		foody1 = (int)(Math.random()*431)+50;
-		foodx2 = (int)(Math.random()*461)+20;
-		foody2 = (int)(Math.random()*431)+50;
-		foodx3 = (int)(Math.random()*461)+20;
-		foody3 = (int)(Math.random()*431)+50;
-		foodx4 = (int)(Math.random()*461)+20;
-		foody4 = (int)(Math.random()*431)+50;
-		foodx5 = (int)(Math.random()*461)+20;
-		foody5 = (int)(Math.random()*431)+50;
+		for(int i=0; i<xValue.length; i++) {
+			xValue[i]=(int)(Math.random()*461)+20;
+			yValue[i]=(int)(Math.random()*431)+50;
+		}
 
 		while(true) {
 			if(sel%2==0) sel++;
-			else sel--;             //ÀÔ±ôºýÀÌ
+			else sel--;             
 				
 			x+=mx;					
-			y+=my;					//¹æÇâÅ°¿¡ µû¸¥ À§Ä¡ÀÌµ¿
+			y+=my;					
 			
-			if(x>500) {				//Å×µÎ¸® ³Ñ¾î°¡¸é ¼ø°£ÀÌµ¿Ã³¸®
-				x=0;
-			} else if(x<0) {
-				x=500;
-			}
-			
-			if(y>500) {
-				y=0;
-			} else if(y<0) {
-				y=500;
-			}
+			if(x>500) {x=0;}
+			else if(x<0) {x=500;}
+			if(y>500) {y=0;}
+			else if(y<0) {y=500;}
 			
 			try {
-				if( x+25>=foodx1-24 && y+25>=foody1-24 && x+25<=foodx1+24 && y+25<=foody1+24) {
-					foodx1 = -1;
-					foody1 = -1;
+				if( x+25>=xValue[0]-24 && y+25>=yValue[0]-24 && x+25<=xValue[0]+24 && y+25<=yValue[0]+24) {
+					xValue[0] = -1;
+					yValue[0] = -1;
 					System.out.println((x+25)+" "+(y+25));
-				} else if (x+25>=foodx2-24 && y+25>=foody2-24 && x+25<=foodx2+24 && y+25<=foody2+24) {
-					foodx2 = -1;
-					foody2 = -1;
+				} else if (x+25>=xValue[1]-24 && y+25>=yValue[1]-24 && x+25<=xValue[1]+24 && y+25<=yValue[1]+24) {
+					xValue[1] = -1;
+					yValue[1] = -1;
 					System.out.println((x+25)+" "+(y+25));
-				} else if (x+25>=foodx3-24 && y+25>=foody3-24 && x+25<=foodx3+24 && y+25<=foody3+24) {
-					foodx3 = -1;
-					foody3 = -1;
+				} else if (x+25>=xValue[2]-24 && y+25>=yValue[2]-24 && x+25<=xValue[2]+24 && y+25<=yValue[2]+24) {
+					xValue[2] = -1;
+					yValue[2] = -1;
 					System.out.println((x+25)+" "+(y+25));
-				} else if (x+25>=foodx4-24 && y+25>=foody4-24 && x+25<=foodx4+24 && y+25<=foody4+24) {
-					foodx4 = -1;
-					foody4 = -1;
+				} else if (x+25>=xValue[3]-24 && y+25>=yValue[3]-24 && x+25<=xValue[3]+24 && y+25<=yValue[3]+24) {
+					xValue[3] = -1;
+					yValue[3]= -1;
 					System.out.println((x+25)+" "+(y+25));
-				} else if (x+25>=foodx5-24 && y+25>=foody5-24 && x+25<=foodx5+24 && y+25<=foody5+24) {
-					foodx5 = -1;
-					foody5 = -1;
+				} else if (x+25>=xValue[4]-24 && y+25>=yValue[4]-24 && x+25<=xValue[4]+24 && y+25<=yValue[4]+24) {
+					xValue[4] = -1;
+					yValue[4] = -1;
 					System.out.println((x+25)+" "+(y+25));
 				} 
-				Thread.sleep(50);
+				
+				if(xValue[0]==-1 && xValue[1]==-1 && xValue[2]==-1 && xValue[3]==-1 && xValue[4]==-1) {
+					break;
+				}
+				Thread.sleep(10);
 				
 			} catch (InterruptedException e) {
 				e.printStackTrace();
