@@ -1,6 +1,7 @@
 package workout;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -65,8 +66,9 @@ public class CalculatorMain1 extends JFrame implements ActionListener {
 		button[16].setBounds(199, 370, 90, 50);
 		button[17].setBounds(294, 370, 90, 50);
 
-		add(dispL);
-		add(inputL);
+		Container c = this.getContentPane();
+		c.add(dispL);
+		c.add(inputL);
 		for (int i = 0; i < button.length; i++) {
 			add(button[i]);
 			button[i].addActionListener(this);
