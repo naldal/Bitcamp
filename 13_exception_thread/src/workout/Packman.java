@@ -1,4 +1,4 @@
-package thread;
+package workout;
 
 import java.awt.Frame;
 import java.awt.Graphics;
@@ -30,7 +30,7 @@ public class Packman extends Frame implements KeyListener, Runnable{
 		setVisible(true);
 		setResizable(true);
 		
-		//���� (20,50) (480,480) ���̿� �Ѹ���, ������ ũ��� 20,20
+		//���� (20,50) (480,480) ���̿� �Ѹ���, ������ ũ���? 20,20
 		
 		addWindowListener(new WindowAdapter() {
 			@Override

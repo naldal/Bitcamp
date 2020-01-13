@@ -1,4 +1,4 @@
-package thread;
+package workout;
 
 import java.awt.Button;
 import java.awt.FlowLayout;
@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Scanner;
+
+import thread.Racer;
 
 public class RunRace extends Frame implements ActionListener {
 	private int count;

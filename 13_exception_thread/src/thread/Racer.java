@@ -6,6 +6,9 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 
+import workout.RunRace;
+
+@SuppressWarnings("serial")
 public class Racer extends Canvas implements Runnable{ 
 	
 	private Image horse;
