@@ -53,15 +53,16 @@ public class TryNotepad extends JFrame implements ActionListener {
 		this.setTitle("간단메모장");
 		setVisible(true);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		
+
 		addWindowListener(new WindowAdapter() {
-			
+
 			@Override
 			public void windowClosing(WindowEvent e) {
-				int result = JOptionPane.showConfirmDialog(TryNotepad.this, "저장하시겠습니까?", "메모장", JOptionPane.YES_NO_CANCEL_OPTION);
+				int result = JOptionPane.showConfirmDialog(TryNotepad.this, "저장하시겠습니까?", "메모장",
+						JOptionPane.YES_NO_CANCEL_OPTION);
 				if (result == JOptionPane.YES_OPTION) {
 					// 파일저장 후 종료
-					if(area.getText().length()!=0) {
+					if (area.getText().length() != 0) {
 						saveDialog();
 						fileWrite();
 					}
@@ -77,12 +78,18 @@ public class TryNotepad extends JFrame implements ActionListener {
 	public void event() {
 		menu.getNewM().addActionListener(this);
 		menu.getExitM().addActionListener(this);
+
 		menu.getSaveM().addActionListener(this);
+
 		menu.getCopyM().addActionListener(this);
+		menu.getCopyM().setAccelerator(KeyStroke.getKeyStroke('C', Event.ALT_MASK));
+
 		menu.getPasteM().addActionListener(this);
+		menu.getPasteM().setAccelerator(KeyStroke.getKeyStroke('V', Event.ALT_MASK));
+
 		menu.getCutM().addActionListener(this);
-		menu.getCutM().setMnemonic('c');
-		menu.getCutM().setAccelerator(KeyStroke.getKeyStroke('C',Event.ALT_MASK));
+		menu.getCutM().setAccelerator(KeyStroke.getKeyStroke('Z', Event.ALT_MASK));
+
 		menu.getOpenM().addActionListener(this);
 	}
 
@@ -96,7 +103,7 @@ public class TryNotepad extends JFrame implements ActionListener {
 			int result = JOptionPane.showConfirmDialog(this, "저장하시겠습니까?", "메모장", JOptionPane.YES_NO_CANCEL_OPTION);
 			if (result == JOptionPane.YES_OPTION) {
 				// 파일저장 후 종료
-				if(area.getText().length()!=0) {
+				if (area.getText().length() != 0) {
 					saveDialog();
 					fileWrite();
 				}
@@ -127,11 +134,11 @@ public class TryNotepad extends JFrame implements ActionListener {
 		try {
 			JFileChooser chooser = new JFileChooser();
 			int result = chooser.showSaveDialog(this);
-			
+
 			if (result == JFileChooser.APPROVE_OPTION) {
-				file = chooser.getSelectedFile(); //선택한 경로와 파일명
+				file = chooser.getSelectedFile(); // 선택한 경로와 파일명
 			} else if (result == JOptionPane.NO_OPTION) {
-				
+
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -141,10 +148,10 @@ public class TryNotepad extends JFrame implements ActionListener {
 
 	public void fileWrite() {
 		try {
-			if(file==null) {
+			if (file == null) {
 				return;
 			}
-			
+
 			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 			String data = area.getText();
 			bw.write(data);
@@ -163,21 +170,21 @@ public class TryNotepad extends JFrame implements ActionListener {
 			// 선택한 경로와 파일명 얻기
 			file = chooser.getSelectedFile();
 		} else if (result == JFileChooser.CANCEL_OPTION) {
-			
+
 		}
 		JOptionPane.showMessageDialog(this, file);
 	}
 
 	public void fileRead() {
-		area.setText("");		
-		if(file==null)
+		area.setText("");
+		if (file == null)
 			return;
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
-			
+
 			String line;
 			while ((line = br.readLine()) != null) {
-				area.append(line + "\n"); 
+				area.append(line + "\n");
 			}
 			br.close();
 		} catch (Exception e) {
