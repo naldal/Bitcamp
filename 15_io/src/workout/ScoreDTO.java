@@ -1,6 +1,8 @@
 package workout;
 
-public class ScoreDTO {
+import java.io.Serializable;
+
+public class ScoreDTO implements Serializable, Comparable<ScoreDTO>{
 
 	private String hak;
 	private String name;
@@ -9,6 +11,19 @@ public class ScoreDTO {
 	private int math;
 	private int tot;
 	private double avg;
+	
+	public ScoreDTO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public ScoreDTO(String hak, String name, int kor, int eng, int math) {
+		super();
+		this.hak = hak;
+		this.name = name;
+		this.kor = kor;
+		this.eng = eng;
+		this.math = math;
+	}
 	
 	public String getHak() {
 		return hak;
@@ -41,7 +56,7 @@ public class ScoreDTO {
 		this.math = math;
 	}
 	public int getTot() {
-		return tot;
+		return kor+eng+math;
 	}
 	public void setTot(int tot) {
 		this.tot = tot;
@@ -50,7 +65,14 @@ public class ScoreDTO {
 		return avg;
 	}
 	public void setAvg(double avg) {
-		this.avg = avg;
+		this.avg = tot/3.0;
+	}
+
+	@Override
+	public int compareTo(ScoreDTO o) {
+		if(tot < o.getTot()) return -1;
+		else if (tot == o.getTot()) return 0;
+		else return 1;
 	}
 	
 	

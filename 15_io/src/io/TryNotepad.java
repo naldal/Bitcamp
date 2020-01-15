@@ -1,6 +1,7 @@
 package io;
 
 import java.awt.Container;
+import java.awt.Event;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +29,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 
 public class TryNotepad extends JFrame implements ActionListener {
 
@@ -50,12 +52,13 @@ public class TryNotepad extends JFrame implements ActionListener {
 		setBounds(1100, 200, 600, 500);
 		this.setTitle("간단메모장");
 		setVisible(true);
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		
 		addWindowListener(new WindowAdapter() {
+			
 			@Override
 			public void windowClosing(WindowEvent e) {
-				int result = JOptionPane.showConfirmDialog(new TryNotepad(), "저장하시겠습니까?", "메모장", JOptionPane.YES_NO_CANCEL_OPTION);
+				int result = JOptionPane.showConfirmDialog(TryNotepad.this, "저장하시겠습니까?", "메모장", JOptionPane.YES_NO_CANCEL_OPTION);
 				if (result == JOptionPane.YES_OPTION) {
 					// 파일저장 후 종료
 					if(area.getText().length()!=0) {
@@ -78,6 +81,8 @@ public class TryNotepad extends JFrame implements ActionListener {
 		menu.getCopyM().addActionListener(this);
 		menu.getPasteM().addActionListener(this);
 		menu.getCutM().addActionListener(this);
+		menu.getCutM().setMnemonic('c');
+		menu.getCutM().setAccelerator(KeyStroke.getKeyStroke('C',Event.ALT_MASK));
 		menu.getOpenM().addActionListener(this);
 	}
 
@@ -172,7 +177,7 @@ public class TryNotepad extends JFrame implements ActionListener {
 			
 			String line;
 			while ((line = br.readLine()) != null) {
-				area.append(line + "\n");
+				area.append(line + "\n"); 
 			}
 			br.close();
 		} catch (Exception e) {
