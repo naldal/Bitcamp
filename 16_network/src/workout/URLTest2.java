@@ -11,17 +11,18 @@ public class URLTest2 {
 		URL url = new URL("http://www.liebli.com/goods/goods_list.php?cateCd=001002");
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
-		String keyword = "18K";
-		String keyword2 = "18k";
+
 		String line=null; 
-		int cnt=1;
+		String txt=null;
 		
 		while((line=br.readLine())!=null) {
-			if(line.contains(keyword)||line.contains(keyword2)) {
-				System.out.println(line);
-				cnt++;
-			}
+			txt += line;
 		}
-		System.out.println(cnt);
+		txt += " ";
+		
+		System.out.println();
+		
+		
+		
 	}
 }

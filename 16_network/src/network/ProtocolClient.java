@@ -31,16 +31,38 @@ public class ProtocolClient {
 			e.printStackTrace();
 			System.exit(0);
 		}
-		String msg;
+		String msg, line;
 		while(true) {
-			//서버로 보내는 쪽
 			try {
+				//서버로 보내는 쪽
+				/*
+				 * "100: angel" //입장
+				 * "200: angel"	//퇴장
+				 * "300: angel" //채팅
+				 */
 				msg = keyboard.readLine();
 				
 				bw.write(msg+"\n");
 				
-				bw.flush();
-			//서버로부터 받는 쪽				
+				bw.flush(); //버퍼비우기
+			//서버로부터 받는 쪽			
+				/*
+				 * angel님이 입장 <--100 
+				 * angel님이 퇴장 <--200
+				 * [angel]안녕   <--300
+				 */
+				
+				line = br.readLine();
+				System.out.println(line);
+				String[] ar = msg.split(":");
+				if(ar[0].equals("200")) {
+					br.close();
+					bw.close();
+					socket.close();
+					
+					keyboard.close();
+					System.exit(0);
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
