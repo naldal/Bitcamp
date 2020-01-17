@@ -1,8 +1,8 @@
-package multiChat;
+package workout;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Panel;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -10,7 +10,6 @@ import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -24,7 +23,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
-public class ChatClient extends JFrame implements ActionListener, Runnable {
+public class ChatClientObject extends JFrame implements ActionListener, Runnable{
 
 	private JTextArea output;
 	private JTextField input;
@@ -34,8 +33,8 @@ public class ChatClient extends JFrame implements ActionListener, Runnable {
 	private PrintWriter pw; // 보내는거
 	Socket socket;
 
-	public ChatClient() {
-
+	public ChatClientObject() {
+		
 		output = new JTextArea();
 		scroll = new JScrollPane(output);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -96,44 +95,20 @@ public class ChatClient extends JFrame implements ActionListener, Runnable {
 		send.addActionListener(this);
 		input.addActionListener(this);
 	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void run() {
-		// 서버에서 오는 걸 받는 쪽
-		String line;
-		while (true) {
-			try {
-				line = br.readLine();
-				if (line == null || line.toLowerCase().trim().equals("quit")) {
-					br.close();
-					pw.close();
-					socket.close();
-
-					System.exit(0);
-				}
-				
-				output.append(line+"\n");
-				
-				int pos = output.getText().length();
-				output.setCaretPosition(pos);
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		// TODO Auto-generated method stub
+		
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// 서버로 보내는쪽
-		String msg = input.getText();
-		pw.println(msg);
-		pw.flush();
-		input.setText("");
-	}
-
+	
 	public static void main(String[] args) {
-		new ChatClient().service();
+		
 	}
-
 }

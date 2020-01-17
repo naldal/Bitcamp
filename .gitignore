@@ -144,5 +144,6 @@ test/
 SetterDI/
 ConstructorDI/
 CollectionDI/
-
+AutoWire/
+JavaBeanConfiguration/
 
