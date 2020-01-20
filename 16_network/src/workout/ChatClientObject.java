@@ -10,6 +10,8 @@ import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -24,17 +26,20 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
 public class ChatClientObject extends JFrame implements ActionListener, Runnable{
-
+	private static final long serialVersionUID = 1L;
 	private JTextArea output;
 	private JTextField input;
 	private JButton send;
 	private JScrollPane scroll;
 	private BufferedReader br; // 받는거
 	private PrintWriter pw; // 보내는거
+
+	private ObjectOutputStream oos;
+	private ObjectInputStream ois;
 	Socket socket;
 
 	public ChatClientObject() {
-		
+
 		output = new JTextArea();
 		scroll = new JScrollPane(output);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -54,12 +59,23 @@ public class ChatClientObject extends JFrame implements ActionListener, Runnable
 
 		setBounds(900, 200, 300, 300);
 		setVisible(true);
-		//setDefaultCloseOperation(EXIT_ON_CLOSE);
+		// setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addWindowFocusListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				pw.println("quit");
-				pw.flush();
+				//서버가 응답하기 전까지는 종료해서는 안된다
+				if(oos==null||ois==null) {
+					System.exit(0);
+				}
+				InfoDTO dto = new InfoDTO();
+				dto.setCommand(Info.EXIT);
+				
+				try {
+					oos.writeObject(dto);
+					oos.flush();
+				} catch(IOException io) {
+					io.printStackTrace();
+				}
 			}
 		});
 	}
@@ -80,13 +96,20 @@ public class ChatClientObject extends JFrame implements ActionListener, Runnable
 
 		try {
 			socket = new Socket(serverIP, 9500);
-			br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
+
+			oos = new ObjectOutputStream(socket.getOutputStream());
+			ois = new ObjectInputStream(socket.getInputStream());
+
+			// 닉네임을 서버로 보내기
+			InfoDTO dto = new InfoDTO();
+			dto.setNickName(nickName);
+			dto.setCommand(Info.JOIN);
+			oos.writeObject(dto);
+			oos.flush();
+
 		} catch (IOException e) {
 			System.out.println("서버와 연결이 안되었습니다.");
 		}
-		pw.println(nickName);
-		pw.flush();
 
 		// 스레드 생성
 		Thread t = new Thread(this);
@@ -95,20 +118,65 @@ public class ChatClientObject extends JFrame implements ActionListener, Runnable
 		send.addActionListener(this);
 		input.addActionListener(this);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		//서버로 보내는 쪽
+		String msg = input.getText();
+		InfoDTO dto = new InfoDTO();
+		if(msg.toLowerCase().trim().equals("exit")) {
+			dto.setCommand(Info.EXIT);
+		} else {
+			dto.setCommand(Info.SEND);
+			dto.setMsg(msg);
+		}
 		
+		try {
+			oos.writeObject(dto);
+			oos.flush();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		input.setText("");
 	}
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		InfoDTO dto = null;
 		
+		while(true) {
+			try {
+				dto = (InfoDTO) ois.readObject();
+				
+				if(dto.getCommand() == Info.EXIT) {
+					ois.close();
+					oos.close();
+					socket.close();
+					
+					System.exit(0);
+				}
+				
+				if(dto.getCommand() == Info.SEND) {
+					output.append(dto.getMsg()+"\n");
+					
+					int pos = output.getText().length();
+					output.setCaretPosition(pos);
+				}
+				
+				
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
-	
+
 	public static void main(String[] args) {
-		
+		new ChatClientObject().service();
 	}
 }
