@@ -146,4 +146,7 @@ ConstructorDI/
 CollectionDI/
 AutoWire/
 JavaBeanConfiguration/
-
+InitDestroy/
+JavaDI/
+JSR250/
+pj_crawler/

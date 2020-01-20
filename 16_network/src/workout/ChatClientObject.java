@@ -25,7 +25,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
-public class ChatClientObject extends JFrame implements ActionListener, Runnable{
+public class ChatClientObject extends JFrame implements ActionListener, Runnable {
 	private static final long serialVersionUID = 1L;
 	private JTextArea output;
 	private JTextField input;
@@ -63,17 +63,17 @@ public class ChatClientObject extends JFrame implements ActionListener, Runnable
 		addWindowFocusListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				//서버가 응답하기 전까지는 종료해서는 안된다
-				if(oos==null||ois==null) {
+				// 서버가 응답하기 전까지는 종료해서는 안된다
+				if (oos == null || ois == null) {
 					System.exit(0);
 				}
 				InfoDTO dto = new InfoDTO();
 				dto.setCommand(Info.EXIT);
-				
+
 				try {
 					oos.writeObject(dto);
 					oos.flush();
-				} catch(IOException io) {
+				} catch (IOException io) {
 					io.printStackTrace();
 				}
 			}
@@ -121,16 +121,16 @@ public class ChatClientObject extends JFrame implements ActionListener, Runnable
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//서버로 보내는 쪽
+		// 서버로 보내는 쪽
 		String msg = input.getText();
 		InfoDTO dto = new InfoDTO();
-		if(msg.toLowerCase().trim().equals("exit")) {
+		if (msg.toLowerCase().trim().equals("exit")) {
 			dto.setCommand(Info.EXIT);
 		} else {
 			dto.setCommand(Info.SEND);
 			dto.setMsg(msg);
 		}
-		
+
 		try {
 			oos.writeObject(dto);
 			oos.flush();
@@ -138,34 +138,33 @@ public class ChatClientObject extends JFrame implements ActionListener, Runnable
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+
 		input.setText("");
 	}
 
 	@Override
 	public void run() {
 		InfoDTO dto = null;
-		
-		while(true) {
+
+		while (true) {
 			try {
 				dto = (InfoDTO) ois.readObject();
-				
-				if(dto.getCommand() == Info.EXIT) {
+
+				if (dto.getCommand() == Info.EXIT) {
 					ois.close();
 					oos.close();
 					socket.close();
-					
+
 					System.exit(0);
 				}
-				
-				if(dto.getCommand() == Info.SEND) {
-					output.append(dto.getMsg()+"\n");
-					
+
+				if (dto.getCommand() == Info.SEND) {
+					output.append(dto.getMsg() + "\n");
+
 					int pos = output.getText().length();
 					output.setCaretPosition(pos);
 				}
-				
-				
+
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

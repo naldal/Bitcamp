@@ -63,9 +63,9 @@ public class ChatHandlerObject extends Thread {
 
 					// 남은 클라이언트에게 퇴장 메세지 보내기
 					list.remove(this);
-					
+
 					sendDTO.setCommand(Info.SEND);
-					sendDTO.setMsg(nickName+"님이 퇴장하였습니다.");
+					sendDTO.setMsg(nickName + "님이 퇴장하였습니다.");
 					broadcast(sendDTO);
 
 				} else if (dto.getCommand() == Info.SEND) {
