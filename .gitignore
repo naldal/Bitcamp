@@ -150,3 +150,7 @@ InitDestroy/
 JavaDI/
 JSR250/
 pj_crawler/
+Component/
+ComponentSetting/
+ComponentAutowired/
+AOPXML/
