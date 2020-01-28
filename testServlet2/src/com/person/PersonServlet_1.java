@@ -13,7 +13,6 @@ public class PersonServlet_1 extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		
 		// 데이터
 		String name = request.getParameter("name");
 		String gender = request.getParameter("gender");
