@@ -1,0 +1,19 @@
+
+
+
+td {
+    border: 2px solid black;
+    width: 100px;
+}
+
+tr{
+    border: 2px solid black;
+}
+
+.td2 {
+    width: 400px;
+}
+
+#col {
+    text-align: center;
+}

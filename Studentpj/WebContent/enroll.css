@@ -1,0 +1,29 @@
+@charset "EUC-KR";
+body {
+    padding: 0;
+    background-image: linear-gradient(30deg, #ffbe76, #40739e) ;
+
+}
+
+.form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+h1 {
+	margin: 0;
+}
+
+#phoneSection #tel2 {
+    width: 50px;
+}
+
+#phoneSection #tel3 {
+    width: 50px;
+}
+
+#nameSection, #phoneSection, #genderSection, #buttonSection{
+    margin: 30px;
+}

@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="person.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="/testServlet2/person">
+        <table>
+            <tr>
+                <td>이름</td>
+                <td class="td2"><input type="text" size="15" name="name"></td>
+            </tr>
+            <tr>
+                <td>성별</td>
+                <td class="td2"><input type="radio" name="gender" value="male">남성 <input type="radio" name="gender" value="female">여성</td>
+            </tr>
+            <tr>
+                <td>색깔</td>
+                <td class="td2">
+                    <select name="color">
+                        <option value="RED">빨강</option>
+                        <option value="ORANGE">주황</option>
+                        <option value="YELLOW">노랑</option>
+                        <option value="BLUE">파랑</option>
+                        <option value="PULPLE">보라</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>과목</td>
+                <td class="td2">
+                    <input type="checkbox" name="subject" value="reading">독서
+                    <input type="checkbox" name="subject" value="movie">영화
+                    <input type="checkbox" name="subject" value="music">음악
+                    <input type="checkbox" name="subject" value="game">게임
+                    <input type="checkbox" name="subject" value="shopping">쇼핑
+                </td>
+            </tr>
+            <tr>
+                <td>과목</td>
+                <td class="td2">
+                    <select name="stacks" size="10" multiple>
+                        <option value="JAVA">JAVA</option>
+                        <option value="Servlet">Servlet</option>
+                        <option value="JSP">JSP</option>
+                        <option value="SPRING">SPRING</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td id="col" colspan="2"><input type="submit"><input type="reset"></td>
+            </tr>
+        </table>
+    </form>
+
+</body>
+</html>
