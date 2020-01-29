@@ -1,0 +1,41 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+    <form name="boardForm" method="get" action="http://localhost:8081/guestbookServlet/GuestbookServlet">
+    <table border="1">
+        <tr>
+            <td>작성자</td>
+            <td><input type="text" name="name" size="15" placeholder="작성자 입력"></td>
+        </tr>
+        <tr>
+            <td>이메일</td>
+            <td><input type="text" name="email" size="20" placeholder="이메일 입력"></td>
+        </tr>
+        <tr>
+            <td>홈페이지</td>
+            <td><input type="text" name="homepage" size="30" placeholder="http://"></td>
+        </tr>
+        <tr>
+            <td>제목</td>
+            <td><input type="text" name="subject" size="40" placeholder="제목 입력"></td>
+        </tr>
+        <tr>
+            <td>내용</td>
+            <td><textarea cols="50" rows="10" name="content" placeholder="내용을 입력"></textarea></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="button" value="글작성" onclick="write2()">
+                <input type="reset" value="다시작성">
+                <input type="button" value="글목록" onclick="gotoSomeWhere()">
+            </td>
+        </tr>
+    </table>
+    </form>
+</body>
+<script type="text/javascript" src="../js/guestwrite.js"></script>
+</html>
