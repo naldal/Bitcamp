@@ -1,4 +1,3 @@
-let count = 0
 
 function checkWriteForm(){
 	// 유효성 체크
@@ -11,10 +10,8 @@ function checkWriteForm(){
 		alert("비밀번호를 입력하세요");
 	else if (document.writeForm.repwd.value != document.writeForm.pwd.value)
 		alert("비밀번호가 맞지 않습니다");
-	else if (count == 0)
-		alert("중복체크 해주세요");
-	else if (document.writeForm.id.value != id)
-		alert("중복체크 해주세요")
+	else if (document.writeForm.id.value != document.writeForm.check.value)
+		alert("중복체크 하세요");
 	else
 		document.writeForm.submit(); // 현재문서.폼이름.액션찾기
 }
@@ -69,8 +66,8 @@ function checkPost() {
 }
 
 function checkId(){
-	flag = 1;
-	let sId = document.writeForm.id.value;
+	count = 1;
+	sId = document.writeForm.id.value;
 	if(sId=="") 
 		alert("아이디를 입력하세요");
 	else 	
@@ -81,6 +78,7 @@ function checkId(){
 
 function checkIdClose(id){
 	opener.writeForm.id.value= id;
+	opener.writeForm.check.value = id;
 	window.close();
 	opener.writeForm.pwd.focus();
 }

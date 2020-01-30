@@ -2,7 +2,6 @@ package guestbook.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,63 +10,95 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import guestbook.bean.GuestbookDAO;
-import guestbook.dao.GuestbookDTO;
+import guestbook.dto.GuestbookDTO;
+import guestbook.dao.GuestbookDAO;
 
-@WebServlet("/GuestbookServlet")
-public class GuestbookListServlet extends HttpServlet{
+@WebServlet("/GuestbookListServlet")
+public class GuestbookListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	static List<GuestbookDTO> list = new ArrayList<GuestbookDTO>();
+       
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		//데이터
+		int pg = Integer.parseInt(request.getParameter("pg"));
+		
+		//DB
+		GuestbookDAO guestbookDAO = GuestbookDAO.getInstance();
+		
+		//페이징 처리 - 1페이지당 3개씩
+		int endNum = pg*3;
+		int startNum = endNum-2;
+		int totalA = guestbookDAO.getTotalArticle();
+		int totalP = (totalA+2)/3;
 	
-	
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		GuestbookDTO guestdto = null;
-		GuestbookDAO guestbookDAO = GuestbookDAO.getinstance();
+		List<GuestbookDTO> list = guestbookDAO.getList(startNum, endNum);
 		
-		//req
-		request.setCharacterEncoding("UTF-8");
-		
-		String name = request.getParameter("name");
-		String email = request.getParameter("email");
-		String homepage = request.getParameter("homepage");
-		String subject = request.getParameter("subject");
-		String content = request.getParameter("content");
-		
-		guestdto = new GuestbookDTO(name, email, homepage, subject, content);
-		
-		
-		//db
-		boolean flag = false;
-		GuestbookDTO dto = guestbookDAO.insert(guestdto);
-		
-		if(dto!=null) {
-			flag=true;
-			list.add(dto); //list에 추가.
-			System.out.println(list.size());
-			System.out.println("list insert success");
-		}
-		else {
-			System.out.println("list insert fail");
-			flag=false;
-		}
-		
-		
-		//res
-		response.setContentType("text/html;charset=UTF-8");
+		//응답
+		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
 		out.println("<head>");
-		out.println("<body>");
-		if(flag) {
-			out.println("작성하신 글을 저장했습니다.");
-		} else {
-			out.println("저장에 실패했습니다.");
-		}
-		out.println("<a href=\"http://localhost:8081/guestbookServlet/guestbook/guestbookWriteForm.html\">뒤로가기</a>");
-		out.println("</html>");
+		out.println("<style>");
+		out.println("#currentPaging {color: red; text-decoration: underline; }");
+		out.println("#paging {color: black; text-decoration: none; }");
+		out.println("</style>");
 		out.println("</head>");
+		out.println("<body>");
+		
+		if(list!=null) {
+			for(int i=1; i<=totalP; i++) {
+				if(i==pg)
+					out.println("[<a id='currentPaging' href='/guestbookServlet/GuestbookListServlet?pg="+i+"'>"+i+"</a>]");
+				else 
+					out.println("[<a id='paging' href='/guestbookServlet/GuestbookListServlet?pg="+i+"'>"+i+"</a>]");
+			}
+						
+			for(GuestbookDTO guestbookDTO : list) {
+				out.println("<table border='1'>");
+				out.println("<tr>");
+				out.println("<td width='100'>작성자</td>");
+				out.println("<td width='150'>"+guestbookDTO.getName()+"</td>");
+				out.println("<td width='100'>작성일</td>");
+				out.println("<td width='150'>"+guestbookDTO.getLogtime()+"</td>");
+				out.println("</tr>");
+				
+				out.println("<tr>");
+				out.println("<td>이메일</td>");
+				out.println("<td colspan='3'>"+guestbookDTO.getEmail()+"</td>");
+				out.println("</tr>");
+
+				out.println("<tr>");
+				out.println("<td>홈페이지</td>");
+				out.println("<td colspan='3'>"+guestbookDTO.getHomepage()+"</td>");
+				out.println("</tr>");
+
+				out.println("<tr>");
+				out.println("<td>제목</td>");
+				out.println("<td colspan='3'>"+guestbookDTO.getSubject()+"</td>");
+				out.println("</tr>");
+
+				out.println("<tr>");
+				out.println("<td colspan='4'><pre>"+guestbookDTO.getContent()+"</pre></td>");
+				out.println("</tr>");
+				out.println("</table>");
+				out.println("<hr color='red' width='500' align='left'>");
+			}//for
+		}
+		out.println("</body>");
 		out.println("</html>");
 	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

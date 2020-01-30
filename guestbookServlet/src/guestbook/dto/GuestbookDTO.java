@@ -1,38 +1,14 @@
-package guestbook.dao;
-
+package guestbook.dto;
 
 public class GuestbookDTO {
-
 	private int seq;
 	private String name;
-	private String eamil;
+	private String email;
 	private String homepage;
 	private String subject;
 	private String content;
 	private String logtime;
 	
-	public GuestbookDTO() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	public GuestbookDTO(int seq, String name, String eamil, String homepage, String subject, String content, String date) {
-		this.seq = seq;
-		this.name = name;
-		this.eamil = eamil;
-		this.homepage = homepage;
-		this.subject = subject;
-		this.content = content;
-		this.logtime = date;
-	}
-	
-	public GuestbookDTO(String name, String email, String homepage, String subject, String content) {
-		this.name = name;
-		this.eamil = email;
-		this.homepage = homepage;
-		this.subject = subject;
-		this.content = content;
-	}
-
 	public int getSeq() {
 		return seq;
 	}
@@ -45,11 +21,11 @@ public class GuestbookDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getEamil() {
-		return eamil;
+	public String getEmail() {
+		return email;
 	}
-	public void setEamil(String eamil) {
-		this.eamil = eamil;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getHomepage() {
 		return homepage;
@@ -75,5 +51,4 @@ public class GuestbookDTO {
 	public void setLogtime(String logtime) {
 		this.logtime = logtime;
 	}
-	
 }
