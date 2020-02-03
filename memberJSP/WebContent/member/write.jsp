@@ -1,8 +1,6 @@
 <%@page import="org.apache.jasper.tagplugins.jstl.core.Import"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="member.bean.MemberDTO" %>
-<%@ page import="member.dao.MemberDAO" %>
+    pageEncoding="UTF-8" import="member.bean.MemberDTO, member.dao.MemberDAO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +31,7 @@
 	memberDTO.setEmail1(email1);
 	memberDTO.setEmail2(email2);
 	memberDTO.setTel1(tel1);
-	memberDTO.setTel2(tel2);
+	memberDTO.setTel2(tel2); 
 	memberDTO.setTel3(tel3);
 	memberDTO.setZipcode(zipcode);
 	memberDTO.setAddr1(addr1);

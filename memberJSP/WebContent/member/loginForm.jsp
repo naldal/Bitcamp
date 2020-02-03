@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form name="loginForm" method="post" action="http://localhost:8081/memberServlet/LoginServlet">
+<form name="loginForm" method="post" action="login.jsp">
 <h2>로그인</h2>
 <table border='1'>
 	<tr>

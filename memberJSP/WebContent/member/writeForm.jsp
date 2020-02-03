@@ -10,7 +10,7 @@
 <body>
 	
 	<h2>회원가입</h2>
-	<form name="writeForm" method="post" action="/memberServlet/WriteServlet">
+	<form name="writeForm" method="post" action="write.jsp">
 	<table border="1" style="width: 100">
 		<tr>
 			<td>이름</td>
@@ -90,6 +90,6 @@
 	</table>
 	</form> 
 </body>
-<script type="text/javascript" src="../js/member.js"></script>
+<script type="text/javascript" src="http://localhost:8081/memberJSP/js/member.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </html>

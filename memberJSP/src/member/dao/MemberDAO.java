@@ -1,7 +1,10 @@
 package member.dao;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
+import member.bean.ZipcodeDTO;
 import member.bean.MemberDTO;
 
 public class MemberDAO {
@@ -105,7 +108,51 @@ public class MemberDAO {
 		return row;
 
 	}
-
+	
+	public List<ZipcodeDTO> getZipcodeList(String sido, String sigungu, String roadname) {
+		List<ZipcodeDTO> list = new ArrayList<ZipcodeDTO>();
+		
+		String sql = "select * from newzipcode where sido like ? and nvl(sigungu, '0') like ? and sigungu like ? and roadname like ?";
+		this.getConnection();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+sido+"%");
+			pstmt.setString(2, "%"+sigungu+"%");
+			pstmt.setString(3, "%"+roadname+"%");
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ZipcodeDTO zipcodeDTO = new ZipcodeDTO();
+				zipcodeDTO.setZipcode(rs.getString("zipcode"));
+				zipcodeDTO.setSido(rs.getString("sido"));
+				zipcodeDTO.setSigungu(rs.getString("sigungu")==null?"":rs.getString("sigungu"));
+				zipcodeDTO.setYubmyundong(rs.getString("yubmyundong"));
+				zipcodeDTO.setRi(rs.getString("ri")==null ? "" : rs.getString("ri"));
+				zipcodeDTO.setRoadname(rs.getString("roadname"));
+				zipcodeDTO.setBuildingname(rs.getString("buildingname")==null? "" :rs.getString("buildingname"));
+				
+				list.add(zipcodeDTO);
+			}
+			System.out.println("list add 완료");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			list = null; //오류시 반드시 list를  null로 초기화시키자.
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				con.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	
 	public boolean checkId(String id) {
 		String sql = "select * from member where id = ?";
 		this.getConnection();
