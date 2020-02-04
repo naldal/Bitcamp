@@ -1,0 +1,13 @@
+@charset "EUC-KR";
+td {
+	font-size: 9pt;
+}
+.addressA{
+	color: black;
+}
+
+.addressA:hover{
+	color: green;
+	text-decoration: underline;
+	font-weight: bold;
+}

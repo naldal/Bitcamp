@@ -20,22 +20,19 @@
 	MemberDAO memberDAO = MemberDAO.getinstance();
 	List<ZipcodeDTO> list = null;
 	if(sido!=null && roadname!=null) {
-		list = memberDAO.getZipcodeList(sido, sigungu, roadname); 
+		if(sido!="" && roadname!="") {
+			list = memberDAO.getZipcodeList(sido, sigungu, roadname); 
+		}
 	}
 %>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<style type="text/css">
-td {
-	font-size: 9pt;
-}
-</style>
+<link rel="stylesheet" href="../css/member.css">
 </head>
 <body>
-<form action="checkPost.jsp" method="post">
+<form name="checkPostForm" action="checkPost.jsp" method="post">
 	<table border="1" width="100%" cellspacing="0" cellpadding="3">
 		<tr>
 			<td>시도</td>
@@ -79,11 +76,18 @@ td {
 			<td colspan="3" align="center">주소</td>
 		</tr>
 		<%if(list!=null) { %>
-			<%for(ZipcodeDTO zipcodeDTO : list) { %>
+			<%for(ZipcodeDTO zipcodeDTO : list) {
+				String address = zipcodeDTO.getSido()+" "
+					+zipcodeDTO.getSigungu()+" "
+					+zipcodeDTO.getYubmyundong()+" "
+					+zipcodeDTO.getRi()+" "
+					+zipcodeDTO.getRoadname()+" "
+					+zipcodeDTO.getBuildingname(); 	
+			%>
 			<tr>
-				<td><%=zipcodeDTO.getZipcode() %></td>
-				<td>
-				<%=zipcodeDTO.getSido()+" "+zipcodeDTO.getSigungu()+" "+zipcodeDTO.getYubmyundong()+" "+zipcodeDTO.getRi()+" "+zipcodeDTO.getRoadname()+" "+zipcodeDTO.getBuildingname() %>
+				<td colspan="1"><%=zipcodeDTO.getZipcode() %></td>
+				<td colspan="3">
+				<a class="addressA" href="#" onclick="checkPostClose('<%=zipcodeDTO.getZipcode()%>','<%=address%>')"><%=address%></a>
 				</td>
 			</tr>
 		<%} %>
@@ -91,4 +95,12 @@ td {
 	</table>
 	</form>
 </body>
+<script>
+function checkPostClose(zipcode, address) {
+	opener.writeForm.zipcode.value = zipcode;
+	opener.writeForm.addr1.value = address;
+	window.close();	
+	opener.writeForm.addr2.focus();
+}
+</script>
 </html>

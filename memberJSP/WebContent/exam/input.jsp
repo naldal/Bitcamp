@@ -14,7 +14,7 @@
 		X
 	</td>
 	<td>
-		<input type="text" name="xValue">
+		<input type="text" name="x">
 	</td>
 </tr>
 <tr>
@@ -22,12 +22,12 @@
 		Y
 	</td>
 	<td>
-		<input type="text" name="yValue">
+		<input type="text" name="y">
 	</td>
 </tr>
 <tr>
 	<td colspan="2">
-		<input type="submit" value="합 구하기">
+		<input type="submit" value="계산">
 		<input type="reset" value="취소">
 		
 	</td>

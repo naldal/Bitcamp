@@ -5,7 +5,7 @@ public class MemberDTO {
 	
 	private String name; 
 	private String id; 
-	private String pwd; 
+	private String password; 
 	private String gender;
 	private String email1;
 	private String email2;
@@ -22,8 +22,8 @@ public class MemberDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
@@ -58,8 +58,8 @@ public class MemberDTO {
 	public String getId() {
 		return id;
 	}
-	public String getPwd() {
-		return pwd;
+	public String getPassword() {
+		return password;
 	}
 	public String getGender() {
 		return gender;
