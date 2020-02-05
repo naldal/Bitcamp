@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import board.bean.BoardDTO;
 import member.bean.ZipcodeDTO;
 import member.bean.MemberDTO;
 
@@ -36,15 +37,128 @@ public class MemberDAO {
 		}
 	}
 
-	public String loginChecking(String id, String pwd) {
+	public MemberDTO getMember(String id) {
+		this.getConnection();
+		String sql = "select * from member where id = ?";
+		MemberDTO memberdto = null;
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			rs.next();
+			memberdto = new MemberDTO();
+			memberdto.setName(rs.getString("name"));
+			memberdto.setId(rs.getString("id"));
+			memberdto.setPassword(rs.getString("pwd"));
+			memberdto.setGender(rs.getString("gender"));
+			memberdto.setEmail1(rs.getString("email1")==null ? "":rs.getString("email1"));
+            memberdto.setEmail2(rs.getString("email2")==null ? "":rs.getString("email2"));
+            memberdto.setTel1(rs.getString("tel1")==null ? "":rs.getString("tel1"));
+            memberdto.setTel2(rs.getString("tel2")==null ? "":rs.getString("tel2"));
+            memberdto.setTel3(rs.getString("tel3")==null ? "":rs.getString("tel3"));
+            memberdto.setZipcode(rs.getString("zipcode")==null ? "":rs.getString("zipcode"));
+            memberdto.setAddr1(rs.getString("addr1")==null ? "":rs.getString("addr1"));
+            memberdto.setAddr2(rs.getString("addr2")==null ? "":rs.getString("addr2"));
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			memberdto=null;
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return memberdto;
+	}
+	
+	public void modify(MemberDTO memberDTO) {
+		getConnection();
+
+		String sql = "update member set name = ?,"
+				+ "pwd = ? ,"
+				+ "gender = ? ,"
+				+ "email1 = ? ,"
+				+ "email2 = ? ,"
+				+ "tel1 = ? ,"
+				+ "tel2 = ? ,"
+				+ "tel3 = ? ,"
+				+ "zipcode = ? ,"
+				+ "addr1 = ? ,"
+				+ "addr2 =  ?"
+				+ "where id = ?";
+
+		int su = 0;
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, memberDTO.getName());
+			pstmt.setString(2, memberDTO.getPassword());
+			pstmt.setString(3, memberDTO.getGender());
+			pstmt.setString(4, memberDTO.getEmail1());
+			pstmt.setString(5, memberDTO.getEmail2());
+			pstmt.setString(6, memberDTO.getTel1());
+			pstmt.setString(7, memberDTO.getTel2());
+			pstmt.setString(8, memberDTO.getTel3());
+			pstmt.setString(9, memberDTO.getZipcode());
+			pstmt.setString(10, memberDTO.getAddr1());
+			pstmt.setString(11, memberDTO.getAddr2());
+			pstmt.setString(12, memberDTO.getId());
+			
+			su = pstmt.executeUpdate();
+			System.out.println("su : "+su);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public String getEmail(String id, String password) {
+		String sql = "select email1, email2 from member where id= ? and pwd = ?";
+		getConnection();
+		String email=null;
+		
+		try {
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, password);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				String email1 = rs.getString("email1");
+				String email2 = rs.getString("email2");
+				email = email1+"@"+email2;
+			}
+			
+		
+		} catch (SQLException e) {
+			email=null;
+			e.printStackTrace();
+		}
+		System.out.println("email확인 : "+email);
+		return email;
+	}
+	
+	public String loginChecking(String id, String password) {
 		String sql = "select name from member where id = ? and pwd = ?";
 		getConnection();
-		String row11 = "";
+		String row11 = null;
 
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			pstmt.setString(2, pwd);
+			pstmt.setString(2, password);
 
 			rs = pstmt.executeQuery();
 
@@ -153,43 +267,7 @@ public class MemberDAO {
 		return list;
 	}
 
-	public MemberDTO findInfo(String id) {
-		this.getConnection();
-		String sql = "select * from member where id = ?";
-		MemberDTO memberdto = new MemberDTO();
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				memberdto.setName(rs.getString("name"));
-				memberdto.setId(rs.getString("id"));
-				memberdto.setPassword(rs.getString("pwd"));
-				memberdto.setGender(rs.getString("gender"));
-				memberdto.setEmail1(rs.getString("email1"));
-				memberdto.setEmail2(rs.getString("email2"));
-				memberdto.setTel1(rs.getString("tel1"));
-				memberdto.setTel2(rs.getString("tel2"));
-				memberdto.setTel3(rs.getString("tel3"));
-				memberdto.setZipcode(rs.getString("zipcode"));
-				memberdto.setAddr1(rs.getString("addr1"));
-				memberdto.setAddr2(rs.getString("addr2"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			memberdto=null;
-		} finally {
-			try {
-				rs.close();
-				pstmt.close();
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
-		return memberdto;
-	}
+	
 
 	public boolean checkId(String id) {
 		String sql = "select * from member where id = ?";

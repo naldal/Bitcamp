@@ -17,7 +17,7 @@
 	</tr>
 	<tr>
 		<td>비밀번호</td>
-		<td><input type="password" name="pwd"></td>
+		<td><input type="password" name="password"></td>
 	</tr>
 	<tr>
 		<td colspan="2">

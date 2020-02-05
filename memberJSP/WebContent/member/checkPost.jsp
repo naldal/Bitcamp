@@ -97,10 +97,15 @@
 </body>
 <script>
 function checkPostClose(zipcode, address) {
-	opener.writeForm.zipcode.value = zipcode;
-	opener.writeForm.addr1.value = address;
+/* 	opener.document.forms[0].zipcode.value = zipcode;
+	opener.document.forms[0].addr1.value = address;
 	window.close();	
-	opener.writeForm.addr2.focus();
+	opener.document.forms[0].addr2.focus(); */
+	
+	opener.document.getElementById('zipcode').value=zipcode;
+	opener.document.getElementById('addr1').value=address;
+	window.close();
+	opener.document.getElementById('addr2').focus();
 }
 </script>
 </html>
