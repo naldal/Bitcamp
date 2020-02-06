@@ -102,22 +102,35 @@ public class BoardDAO {
 		return totalA;
 	}
 	
-	public List<BoardDTO> listing(int startNum, int endNum) {
+	public List<BoardDTO> boardList(int startNum, int endNum) {
 		List<BoardDTO> list = new ArrayList<BoardDTO>();
-		String sql = "select seq, subject, name, logtime, hit from board order by seq desc";
+		String sql = "select * from" + 
+				"(select rownum rn, tt.* from" +
+				"(select * from board order by seq desc) tt" + 
+				") where rn>=? and rn<=?";
 		this.getConnection();
 		
 		try {
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, startNum);
+			pstmt.setInt(2, endNum);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				BoardDTO boardDTO = new BoardDTO();
 				boardDTO.setSeq(rs.getInt("seq"));
-				boardDTO.setSubject(rs.getString("subject"));
+				boardDTO.setSubject(rs.getString("id"));
 				boardDTO.setName(rs.getString("name"));
-				boardDTO.setLogtime(rs.getString("logtime"));
+				boardDTO.setEmail(rs.getString("email"));
+				boardDTO.setSubject(rs.getString("subject"));
+				boardDTO.setContent(rs.getString("content"));
+				boardDTO.setRef(rs.getInt("ref"));
+				boardDTO.setLev(rs.getInt("lev"));
+				boardDTO.setStep(rs.getInt("step"));
+				boardDTO.setPseq(rs.getInt("pseq"));
+				boardDTO.setReply(rs.getInt("reply"));				
 				boardDTO.setHit(rs.getInt("hit"));
+				boardDTO.setLogtime(rs.getString("logtime"));
 				
 				list.add(boardDTO);
 			}
@@ -125,7 +138,6 @@ public class BoardDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(rs!=null) rs.close();
 				if(pstmt!=null) pstmt.close();
 				if(con!=null) con.close();
 			} catch (SQLException e) {
