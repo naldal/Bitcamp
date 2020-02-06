@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import board.bean.BoardDTO;
 import member.dao.MemberDAO;
@@ -47,17 +50,17 @@ public class BoardDAO {
 		return instance;
 	}
 	
-	public boolean saveBoard(BoardDTO boardDTO) {
+	public boolean boardWrite(Map<String, String> map) {
 		boolean flag=false;
 		String sql = "insert into board(seq, id, name, email, subject, content, ref) values (seq_board.nextval, ?, ?, ?, ?, ?, seq_board.nextval)";
 		this.getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, boardDTO.getId());
-			pstmt.setString(2,  boardDTO.getName());
-			pstmt.setString(3,  boardDTO.getEmail());
-			pstmt.setString(4,  boardDTO.getSubject());
-			pstmt.setString(5,  boardDTO.getContent());
+			pstmt.setString(1, map.get("id"));
+			pstmt.setString(2, map.get("name"));
+			pstmt.setString(3, map.get("eamil"));
+			pstmt.setString(4, map.get("subject"));
+			pstmt.setString(5, map.get("content"));
 			
 			flag = pstmt.executeUpdate()>0;
 			
@@ -76,4 +79,59 @@ public class BoardDAO {
 		return flag;
 	}
 	
+	public int getTotalBoard() {
+		int totalA=0;
+		String sql = "select count(*) from board";
+		this.getConnection();
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			totalA = rs.getInt(1);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return totalA;
+	}
+	
+	public List<BoardDTO> listing(int startNum, int endNum) {
+		List<BoardDTO> list = new ArrayList<BoardDTO>();
+		String sql = "select seq, subject, name, logtime, hit from board order by seq desc";
+		this.getConnection();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardDTO boardDTO = new BoardDTO();
+				boardDTO.setSeq(rs.getInt("seq"));
+				boardDTO.setSubject(rs.getString("subject"));
+				boardDTO.setName(rs.getString("name"));
+				boardDTO.setLogtime(rs.getString("logtime"));
+				boardDTO.setHit(rs.getInt("hit"));
+				
+				list.add(boardDTO);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
 }

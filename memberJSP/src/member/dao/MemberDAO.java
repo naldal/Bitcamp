@@ -123,67 +123,48 @@ public class MemberDAO {
 		}
 	}
 	
-	public String getEmail(String id, String password) {
-		String sql = "select email1, email2 from member where id= ? and pwd = ?";
-		getConnection();
-		String email=null;
-		
-		try {
-			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setString(2, password);
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				String email1 = rs.getString("email1");
-				String email2 = rs.getString("email2");
-				email = email1+"@"+email2;
-			}
-			
-		
-		} catch (SQLException e) {
-			email=null;
-			e.printStackTrace();
-		}
-		System.out.println("email확인 : "+email);
-		return email;
-	}
-	
-	public String loginChecking(String id, String password) {
-		String sql = "select name from member where id = ? and pwd = ?";
-		getConnection();
-		String row11 = null;
 
+	
+	public MemberDTO login(String id, String pwd) {
+		MemberDTO memberDTO = null;
+		String sql = "SELECT * from member where id = ? AND pwd= ? ";
+
+		getConnection();
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			pstmt.setString(2, password);
-
+			pstmt.setString(2, pwd);
 			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				row11 = rs.getString(1);
-			}
-
+			rs.next();
+			memberDTO = new MemberDTO();
+			memberDTO.setName(rs.getString("name"));
+			memberDTO.setId(rs.getString("id"));
+			memberDTO.setPassword(rs.getString("pwd"));
+			memberDTO.setGender(rs.getString("gender"));
+			memberDTO.setEmail1(rs.getString("email1")==null ? "":rs.getString("email1"));
+			memberDTO.setEmail2(rs.getString("email2")==null ? "":rs.getString("email2"));
+			memberDTO.setTel1(rs.getString("tel1")==null ? "":rs.getString("tel1"));
+			memberDTO.setTel2(rs.getString("tel2")==null ? "":rs.getString("tel2"));
+			memberDTO.setTel3(rs.getString("tel3")==null ? "":rs.getString("tel3"));
+			memberDTO.setZipcode(rs.getString("zipcode")==null? "":rs.getString("zipcode"));
+			memberDTO.setAddr1(rs.getString("addr1")==null? "":rs.getString("addr1"));
+			memberDTO.setAddr2(rs.getString("addr2")==null? "":rs.getString("addr2"));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-			row11 = null;
+			memberDTO=null;
 		} finally {
-
 			try {
+				if (rs != null)
+					rs.close();
 				if (pstmt != null)
 					pstmt.close();
 				if (con != null)
 					con.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-
-		return row11;
+		return memberDTO;
 	}
 
 	public boolean insert(String name, String id, String password, String gender, String email1, String email2,

@@ -27,11 +27,9 @@
 				id = ar[i].getValue();
 		}
 	}
-	
-	//세션
+
 	name = (String)session.getAttribute("memName");
 	id = (String)session.getAttribute("memId");
-
 
 %>
 
