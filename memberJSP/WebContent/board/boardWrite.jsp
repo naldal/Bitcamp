@@ -7,21 +7,21 @@
 <jsp:useBean id="boardDAO" class="board.dao.BoardDAO"/>
 
 <%
-//데이터
-boardDTO.setId((String)session.getAttribute("memId"));
-boardDTO.setName((String)session.getAttribute("memName"));
-boardDTO.setEmail((String)session.getAttribute("memEmail"));
-boardDTO.setSubject(request.getParameter("subject"));
-boardDTO.setContent(request.getParameter("content"));
-
-//DB
-Map<String,String> map = new HashMap<String,String>();
-map.put("id", boardDTO.getId());
-map.put("name", boardDTO.getName());
-map.put("email", boardDTO.getEmail());
-map.put("subject", boardDTO.getSubject());
-map.put("content", boardDTO.getContent());
-boardDAO.boardWrite(map);
+	//데이터
+	boardDTO.setId((String)session.getAttribute("memId"));
+	boardDTO.setName((String)session.getAttribute("memName"));
+	boardDTO.setEmail((String)session.getAttribute("memEmail"));
+	boardDTO.setSubject(request.getParameter("subject"));
+	boardDTO.setContent(request.getParameter("content"));
+	
+	//DB
+	Map<String,String> map = new HashMap<String,String>();
+	map.put("id", boardDTO.getId());
+	map.put("name", boardDTO.getName());
+	map.put("email", boardDTO.getEmail());
+	map.put("subject", boardDTO.getSubject());
+	map.put("content", boardDTO.getContent());
+	boardDAO.boardWrite(map);
 
 %>
  

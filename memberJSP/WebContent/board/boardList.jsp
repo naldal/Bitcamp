@@ -2,23 +2,34 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="board.bean.BoardDTO"%>
+<%@ page import="board.bean.BoardPaging" %>
 <jsp:useBean id="boardDAO" class="board.dao.BoardDAO"></jsp:useBean>
 <%
 	//req
-	int pg = Integer.parseInt(request.getParameter("pg"));
+	int pg;
+	
+	if(request.getParameter("pg")!=null) {
+		pg = Integer.parseInt(request.getParameter("pg"));
+	} else {
+		pg=1;
+	}
+	
+	String id = (String)session.getAttribute("memId");
 	
 	//paging
 	int endNum = pg*5;
 	int startNum = endNum-4;
-	int totalA = boardDAO.getTotalBoard();
-	int totalP = (totalA+4)/5;
-	
 	List<BoardDTO> list = boardDAO.boardList(startNum, endNum);
 	
-	String id = (String)session.getAttribute("memId");
-	if(id==null){
-		System.out.print("this is null id");
-	} 
+	//페이징 처리
+	BoardPaging boardPaging = new BoardPaging();
+	int totalA = boardDAO.getTotalBoard();
+	boardPaging.setCurrentPage(pg);
+	boardPaging.setPageBlock(3);
+	boardPaging.setPageSize(5);
+	boardPaging.setTotalA(totalA);
+	
+	boardPaging.makePagingHTML();
 %>
 
 <!DOCTYPE html>
@@ -34,7 +45,20 @@
 	}
 	
 	#subjectId:hover {
+		color:blue;
 		text-decoration: underline;
+	}
+	
+	#paging {
+		color: black;
+		text-decoration: none;
+		cursor:pointer;
+	}
+	
+	#currentPaging {
+		color: red;
+		text-decoration: underline;
+		cursor:pointer;
 	}
 </style>
 <body>
@@ -54,7 +78,7 @@
 	<tr>
 	    <td width="50" align="center"><%=boardDTO.getSeq() %></td>
 	    <td width="300" align="center">
-		<a href="#" id="subjectId" onclick="isLogin(<%=id%>)"><%=boardDTO.getSubject() %></a>
+		<a href="javascript:isLogin('<%=id%>', <%=boardDTO.getSeq()%>, <%=pg%>)" id="subjectId"><%=boardDTO.getSubject() %></a>
 	    </td>
 	    <td width="100" align="center"><%=boardDTO.getName() %></td>
 	    <td width="200" align="center"><%=boardDTO.getLogtime() %></td>
@@ -62,10 +86,18 @@
 	</tr>
 <% } %>
 </table>
-<div style="border: 1px solid red; width:100px; display:inline;">
+<div style="float:left; width:70px;">
 	<jsp:include page="../main/logo.jsp"/>
 </div>
-<div style="border: 1px solid blue; width: 300px; display:inline">asdf</div>
+<div style="float:left; text-align:center; width: 700px"><%=boardPaging.getPagingHTML() %></div>
 </body>
-<script type="text/javascript" src="../js/boardList.js"></script>
+<script type="text/javascript">
+function isLogin(id, seq, pg){
+	if(id=='null'){
+		alert("먼저 로그인을 하세요");
+	} else {
+		location.href="boardView.jsp?seq="+seq+"&pg="+pg;
+	}
+}
+</script>
 </html>

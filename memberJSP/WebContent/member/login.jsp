@@ -19,7 +19,6 @@
 
 		//email
 		String email = memberDTO.getEmail1() + "@" + memberDTO.getEmail2();
-		
 		session.setAttribute("memEmail", email);
 
 		response.sendRedirect("loginOk.jsp");

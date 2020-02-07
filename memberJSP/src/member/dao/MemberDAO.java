@@ -4,7 +4,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import board.bean.BoardDTO;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import member.bean.ZipcodeDTO;
 import member.bean.MemberDTO;
 
@@ -12,36 +16,36 @@ public class MemberDAO {
 
 	private static MemberDAO instance;
 
-	private String driver = "oracle.jdbc.driver.OracleDriver";
-	private String jdbcURL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private String jdbcId = "c##java";
-	private String jdbcPwd = "bit";
-
 	private Connection con;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 
-	public MemberDAO() {
-		try {
-			Class.forName(driver);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+	private DataSource ds;
+
+	public static MemberDAO getinstance() {
+		if (instance == null) {
+			synchronized (MemberDAO.class) {
+				instance = new MemberDAO();
+			}
 		}
+		return instance;
 	}
 
-	public void getConnection() {
+	// Naming Service : 이름으로 서비스제공 --> lookup
+	public MemberDAO() {
 		try {
-			con = DriverManager.getConnection(jdbcURL, jdbcId, jdbcPwd);
-		} catch (SQLException e) {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/oracle"); //톰캣의 경우 접두사 java:comp/env/ 를 써줘야한다
+		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public MemberDTO getMember(String id) {
-		this.getConnection();
 		String sql = "select * from member where id = ?";
 		MemberDTO memberdto = null;
 		try {
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -51,18 +55,18 @@ public class MemberDAO {
 			memberdto.setId(rs.getString("id"));
 			memberdto.setPassword(rs.getString("pwd"));
 			memberdto.setGender(rs.getString("gender"));
-			memberdto.setEmail1(rs.getString("email1")==null ? "":rs.getString("email1"));
-            memberdto.setEmail2(rs.getString("email2")==null ? "":rs.getString("email2"));
-            memberdto.setTel1(rs.getString("tel1")==null ? "":rs.getString("tel1"));
-            memberdto.setTel2(rs.getString("tel2")==null ? "":rs.getString("tel2"));
-            memberdto.setTel3(rs.getString("tel3")==null ? "":rs.getString("tel3"));
-            memberdto.setZipcode(rs.getString("zipcode")==null ? "":rs.getString("zipcode"));
-            memberdto.setAddr1(rs.getString("addr1")==null ? "":rs.getString("addr1"));
-            memberdto.setAddr2(rs.getString("addr2")==null ? "":rs.getString("addr2"));
-			
+			memberdto.setEmail1(rs.getString("email1") == null ? "" : rs.getString("email1"));
+			memberdto.setEmail2(rs.getString("email2") == null ? "" : rs.getString("email2"));
+			memberdto.setTel1(rs.getString("tel1") == null ? "" : rs.getString("tel1"));
+			memberdto.setTel2(rs.getString("tel2") == null ? "" : rs.getString("tel2"));
+			memberdto.setTel3(rs.getString("tel3") == null ? "" : rs.getString("tel3"));
+			memberdto.setZipcode(rs.getString("zipcode") == null ? "" : rs.getString("zipcode"));
+			memberdto.setAddr1(rs.getString("addr1") == null ? "" : rs.getString("addr1"));
+			memberdto.setAddr2(rs.getString("addr2") == null ? "" : rs.getString("addr2"));
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-			memberdto=null;
+			memberdto = null;
 		} finally {
 			try {
 				rs.close();
@@ -74,25 +78,15 @@ public class MemberDAO {
 		}
 		return memberdto;
 	}
-	
-	public void modify(MemberDTO memberDTO) {
-		getConnection();
 
-		String sql = "update member set name = ?,"
-				+ "pwd = ? ,"
-				+ "gender = ? ,"
-				+ "email1 = ? ,"
-				+ "email2 = ? ,"
-				+ "tel1 = ? ,"
-				+ "tel2 = ? ,"
-				+ "tel3 = ? ,"
-				+ "zipcode = ? ,"
-				+ "addr1 = ? ,"
-				+ "addr2 =  ?"
+	public void modify(MemberDTO memberDTO) {
+		String sql = "update member set name = ?," + "pwd = ? ," + "gender = ? ," + "email1 = ? ," + "email2 = ? ,"
+				+ "tel1 = ? ," + "tel2 = ? ," + "tel3 = ? ," + "zipcode = ? ," + "addr1 = ? ," + "addr2 =  ?"
 				+ "where id = ?";
 
 		int su = 0;
 		try {
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, memberDTO.getName());
 			pstmt.setString(2, memberDTO.getPassword());
@@ -106,9 +100,9 @@ public class MemberDAO {
 			pstmt.setString(10, memberDTO.getAddr1());
 			pstmt.setString(11, memberDTO.getAddr2());
 			pstmt.setString(12, memberDTO.getId());
-			
+
 			su = pstmt.executeUpdate();
-			System.out.println("su : "+su);
+			System.out.println("su : " + su);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		} finally {
@@ -122,15 +116,12 @@ public class MemberDAO {
 			}
 		}
 	}
-	
 
-	
 	public MemberDTO login(String id, String pwd) {
 		MemberDTO memberDTO = null;
 		String sql = "SELECT * from member where id = ? AND pwd= ? ";
-
-		getConnection();
 		try {
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
@@ -141,17 +132,17 @@ public class MemberDAO {
 			memberDTO.setId(rs.getString("id"));
 			memberDTO.setPassword(rs.getString("pwd"));
 			memberDTO.setGender(rs.getString("gender"));
-			memberDTO.setEmail1(rs.getString("email1")==null ? "":rs.getString("email1"));
-			memberDTO.setEmail2(rs.getString("email2")==null ? "":rs.getString("email2"));
-			memberDTO.setTel1(rs.getString("tel1")==null ? "":rs.getString("tel1"));
-			memberDTO.setTel2(rs.getString("tel2")==null ? "":rs.getString("tel2"));
-			memberDTO.setTel3(rs.getString("tel3")==null ? "":rs.getString("tel3"));
-			memberDTO.setZipcode(rs.getString("zipcode")==null? "":rs.getString("zipcode"));
-			memberDTO.setAddr1(rs.getString("addr1")==null? "":rs.getString("addr1"));
-			memberDTO.setAddr2(rs.getString("addr2")==null? "":rs.getString("addr2"));
+			memberDTO.setEmail1(rs.getString("email1") == null ? "" : rs.getString("email1"));
+			memberDTO.setEmail2(rs.getString("email2") == null ? "" : rs.getString("email2"));
+			memberDTO.setTel1(rs.getString("tel1") == null ? "" : rs.getString("tel1"));
+			memberDTO.setTel2(rs.getString("tel2") == null ? "" : rs.getString("tel2"));
+			memberDTO.setTel3(rs.getString("tel3") == null ? "" : rs.getString("tel3"));
+			memberDTO.setZipcode(rs.getString("zipcode") == null ? "" : rs.getString("zipcode"));
+			memberDTO.setAddr1(rs.getString("addr1") == null ? "" : rs.getString("addr1"));
+			memberDTO.setAddr2(rs.getString("addr2") == null ? "" : rs.getString("addr2"));
 		} catch (SQLException e) {
 			e.printStackTrace();
-			memberDTO=null;
+			memberDTO = null;
 		} finally {
 			try {
 				if (rs != null)
@@ -170,10 +161,10 @@ public class MemberDAO {
 	public boolean insert(String name, String id, String password, String gender, String email1, String email2,
 			String tel1, String tel2, String tel3, String zipcode, String addr1, String addr2) {
 		String sql = "insert into member values(?,?,?,?,?,?,?,?,?,?,?,?)";
-		this.getConnection();
 		boolean row = false;
 
 		try {
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, name);
 			pstmt.setString(2, id);
@@ -209,9 +200,8 @@ public class MemberDAO {
 		List<ZipcodeDTO> list = new ArrayList<ZipcodeDTO>();
 
 		String sql = "select * from newzipcode where sido like ? and nvl(sigungu, '0') like ? and roadname like ?";
-		this.getConnection();
-
 		try {
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "%" + sido + "%");
 			pstmt.setString(2, "%" + sigungu + "%");
@@ -248,14 +238,12 @@ public class MemberDAO {
 		return list;
 	}
 
-	
-
 	public boolean checkId(String id) {
 		String sql = "select * from member where id = ?";
-		this.getConnection();
 		boolean row = false;
 
 		try {
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 
@@ -280,21 +268,12 @@ public class MemberDAO {
 		return row;
 	}
 
-	public static MemberDAO getinstance() {
-		if (instance == null) {
-			synchronized (MemberDAO.class) {
-				instance = new MemberDAO();
-			}
-		}
-		return instance;
-	}
-
 	public boolean isExistId(String id) {
 		boolean exist = false;
 		String sql = " select * from member where id=?";
 
-		this.getConnection();
 		try {
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 
@@ -322,10 +301,7 @@ public class MemberDAO {
 	}
 
 	public int write(MemberDTO memeberDTO) {
-		getConnection();
-
 		String sql = "insert into member values(?,?,?,?,?,?,?,?,?,?,?,?)";
-
 		int su = 0;
 
 		String name = memeberDTO.getName();
@@ -342,6 +318,7 @@ public class MemberDAO {
 		String addr2 = memeberDTO.getAddr2();
 
 		try {
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, name);
 			pstmt.setString(2, id);
@@ -371,25 +348,15 @@ public class MemberDAO {
 		}
 		return su;
 	}
-	
-	public int update(MemberDTO memeberDTO) {
-		getConnection();
 
-		String sql = "update member set name = ?,"
-				+ "pwd = ? ,"
-				+ "gender = ? ,"
-				+ "email1 = ? ,"
-				+ "email2 = ? ,"
-				+ "tel1 = ? ,"
-				+ "tel2 = ? ,"
-				+ "tel3 = ? ,"
-				+ "zipcode = ? ,"
-				+ "addr1 = ? ,"
-				+ "addr2 =  ?"
+	public int update(MemberDTO memeberDTO) {
+		String sql = "update member set name = ?," + "pwd = ? ," + "gender = ? ," + "email1 = ? ," + "email2 = ? ,"
+				+ "tel1 = ? ," + "tel2 = ? ," + "tel3 = ? ," + "zipcode = ? ," + "addr1 = ? ," + "addr2 =  ?"
 				+ "where id = ?";
 
 		int su = 0;
 		try {
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, memeberDTO.getName());
 			pstmt.setString(2, memeberDTO.getPassword());
@@ -403,9 +370,9 @@ public class MemberDAO {
 			pstmt.setString(10, memeberDTO.getAddr1());
 			pstmt.setString(11, memeberDTO.getAddr2());
 			pstmt.setString(12, memeberDTO.getId());
-			
+
 			su = pstmt.executeUpdate();
-			System.out.println("su : "+su);
+			System.out.println("su : " + su);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		} finally {
