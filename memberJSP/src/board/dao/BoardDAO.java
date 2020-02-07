@@ -46,7 +46,33 @@ public class BoardDAO {
 		}
 	}
 
-	
+	public boolean modifyBoard(int seq, String subject, String content) {
+		String sql = "update board set subject = ?, content = ? where seq = ?";
+		boolean flag=false;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, subject);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, seq);
+			
+			flag = pstmt.executeUpdate()>0;
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			flag=false;
+		} finally {
+			try {
+				pstmt.close();
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return flag;
+	}
 	
 	public BoardDTO getBoard(int seq) {
 		BoardDTO boardDTO = null;

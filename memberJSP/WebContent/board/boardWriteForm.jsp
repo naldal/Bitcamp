@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -10,7 +11,7 @@
 </style>
 </head>
 <body>
-<h3>글쓰기</h3>
+<h3>글 수정하기</h3>
 <form name="boardForm" action="boardWrite.jsp" method="post">
 <table border="1">
     <tr>

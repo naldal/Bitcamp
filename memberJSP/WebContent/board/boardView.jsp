@@ -17,9 +17,9 @@
 <meta charset="UTF-8">
 <title>작성한 글 확인</title>
 <style type="text/css">
-	pre {
-		overflow: auto;
+	#preSelector {
 		white-space: pre-wrap;
+		word-break: break-all;
 	}
 </style>
 </head>
@@ -40,14 +40,15 @@
    	</tr> 
     
     <tr>
-        <td colspan="3" height="200" valign="top">
-        	<pre><%=boardDTO.getContent()%></pre>
+        <td colspan="3" height="200" valign="top" width="500px">
+        	<pre id="preSelector"><%=boardDTO.getContent()%></pre>
         </td>
     </tr>
 </table>
 <input type="button" value="목록" onclick="location.href='boardList.jsp?pg=<%=pg%>'">
 <% if(session.getAttribute("memId").equals(boardDTO.getId())) {%>
-	<input type="button" value="글수정">
+	<input type="button" value="글수정" onclick="location.href=
+	'boardModifyForm.jsp?seq=<%=seq%>&pg=<%=pg%>&subject=<%=boardDTO.getSubject()%>&content=<%=boardDTO.getContent()%>'">
 	<input type="button" value="글삭제">
 <%} %>
 </body>
