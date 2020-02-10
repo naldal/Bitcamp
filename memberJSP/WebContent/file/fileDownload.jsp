@@ -17,8 +17,19 @@
 	response.setHeader("Content-Disposition", "attachment;fileName="+fileName);
 	response.setHeader("Content-Length", file.length()+"");
 	
+	out.clear();
+	out = pageContext.pushBody();
+	
 	BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
 	BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
+	
+	int size = (int)file.length();
+	byte[] b = new byte[size];
+	bis.read(b,0,size); /* 배열의 0번째 방부터 현재 사이즈까지의 모든 바이트를 저장 */
+	bos.write(b);
+	
+	bis.close();
+	bos.close();
 	
 %>
 <!DOCTYPE html>
