@@ -31,5 +31,7 @@
 </table>
 </form>
 </body>
-<script type="text/javascript" src="../js/board.js"></script>
+<script type="text/javascript" src="../js/board.js">
+
+</script>
 </html>

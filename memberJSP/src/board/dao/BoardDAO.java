@@ -46,22 +46,17 @@ public class BoardDAO {
 		}
 	}
 
-	public boolean modifyBoard(int seq, String subject, String content) {
-		String sql = "update board set subject = ?, content = ? where seq = ?";
-		boolean flag=false;
+	public void boardHit(int seq) {
+		String sql = "update board set hit=hit+1 where seq=?";
+		
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, subject);
-			pstmt.setString(2, content);
-			pstmt.setInt(3, seq);
+			pstmt.setInt(1,  seq);
 			
-			flag = pstmt.executeUpdate()>0;
-			
-			
-		} catch (SQLException e) {
+			pstmt.executeUpdate();
+		} catch(SQLException e) {
 			e.printStackTrace();
-			flag=false;
 		} finally {
 			try {
 				pstmt.close();
@@ -70,8 +65,30 @@ public class BoardDAO {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void boardModify(Map<String, String> map) {
+		String sql = "UPDATE board SET subject=?, content = ?, logtime = sysdate WHERE seq = ?";
 		
-		return flag;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, (String) map.get("subject"));
+			pstmt.setString(2, (String)map.get("content"));
+			pstmt.setInt(3, Integer.parseInt(map.get("seq")));
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public BoardDTO getBoard(int seq) {
