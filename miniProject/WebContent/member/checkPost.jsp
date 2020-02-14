@@ -1,22 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "member.bean.ZipcodeDTO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <fmt:requestEncoding value="utf-8"/>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
 
 <link rel="stylesheet" href="../css/member.css">
 
-</head>
-<body>
 <form method="post" action="/miniProject/member/checkPost.do">
 
 <table border="1" width="100%" cellspacing="1" cellpadding="3">
@@ -65,11 +58,11 @@
 <c:if test="${list!=null }">
 <!-- for(ZipcodeDTO zipcodeDTO : list) {  -->
 <c:forEach var="zipcodeDTO" items="${list }">
-<c:set var="addr">${zipcodeDTO.getSiDo() 
-				} ${zipcodeDTO.getSiGunGu()
+<c:set var="addr">${zipcodeDTO.getSido() 
+				} ${zipcodeDTO.getSigungu()
 				} ${zipcodeDTO.getYumMyunDong() 
 				} ${zipcodeDTO.getRi() 
-				} ${zipcodeDTO.getRoadName() 
+				} ${zipcodeDTO.getRoadname() 
 				} ${zipcodeDTO.getBuildingName() }</c:set>
 <tr>
 <td width="130" align="center">${zipcodeDTO.getZipcode()}</td>
@@ -82,7 +75,7 @@
 </table>
 
 </form>
-</body>
+
 <script>
 function checkPostClose(zipcode, addr) {
 	alert(zipcode);
@@ -92,4 +85,3 @@ function checkPostClose(zipcode, addr) {
 	opener.document.getElementById('addr2').focus();
 }
 </script>
-</html>

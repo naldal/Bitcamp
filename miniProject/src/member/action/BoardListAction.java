@@ -5,11 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.control.CommandProcess;
 
-public class WriteAction implements CommandProcess{
+public class BoardListAction implements CommandProcess{
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-		return "/member/write.jsp";
+		
+		request.setAttribute("display", "/member/boardList.jsp");
+		return "/main/lndex.jsp";
 	}
 
 }

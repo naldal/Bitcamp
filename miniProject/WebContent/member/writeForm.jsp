@@ -1,38 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<form name="writeForm" method="post" action="/miniProject/member/writeForm.do">
+
+	<form name="writeForm" method="post" action="/miniProject/member/write.do">
 		<table border="1" cellspacing="0" cellpadding="3">
 
 			<tr>
 				<td width="70" align="center">이름</td>
-				<td><input type="text" name="name" placeholder="이름 입력">
+				<td>
+					<input type="text" name="name" id="name" placeholder="이름 입력">
+					<div id="nameDiv"></div>
 				</td>
 			</tr>
 
 			<tr>
 				<td align="center">아이디</td>
 				<td>
-					<input type="text" name="id" placeholder="아이디 입력">
+					<input type="text" name="id" id="id" placeholder="아이디 입력">
 					<input type="button" value="중복체크" onclick="idCheck2()">
-					<input type="hidden" name="idCheck" value="">
+					<input type="hidden" id="idCheck" name="idCheck" value="">
+					<div id="idDiv"></div>
 				</td>
 			</tr>
 
 			<tr>
 				<td align="center">비밀번호</td>
-				<td><input type="password" name="pwd"></td>
+				<td>
+					<input type="password" id="pwd" name="pwd">
+					<div id="pwdDiv"></div>
+				</td>
 			</tr>
 
 			<tr>
 				<td align="center">재확인</td>
-				<td><input type="password" name="repwd"></td>
+				<td>
+					<input type="password" id="repwd" name="repwd">
+					<div id="repwdDiv"></div>	
+				</td>
 			</tr>
 
 			<tr>
@@ -81,13 +84,12 @@
 
 			<tr>
 				<td colspan="2" align="center">
-				<input type="button" value="회원가입" onclick="checkWriteForm()">&emsp;
+				<!-- <input type="button" value="회원가입" onclick="checkWriteForm()">&emsp; -->
+				<input id="writeFormBtn" type="button" value="회원가입">
 				<input type="reset" value="다시작성">
 				</td>
 			</tr>
 		</table>
 	</form>
-</body>
+<script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>	
 <script type="text/javascript" src="../js/member.js"></script>
-<!-- <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> -->
-</html>

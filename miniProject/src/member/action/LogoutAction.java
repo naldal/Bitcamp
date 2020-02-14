@@ -13,7 +13,9 @@ public class LogoutAction implements CommandProcess {
 		HttpSession session = request.getSession();
 		/* System.out.println("로그아웃 세션 : " + session.getAttribute("memId")); */
 		session.invalidate();
-		return "/member/logout.jsp";
+		
+		request.setAttribute("display", "/member/logout.jsp");
+		return "/main/index.jsp";
 	}
 
 }

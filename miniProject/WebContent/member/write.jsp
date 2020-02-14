@@ -10,19 +10,9 @@
 	'${param.email1}', '${param.email2}', '${param.tel1}', '${param.tel2}', '${param.tel3}', 
 	'${param.zipcode}', '${param.addr1}', '${param.addr2}', '${param.logtime}')
 </sql:update>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
 <c:if test="${su==1 }">
 DB 저장 성공
 <a href="#">홈으로</a>
 </c:if>
 
 <c:if test="${su==0 }">DB 저장 실패</c:if>
-</body>
-</html>

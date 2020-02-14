@@ -9,7 +9,8 @@ public class IndexAction implements CommandProcess{
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-		// TODO Auto-generated method stub
+		request.setAttribute("display", "/template/body.jsp");
+		System.out.println("imhere");
 		return "/main/index.jsp";
 	}
 

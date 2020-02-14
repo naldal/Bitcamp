@@ -27,10 +27,13 @@ public class LoginAction implements CommandProcess {
 			session.setAttribute("memName", memberDTO.getName());
 			session.setAttribute("memId", id);
 			session.setAttribute("memEmail", memberDTO.getEmail1() + "@" + memberDTO.getEmail2());
-	
-			return "/member/loginOk.jsp";
+			
+			request.setAttribute("display", "/member/loginOk.jsp");
+			return "/main/index.jsp";
+			
 		} else {
-			return "/member/loginFail.jsp";
+			request.setAttribute("display", "/member/loginFail.jsp");
+			return "/main/index.jsp";
 		}
 	}
 }

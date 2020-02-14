@@ -13,8 +13,8 @@
 		<td colspan="2"><jsp:include page="../template/top.jsp"/></td>
 	</tr>
 	<tr width="30%" height="400">
-		<td><jsp:include page="../template/left.jsp"/></td>
-		<td><jsp:include page="../template/body.jsp"/></td>
+		<td valign="top"><jsp:include page="../template/left.jsp"/></td>
+		<td><jsp:include page="${display}"/></td>
 	</tr>
 	<tr >
 		<td colspan="2"><jsp:include page="../template/bottom.jsp"/></td>
