@@ -110,6 +110,7 @@ $('#checkLoginBtn').click(function(){
 */
 
 if($('#fail').val()=="1") {
+	$('#loginChk').empty();
 	$('#loginChk').text('로그인 실패')
 				  .css('color', 'red')
 				  .css('font-size', '8pt')

@@ -6,7 +6,7 @@
 <%@ page import="board.bean.BoardDTO" %>
 <%@ page import="board.bean.BoardPaging" %>
 
-<<jsp:useBean id="boardDAO" class="board.dao.BoardDAO"></jsp:useBean>
+<jsp:useBean id="boardDAO" class="board.dao.BoardDAO"/>
     
 <%
 request.setCharacterEncoding("utf-8");
@@ -79,7 +79,7 @@ if(session.getAttribute("memId")!=null) {
 	<th>조회수</th>
 <%if(list!=null){ %>
 	<%-- <%for (BoardDTO boardDTO : list) { System.out.println(boardDTO.getSeq());%> --%>
-	<%for (int i=0; i<list.size(); i++) { %>
+	<% for (int i=0; i<list.size(); i++) { %>
 	<tr>
 		<td width="50" align="center"><%=list.get(i).getSeq() %></td>
 		<td>

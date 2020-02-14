@@ -19,15 +19,18 @@
 			<c:if test="${sessionScope.memId eq null}">
 				<jsp:include page="../member/loginForm.jsp"/>
 				<input type="hidden" id="fail" value="${fail}">
-				<div id='loginChk' align="center"></div>
+				<div style="margin-top: 8px" id='loginChk' align="center"></div>
 			</c:if>
 			<c:if test="${sessionScope.memId ne null}">
-				<jsp:include page="${display}"/>
+				<jsp:include page="../member/loginOk.jsp"/>
 			</c:if>
 		</td>
 		<td>
-			<c:if test="${sessionScope.memId ne null}">
+			<c:if test="${sessionScope.memId ne null && success eq '0'}">
 				<jsp:include page="../template/body.jsp"/>
+			</c:if>
+			<c:if test="${sessionScope.memId ne null && success ne '0'}">
+				<jsp:include page="${display}"/>
 			</c:if>
 		</td>
 	</tr>
