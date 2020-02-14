@@ -1,26 +1,36 @@
 package member.bean;
 
 public class ZipcodeDTO {
-
 	private String zipcode;
 	private String sido;
 	private String sigungu;
-	private String yubmyundong;
+	private String yumMyunDong;
 	private String ri;
 	private String roadname;
-	private String buildingname;
-	
+	private String buildingName;
 	public String getZipcode() {
 		return zipcode;
 	}
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
-	public String getYubmyundong() {
-		return yubmyundong;
+	public String getSiDo() {
+		return sido;
 	}
-	public void setYubmyundong(String yubmyundong) {
-		this.yubmyundong = yubmyundong;
+	public void setSiDo(String siDo) {
+		this.sido = siDo;
+	}
+	public String getSiGunGu() {
+		return sigungu;
+	}
+	public void setSiGunGu(String siGunGu) {
+		this.sigungu = siGunGu;
+	}
+	public String getYumMyunDong() {
+		return yumMyunDong;
+	}
+	public void setYumMyunDong(String yumMyunDong) {
+		this.yumMyunDong = yumMyunDong;
 	}
 	public String getRi() {
 		return ri;
@@ -28,33 +38,18 @@ public class ZipcodeDTO {
 	public void setRi(String ri) {
 		this.ri = ri;
 	}
-	public String getSido() {
-		return sido;
-	}
-	public void setSido(String sido) {
-		this.sido = sido;
-	}
-	public String getSigungu() {
-		return sigungu;
-	}
-	public void setSigungu(String sigungu) {
-		this.sigungu = sigungu;
-	}
-
-	public String getRoadname() {
+	public String getRoadName() {
 		return roadname;
 	}
-	public void setRoadname(String roadname) {
-		this.roadname = roadname;
+	public void setRoadName(String roadName) {
+		this.roadname = roadName;
+	}
+	public String getBuildingName() {
+		return buildingName;
+	}
+	public void setBuildingName(String buildingName) {
+		this.buildingName = buildingName;
 	}
 
-	public String getBuildingname() {
-		return buildingname;
-	}
-	public void setBuildingname(String buildingname) {
-		this.buildingname = buildingname;
-	}
-
-	
 	
 }

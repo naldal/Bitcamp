@@ -9,52 +9,55 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import guestbook.bean.GuestbookDTO;
 import guestbook.dao.GuestbookDAO;
-import guestbook.dto.GuestbookDTO;
+
 
 @WebServlet("/GuestbookWriteServlet")
 public class GuestbookWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//데이터
-		request.setCharacterEncoding("UTF-8");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("utf-8");
+//		GuestbookDAO guestbookDAO = GuestbookDAO.getInstance();
+		GuestbookDTO guestbookDTO = new GuestbookDTO();
+		
+		//데이터
+//		int seq = guestbookDAO.getSeq();
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String homepage = request.getParameter("homepage");
 		String subject = request.getParameter("subject");
 		String content = request.getParameter("content");
+		String logtime = request.getParameter("logtime");
 		
-		GuestbookDTO guestbookDTO = new GuestbookDTO();
+//		guestbookDTO.setSeq(seq);
 		guestbookDTO.setName(name);
 		guestbookDTO.setEmail(email);
 		guestbookDTO.setHomepage(homepage);
 		guestbookDTO.setSubject(subject);
 		guestbookDTO.setContent(content);
+		guestbookDTO.setLogtime(logtime);
 		
+		
+		//DB
 		GuestbookDAO guestbookDAO = GuestbookDAO.getInstance();
 		guestbookDAO.write(guestbookDTO);
 		
 		//응답
-		response.setContentType("text/html; charset=UTF-8");
+		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
+		
 		out.println("<html>");
 		out.println("<body>");
-		out.println("작성하신 글을 저장했습니다.<br><br>");
-		out.println("<input type='button' value='글목록' "
-				+ "onclick=location.href='/guestbookServlet/GuestbookListServlet?pg=1'>");
+//		out.println("<form name='successForm' method='post' action='/guestbookServlet/GuestbookListServlet'>");
+		out.println("글 등록 완료<br><br>");
+		out.println("<input type='button' value='글목록' onclick='guestbookList()'>"); //아래의 것과 같다.
+//		out.println("<input type='button' value='글목록' onclick=location.href='/guestbookServlet/GuestListServlet'>");
+//		out.println("</form>");
 		out.println("</body>");
+		out.println("<script type='text/javascript' src='http://localhost:8080/guestbookServlet/js/guestbook.js'></script>");
 		out.println("</html>");
-	}
+	} 										
 }
-
-
-
-
-
-
-
-
-
-

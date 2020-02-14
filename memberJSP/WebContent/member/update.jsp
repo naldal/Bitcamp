@@ -20,8 +20,8 @@
 	System.out.println(memberDTO.getName());
 	System.out.println(memberDTO.getGender());
 	
-	MemberDAO memberDAO = MemberDAO.getinstance();
-	int su = memberDAO.update(memberDTO);
+	MemberDAO memberDAO = MemberDAO.getInstance();
+	int su = memberDAO.memberWrite(memberDTO);
 	if(su>=1)
 		out.println("수정 성공");
 	else

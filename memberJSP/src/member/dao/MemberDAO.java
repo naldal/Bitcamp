@@ -1,6 +1,10 @@
 package member.dao;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,87 +13,251 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import member.bean.ZipcodeDTO;
+import board.bean.BoardDTO;
 import member.bean.MemberDTO;
+import member.bean.ZipcodeDTO;
 
 public class MemberDAO {
-
 	private static MemberDAO instance;
-
-	private Connection con;
+	
+	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
-
+	
 	private DataSource ds;
-
-	public static MemberDAO getinstance() {
-		if (instance == null) {
-			synchronized (MemberDAO.class) {
+	
+	public static MemberDAO getInstance() {
+		if(instance==null) {
+			synchronized(MemberDAO.class) {
 				instance = new MemberDAO();
 			}
 		}
 		return instance;
 	}
-
-	// Naming Service : 이름으로 서비스제공 --> lookup
+	
 	public MemberDAO() {
+		Context ctx;
 		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/oracle"); //톰캣의 경우 접두사 java:comp/env/ 를 써줘야한다
+			ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/oracle"); //Tomcat의 경우 java:comp/env/를 꼭 붙여야한다.
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 	}
-
-	public MemberDTO getMember(String id) {
-		String sql = "select * from member where id = ?";
-		MemberDTO memberdto = null;
+	
+	
+	public int memberWrite(MemberDTO memberDTO) {
+		int su=0;
+		String sql = "insert into member values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, sysdate)";
+		
 		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-			rs.next();
-			memberdto = new MemberDTO();
-			memberdto.setName(rs.getString("name"));
-			memberdto.setId(rs.getString("id"));
-			memberdto.setPassword(rs.getString("pwd"));
-			memberdto.setGender(rs.getString("gender"));
-			memberdto.setEmail1(rs.getString("email1") == null ? "" : rs.getString("email1"));
-			memberdto.setEmail2(rs.getString("email2") == null ? "" : rs.getString("email2"));
-			memberdto.setTel1(rs.getString("tel1") == null ? "" : rs.getString("tel1"));
-			memberdto.setTel2(rs.getString("tel2") == null ? "" : rs.getString("tel2"));
-			memberdto.setTel3(rs.getString("tel3") == null ? "" : rs.getString("tel3"));
-			memberdto.setZipcode(rs.getString("zipcode") == null ? "" : rs.getString("zipcode"));
-			memberdto.setAddr1(rs.getString("addr1") == null ? "" : rs.getString("addr1"));
-			memberdto.setAddr2(rs.getString("addr2") == null ? "" : rs.getString("addr2"));
-
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberDTO.getName());
+			pstmt.setString(2, memberDTO.getId());
+			pstmt.setString(3, memberDTO.getPwd());
+			pstmt.setString(4,  memberDTO.getGender());
+			pstmt.setString(5, memberDTO.getEmail1());
+			pstmt.setString(6, memberDTO.getEmail2());
+			pstmt.setString(7, memberDTO.getTel1());
+			pstmt.setString(8, memberDTO.getTel2());
+			pstmt.setString(9, memberDTO.getTel3());
+			pstmt.setString(10, memberDTO.getZipcode());
+			pstmt.setString(11, memberDTO.getAddr1());
+			pstmt.setString(12, memberDTO.getAddr2());
+			
+			su = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			memberdto = null;
+		} finally {
+				try {
+					if(pstmt!=null) pstmt.close();
+					if(conn!=null) conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+		return su; 
+	}
+	
+	public boolean isExistId(String id) {
+		boolean exist = false;
+		String sql = "select * from member where id=?";
+		
+		
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				exist = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+
+				try {
+					if(rs!=null) rs.close();
+					if(pstmt!=null) pstmt.close();
+					if(conn!=null) conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+		return exist;
+	}
+	
+	public MemberDTO login(String id, String pwd) {
+		MemberDTO memberDTO=null;
+		System.out.println("id : "+ id + ", pwd : " + pwd) ;
+		String sql = "select * from member where id=? and pwd=?";
+		
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pwd);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				memberDTO = new MemberDTO();
+				memberDTO.setName(rs.getString("name"));
+				memberDTO.setId(rs.getString("id"));
+				memberDTO.setPwd(rs.getString("pwd"));
+				memberDTO.setGender(rs.getString("gender"));
+				memberDTO.setEmail1(rs.getString("email1"));
+				memberDTO.setEmail2(rs.getString("email2"));
+				memberDTO.setTel1(rs.getString("tel1"));
+				memberDTO.setTel2(rs.getString("tel2"));
+				memberDTO.setTel3(rs.getString("tel3"));
+				memberDTO.setZipcode(rs.getString("zipcode"));
+				memberDTO.setAddr1(rs.getString("addr1"));
+				memberDTO.setAddr2(rs.getString("addr2"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		} finally {
 			try {
-				rs.close();
-				pstmt.close();
-				con.close();
+				if(rs!=null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		return memberdto;
+		return memberDTO;
 	}
-
-	public void modify(MemberDTO memberDTO) {
-		String sql = "update member set name = ?," + "pwd = ? ," + "gender = ? ," + "email1 = ? ," + "email2 = ? ,"
-				+ "tel1 = ? ," + "tel2 = ? ," + "tel3 = ? ," + "zipcode = ? ," + "addr1 = ? ," + "addr2 =  ?"
-				+ "where id = ?";
-
-		int su = 0;
+	
+	public List<ZipcodeDTO> getZipcode(String sido, String sigungu, String roadname) {
+		List<ZipcodeDTO> list = new ArrayList<ZipcodeDTO>();
+		
+		String sql = "select * from newzipcode where sido like ? and nvl(sigungu, '0') like ? and roadname like ?";
+		
 		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+sido+"%");
+			pstmt.setString(2, "%"+sigungu+"%");
+			pstmt.setString(3, "%"+roadname+"%");
+			System.out.println(sido);
+			System.out.println(sigungu);
+			System.out.println(roadname);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ZipcodeDTO zipcodeDTO = new ZipcodeDTO();
+				zipcodeDTO.setZipcode(rs.getString("zipcode"));
+				zipcodeDTO.setSiDo(rs.getString("sido"));
+				zipcodeDTO.setSiGunGu(rs.getString("sigungu")==null ? "" : rs.getString("sigungu"));
+				zipcodeDTO.setYumMyunDong(rs.getString("yubmyundong"));
+				zipcodeDTO.setRi(rs.getString("ri")==null ? "" : rs.getString("ri"));
+				zipcodeDTO.setRoadName(rs.getString("roadname"));
+				zipcodeDTO.setBuildingName(rs.getString("buildingname")==null ? "" : rs.getString("buildingname"));
+				
+				list.add(zipcodeDTO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			list=null;
+		} finally {
+				try {
+					if (rs!=null) rs.close();
+					if (pstmt!=null) pstmt.close();
+					if (conn!=null) conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+		return list;
+	}
+	
+	public MemberDTO getMember(String id) {
+		MemberDTO memberDTO = null;
+		String sql = "select * from member where id=?";
+		
+		try {
+			conn = ds.getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) { // 이미 로그인을 하고 들어온 상황이므로 if문은 해줘도 안해줘도 된다.
+				memberDTO = new MemberDTO();
+				
+				memberDTO.setName(rs.getString("name"));
+				memberDTO.setId(rs.getString("id"));
+				memberDTO.setPwd(rs.getString("pwd"));
+				memberDTO.setGender(rs.getString("gender"));
+				memberDTO.setEmail1(rs.getString("email1"));
+				memberDTO.setEmail2(rs.getString("email2"));
+				memberDTO.setTel1(rs.getString("tel1"));
+				memberDTO.setTel2(rs.getString("tel2"));
+				memberDTO.setTel3(rs.getString("tel3"));
+				memberDTO.setZipcode(rs.getString("zipcode"));
+				memberDTO.setAddr1(rs.getString("addr1"));
+				memberDTO.setAddr2(rs.getString("addr2"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+				try {
+					if(rs!=null) rs.close();
+					if(pstmt!=null) pstmt.close();
+					if(conn!=null) conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+		return memberDTO;
+	}
+	
+	public void modify(MemberDTO memberDTO) {
+		
+		String sql = "update member set name=?,"
+									+ "pwd=?,"
+									+ "gender=?,"
+									+ "email1=?,"
+									+ "email2=?,"
+									+ "tel1=?,"
+									+ "tel2=?,"
+									+ "tel3=?,"
+									+ "zipcode=?,"
+									+ "addr1=?,"
+									+ "addr2=?,"
+									+ "logtime=sysdate "
+					+ "where id=?";
+		
+		
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberDTO.getName());
-			pstmt.setString(2, memberDTO.getPassword());
+			pstmt.setString(2, memberDTO.getPwd());
 			pstmt.setString(3, memberDTO.getGender());
 			pstmt.setString(4, memberDTO.getEmail1());
 			pstmt.setString(5, memberDTO.getEmail2());
@@ -98,293 +266,21 @@ public class MemberDAO {
 			pstmt.setString(8, memberDTO.getTel3());
 			pstmt.setString(9, memberDTO.getZipcode());
 			pstmt.setString(10, memberDTO.getAddr1());
-			pstmt.setString(11, memberDTO.getAddr2());
+		   	pstmt.setString(11, memberDTO.getAddr2());
 			pstmt.setString(12, memberDTO.getId());
-
-			su = pstmt.executeUpdate();
-			System.out.println("su : " + su);
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		} finally {
-			try {
-				if (pstmt != null)
-					pstmt.close();
-				if (con != null)
-					con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	public MemberDTO login(String id, String pwd) {
-		MemberDTO memberDTO = null;
-		String sql = "SELECT * from member where id = ? AND pwd= ? ";
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setString(2, pwd);
-			rs = pstmt.executeQuery();
-			rs.next();
-			memberDTO = new MemberDTO();
-			memberDTO.setName(rs.getString("name"));
-			memberDTO.setId(rs.getString("id"));
-			memberDTO.setPassword(rs.getString("pwd"));
-			memberDTO.setGender(rs.getString("gender"));
-			memberDTO.setEmail1(rs.getString("email1") == null ? "" : rs.getString("email1"));
-			memberDTO.setEmail2(rs.getString("email2") == null ? "" : rs.getString("email2"));
-			memberDTO.setTel1(rs.getString("tel1") == null ? "" : rs.getString("tel1"));
-			memberDTO.setTel2(rs.getString("tel2") == null ? "" : rs.getString("tel2"));
-			memberDTO.setTel3(rs.getString("tel3") == null ? "" : rs.getString("tel3"));
-			memberDTO.setZipcode(rs.getString("zipcode") == null ? "" : rs.getString("zipcode"));
-			memberDTO.setAddr1(rs.getString("addr1") == null ? "" : rs.getString("addr1"));
-			memberDTO.setAddr2(rs.getString("addr2") == null ? "" : rs.getString("addr2"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-			memberDTO = null;
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-				if (con != null)
-					con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return memberDTO;
-	}
-
-	public boolean insert(String name, String id, String password, String gender, String email1, String email2,
-			String tel1, String tel2, String tel3, String zipcode, String addr1, String addr2) {
-		String sql = "insert into member values(?,?,?,?,?,?,?,?,?,?,?,?)";
-		boolean row = false;
-
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, name);
-			pstmt.setString(2, id);
-			pstmt.setString(3, password);
-			pstmt.setString(4, gender);
-			pstmt.setString(5, email1);
-			pstmt.setString(6, email2);
-			pstmt.setString(7, tel1);
-			pstmt.setString(8, tel2);
-			pstmt.setString(9, tel3);
-			pstmt.setString(10, zipcode);
-			pstmt.setString(11, addr1);
-			pstmt.setString(12, addr2);
-
-			row = pstmt.executeUpdate() > 0;
+			
+			pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (pstmt != null)
-					pstmt.close();
-				if (con != null)
-					con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+				try {
+					if(pstmt!=null) pstmt.close();
+					if(conn!=null) conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 		}
-		return row;
-
 	}
-
-	public List<ZipcodeDTO> getZipcodeList(String sido, String sigungu, String roadname) {
-		List<ZipcodeDTO> list = new ArrayList<ZipcodeDTO>();
-
-		String sql = "select * from newzipcode where sido like ? and nvl(sigungu, '0') like ? and roadname like ?";
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "%" + sido + "%");
-			pstmt.setString(2, "%" + sigungu + "%");
-			pstmt.setString(3, "%" + roadname + "%");
-
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				ZipcodeDTO zipcodeDTO = new ZipcodeDTO();
-				zipcodeDTO.setZipcode(rs.getString("zipcode"));
-				zipcodeDTO.setSido(rs.getString("sido"));
-				zipcodeDTO.setSigungu(rs.getString("sigungu") == null ? "" : rs.getString("sigungu"));
-				zipcodeDTO.setYubmyundong(rs.getString("yubmyundong"));
-				zipcodeDTO.setRi(rs.getString("ri") == null ? "" : rs.getString("ri"));
-				zipcodeDTO.setRoadname(rs.getString("roadname"));
-				zipcodeDTO.setBuildingname(rs.getString("buildingname") == null ? "" : rs.getString("buildingname"));
-
-				list.add(zipcodeDTO);
-			}
-			System.out.println("list add 완료");
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-			list = null; // 오류시 반드시 list를 null로 초기화시키자.
-		} finally {
-			try {
-				rs.close();
-				pstmt.close();
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return list;
-	}
-
-	public boolean checkId(String id) {
-		String sql = "select * from member where id = ?";
-		boolean row = false;
-
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				row = true;
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (pstmt != null)
-					pstmt.close();
-				if (con != null)
-					con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return row;
-	}
-
-	public boolean isExistId(String id) {
-		boolean exist = false;
-		String sql = " select * from member where id=?";
-
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				exist = true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-				if (con != null)
-					con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
-		return exist;
-	}
-
-	public int write(MemberDTO memeberDTO) {
-		String sql = "insert into member values(?,?,?,?,?,?,?,?,?,?,?,?)";
-		int su = 0;
-
-		String name = memeberDTO.getName();
-		String id = memeberDTO.getId();
-		String pwd = memeberDTO.getPassword();
-		String gender = memeberDTO.getGender();
-		String email1 = memeberDTO.getEmail1();
-		String email2 = memeberDTO.getEmail2();
-		String tel1 = memeberDTO.getTel1();
-		String tel2 = memeberDTO.getTel2();
-		String tel3 = memeberDTO.getTel3();
-		String zipcode = memeberDTO.getZipcode();
-		String addr1 = memeberDTO.getAddr1();
-		String addr2 = memeberDTO.getAddr2();
-
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, name);
-			pstmt.setString(2, id);
-			pstmt.setString(3, pwd);
-			pstmt.setString(4, gender);
-			pstmt.setString(5, email1);
-			pstmt.setString(6, email2);
-			pstmt.setString(7, tel1);
-			pstmt.setString(8, tel2);
-			pstmt.setString(9, tel3);
-			pstmt.setString(10, zipcode);
-			pstmt.setString(11, addr1);
-			pstmt.setString(12, addr2);
-
-			su = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (pstmt != null)
-					pstmt.close();
-				if (con != null)
-					con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return su;
-	}
-
-	public int update(MemberDTO memeberDTO) {
-		String sql = "update member set name = ?," + "pwd = ? ," + "gender = ? ," + "email1 = ? ," + "email2 = ? ,"
-				+ "tel1 = ? ," + "tel2 = ? ," + "tel3 = ? ," + "zipcode = ? ," + "addr1 = ? ," + "addr2 =  ?"
-				+ "where id = ?";
-
-		int su = 0;
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, memeberDTO.getName());
-			pstmt.setString(2, memeberDTO.getPassword());
-			pstmt.setString(3, memeberDTO.getGender());
-			pstmt.setString(4, memeberDTO.getEmail1());
-			pstmt.setString(5, memeberDTO.getEmail2());
-			pstmt.setString(6, memeberDTO.getTel1());
-			pstmt.setString(7, memeberDTO.getTel2());
-			pstmt.setString(8, memeberDTO.getTel3());
-			pstmt.setString(9, memeberDTO.getZipcode());
-			pstmt.setString(10, memeberDTO.getAddr1());
-			pstmt.setString(11, memeberDTO.getAddr2());
-			pstmt.setString(12, memeberDTO.getId());
-
-			su = pstmt.executeUpdate();
-			System.out.println("su : " + su);
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		} finally {
-			try {
-				if (pstmt != null)
-					pstmt.close();
-				if (con != null)
-					con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return su;
-	}
+	
 }

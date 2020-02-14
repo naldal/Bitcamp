@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<img src="../image/1.jpg" width="300" height="400">
+
+<img src="../image/벽력일섬6연.gif">
 
 <%
-String name="홍길동"; 
+String name="또치";
 %>
-<br>
-image.jsp name=<%=name%>
+<br><br>
+image.jsp name=<%=name %>

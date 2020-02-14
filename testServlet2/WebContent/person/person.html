@@ -1,62 +1,69 @@
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="person.css">
-    <title>Document</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
-    
-    <form action="/testServlet2/person">
-        <table>
-            <tr>
-                <td>이름</td>
-                <td class="td2"><input type="text" size="15" name="name"></td>
-            </tr>
-            <tr>
-                <td>성별</td>
-                <td class="td2"><input type="radio" name="gender" value="male">남성 
-                <input type="radio" name="gender" value="female">여성</td>
-            </tr>
-            <tr>
-                <td>색깔</td>
-                <td class="td2">
-                    <select name="color">
-                        <option value="RED">빨강</option>
-                        <option value="ORANGE">주황</option>
-                        <option value="YELLOW">노랑</option>
-                        <option value="BLUE">파랑</option>
-                        <option value="PULPLE">보라</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>과목</td>
-                <td class="td2">
-                    <input type="checkbox" name="subject" value="reading">독서
-                    <input type="checkbox" name="subject" value="movie">영화
-                    <input type="checkbox" name="subject" value="music">음악
-                    <input type="checkbox" name="subject" value="game">게임
-                    <input type="checkbox" name="subject" value="shopping">쇼핑
-                </td>
-            </tr>
-            <tr>
-                <td>과목</td>
-                <td class="td2">
-                    <select name="stacks" size="10" multiple>
-                        <option value="JAVA">JAVA</option>
-                        <option value="Servlet">Servlet</option>
-                        <option value="JSP">JSP</option>
-                        <option value="SPRING">SPRING</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td id="col" colspan="2"><input type="submit"><input type="reset"></td>
-            </tr>
-        </table>
-    </form>
+<form method = "get" action="http://localhost:8080/testServlet2/ps">
+<table border = "1" cellspacing = "0" cellpadding = "5">
+
+<tr>
+	<td width = "70" align="center">이름</td>
+	<td><input type="text" name="name" placeholder="이름 입력"></td>
+</tr>
+
+<tr>
+	<td width = "70" align="center">성별</td>
+	<td>
+	<input type="radio" name="gender" value="0" checked>남자
+	<input type="radio" name="gender" value="1">여자
+	</td>
+</tr>
+
+<tr>
+	<td width = "70" align="center">색깔</td>
+	<td>
+	<select name="color" style = "width: 100px;">
+	<option value="red">빨 강</option>
+	<option value="blue">파 랑</option>
+	<option value="magenta">보 라</option>
+	<option value="green">초 록</option>
+	<option value="orange">주 황</option>
+	</select>
+	</td>
+</tr>
+
+<tr>
+	<td width = "70" align="center">취미</td>
+	<td>
+	<input type="checkbox" name="hobby" value="독서">독서 
+	<input type="checkbox" name="hobby"value="영화">영화 
+	<input type="checkbox" name="hobby"value="음악">음악 
+	<input type="checkbox" name="hobby" value="게임">게임 
+	<input type="checkbox" name="hobby" value="쇼핑">쇼핑
+	</td>
+</tr>
+<tr>
+	<td width = "70" align="center">과목</td>
+	<td>
+	<select name="subject" size = "5" multiple style="width: 100px;">
+	<option value="JAVA">JAVA</option>
+	<option value="Servlet">Servlet</option>
+	<option value="JSP">JSP</option>
+	<option value="SPRING">SPRING</option>
+	</select>
+	</td>
+</tr>
+<tr>
+	<td colspan ="2" align ="center">
+	<input type="submit" value="SEND">&emsp;
+	<input type="reset" value="CANCEL">
+	</td>
+</tr>
+</table>
+
+</form>
 
 </body>
 </html>

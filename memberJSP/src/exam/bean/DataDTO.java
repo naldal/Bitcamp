@@ -1,7 +1,6 @@
 package exam.bean;
 
 public class DataDTO {
-
 	private int x;
 	private int y;
 	

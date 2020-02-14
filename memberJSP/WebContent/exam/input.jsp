@@ -7,31 +7,29 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="sum.jsp" method="get">
-<table border="1">
+<form method="get" action="sum.jsp">
+<table border="1" cellspacing="0" cellpadding="3">
+
 <tr>
-	<td>
-		X
-	</td>
-	<td>
-		<input type="text" name="x">
-	</td>
+<td align="center" width="60" >X</td>
+<td>
+<input type="text" name="x" size="7">
+</td>
 </tr>
+
 <tr>
-	<td>
-		Y
-	</td>
-	<td>
-		<input type="text" name="y">
-	</td>
+<td align="center">Y</td>
+<td>
+<input type="text" name="y" size="7">
+</td>
 </tr>
-<tr>
-	<td colspan="2">
-		<input type="submit" value="계산">
-		<input type="reset" value="취소">
-		
-	</td>
+<td colspan="2" align="center">
+<input type="submit" value="합구하기">
+<input type="reset" value="취소">
+</td>
+<tr >
 </tr>
+
 </table>
 </form>
 </body>

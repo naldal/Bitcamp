@@ -14,35 +14,29 @@ import member.dao.MemberDAO;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		//데이터
-		request.setCharacterEncoding("UTF-8");
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
-		System.out.println(id);
-		System.out.println(pwd);
 		
 		//DB
-		MemberDAO memberDAO = MemberDAO.getinstance();
-		boolean flag1 = memberDAO.loginChecking(id, pwd);
+		MemberDAO memberDAO = MemberDAO.getInstance();
+		String name = memberDAO.login(id, pwd);
 		
-		
-		
-		//응답.
-		response.setContentType("text/html;charset=UTF-8");
+		//응답
+		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
 		out.println("<html>");
-		out.println("<head>");
 		out.println("<body>");
-		if(flag1) {
-			out.println("로그인 성공. "+id+"님 어서오세요");
+		if(name!=null) {
+			out.println(name + "님 로그인");
 		} else {
-			out.println("로그인 실패.");
+			out.println("아이디 또는 비밀번호가 맞지 않습니다.");
 		}
 		out.println("</body>");
-		out.println("</head>");
 		out.println("</html>");
 	}
 
