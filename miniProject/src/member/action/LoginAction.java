@@ -32,7 +32,8 @@ public class LoginAction implements CommandProcess {
 			return "/main/index.jsp";
 			
 		} else {
-			request.setAttribute("display", "/member/loginFail.jsp");
+			request.setAttribute("display", "/member/loginFail.jsp?");
+			request.setAttribute("fail", "1");
 			return "/main/index.jsp";
 		}
 	}

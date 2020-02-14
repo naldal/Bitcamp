@@ -109,6 +109,14 @@ $('#checkLoginBtn').click(function(){
 });
 */
 
+if($('#fail').val()=="1") {
+	$('#loginChk').text('로그인 실패')
+				  .css('color', 'red')
+				  .css('font-size', '8pt')
+				  .css('font-weignt','bold');
+}
+
+
 $('#loginFormBtn').click(function(){
 	$('#loginIdDiv').empty();
 	$('#loginPwdDiv').empty();
