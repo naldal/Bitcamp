@@ -9,22 +9,19 @@ style="cursor:pointer;">
 MVC를 이용한 미니 프로젝트 
 </h3>
 
-<c:choose>
-
-<c:when test="${sessionScope.memId eq null}">
+<c:if test="${sessionScope.memId eq null}">
 <a href="/miniProject/member/writeForm.do">회원가입</a>
-<a href="/miniProject/member/loginForm.do">로그인</a>
-</c:when>
+</c:if>
 
-<c:when test="${sessionScope.memId ne null}">
+<c:if test="${sessionScope.memId ne null}">
 <a href="">회원정보수정</a><br>
 <a href="/miniProject/member/logout.do">로그아웃</a>
 <a href="/miniProject/board/boardWriteForm.do">글쓰기</a>
-</c:when>
+</c:if>
 
-<c:when test="${memId ne null && memId eq 'admin'}">
-<a href="">이미지등록</a>
-</c:when>
-</c:choose>
-<a href="">목록</a>
+<c:if test="${sessionScope.memId == 'admin'}">
+<a href="/miniProject/imageboard/imageboardWriteForm.do">이미지등록</a>
+</c:if>
+
+<a href="/miniProject/board/boardList.do">목록</a>
 <a href="">이미지목록</a>

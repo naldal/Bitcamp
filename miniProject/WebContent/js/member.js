@@ -27,7 +27,7 @@ $('#writeFormBtn').click(function(){
 		$('#nameDiv').css('color', 'red');
 		$('#nameDiv').css('font-size', '8pt');
 		$('#nameDiv').css('font-weignt','bold');
-	} else if($('input[name=id]').val()==''){
+	} else if($('#id').val()==''){
 		$('#idDiv').text('아이디를 입력하세요');
 		$('#idDiv').css('color', 'red');
 		$('#idDiv').css('font-size', '8pt');

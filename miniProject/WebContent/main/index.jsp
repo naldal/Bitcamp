@@ -26,12 +26,7 @@
 			</c:if>
 		</td>
 		<td>
-			<c:if test="${sessionScope.memId ne null && success eq '0'}">
-				<jsp:include page="../template/body.jsp"/>
-			</c:if>
-			<c:if test="${sessionScope.memId ne null && success ne '0'}">
-				<jsp:include page="${display}"/>
-			</c:if>
+			<jsp:include page="${display}"/>
 		</td>
 	</tr>
 	<tr >

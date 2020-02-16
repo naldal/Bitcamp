@@ -19,18 +19,18 @@ public class BoardPaging {
 		}
 		
 		if(startPage > pageBlock) {
-			pagingHTML.append("[<a id='paging' href='boardList.jsp?pg="+(startPage-1)+"'>이전</a>]");
+			pagingHTML.append("[<a id='paging' href='/miniProject/board/boardList.do?pg="+(startPage-1)+"'>이전</a>]");
 		}
 		
 		for(int i=startPage; i<=endPage; i++) {
 			if(i == currentPage) {
-				pagingHTML.append("[<a id='currentPaging' href='boardList.jsp?pg="+i+"'>"+i+"</a>]");
+				pagingHTML.append("[<a id='currentPaging' href='/miniProject/board/boardList.do?pg="+i+"'>"+i+"</a>]");
 			} else {
-				pagingHTML.append("[<a id='paging' href='boardList.jsp?pg="+i+"'>"+i+"</a>]");
+				pagingHTML.append("[<a id='paging' href='/miniProject/board/boardList.do?pg="+i+"'>"+i+"</a>]");
 			}
 		}
 		if(endPage<totalP) {
-			pagingHTML.append("[<a id='paging' href='boardList.jsp?pg="+(endPage+1)+"'>다음</a>]");
+			pagingHTML.append("[<a id='paging' href='/miniProject/board/boardList.do?pg="+(endPage+1)+"'>다음</a>]");
 		}
 	}
 
