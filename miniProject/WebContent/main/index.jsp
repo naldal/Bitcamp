@@ -3,12 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
-<html>
-<head>
-<meta charset="UTF-8">
-<title>this is index page</title>
-</head>
-<body>
 
 <table border="1" width="100%">
 	<tr style="text-align:center;">
@@ -16,6 +10,7 @@
 	</tr>
 	<tr height="300">
 		<td valign="top" width="30%">
+		
 			<c:if test="${sessionScope.memId eq null}">
 				<jsp:include page="../member/loginForm.jsp"/>
 				<input type="hidden" id="fail" value="${fail}">
@@ -34,7 +29,5 @@
 	</tr>
 	
 </table>
-</body>
 <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>	
 <script type="text/javascript" src="../js/member.js"></script>
-</html>

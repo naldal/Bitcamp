@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <table border="1" cellspacing="0" cellpadding="5" frame="hsides" rules="rows">
 	
@@ -16,29 +14,29 @@
 
 
 <c:if test="${list ne null}">
-	<c:forEach var="i" begin="0" end="${list.size()}" step="1">
+	<c:forEach var="boardDTO" items="${list}">
 	<tr>
 		<td width="50" align="center">
-			${list[i].getSeq()}
+			${boardDTO.seq}
 		</td>
 		
 		<td>
 		<a id="subjectA" width="300" href="javascript:void(0)" 
-		onclick="isLogin(${id}, ${list[i].seq}, ${pg})">
-			${list[i].subject}
+		onclick="isLogin('${id}', ${boardDTO.seq}, ${pg})">
+			${boardDTO.subject}
 		</a>
 		</td>
 		
 		<td width="100" align="center">
-			${list[i].name}
+			${boardDTO.name}
 		</td>
 		
 		<td width="200" align="center">
-			${list[i].logtime}
+			${boardDTO.logtime}
 		</td>
 		
 		<td width="50" align="center">
-			${list[i].hit}
+			${boardDTO.hit}
 		</td>
 	</tr>
 </c:forEach>
@@ -46,19 +44,17 @@
 </table>
 
 <div style=" float:left; width: 500px; text-align: center;">
-${boardPaging.pagingHTML}</div>
+${boardPaging.pagingHTML}
+</div>
 
-
-</body>
 <script type="text/javascript">
-function isLogin(id, seq, pg) {
-	alert("들어온 id : " + id);
-	if(id=='null') {
-		alert("먼저 로그인하세요.");
+function isLogin(id, seq, pg){
+	if(id==''){
+		alert('먼저 로그인 하세용');
 	} else {
-		
-		location.href="../main/index.jsp
+		location.href="boardView.jsp?seq="+seq+"&pg="+pg;
 	}
 }
+
 </script>
-</html>
+

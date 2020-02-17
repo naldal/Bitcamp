@@ -9,8 +9,9 @@ public class ImageboardListAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-		// TODO Auto-generated method stub
-		return null;
+
+		request.setAttribute("display", "/imageboard/imageboardList.jsp");
+		return "/main/index.jsp";
 	}
 
 }

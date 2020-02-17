@@ -1,21 +1,3 @@
-/*
-   function checkWriteForm() {
-	if(document.writeForm.name.value==""){
-		alert("이름을 입력하세요.");
-	} else if(document.writeForm.id.value=="") {
-		alert("아이디를 입력하세요.")
-	} else if(document.writeForm.pwd.value=="") {
-		alert("비밀번호를 입력하세요.")
-	} else if(document.writeForm.pwd.value != document.writeForm.repwd.value) {
-		alert("비밀번호가 일치하지 않습니다.")
-	} else if(document.writeForm.id.value != document.writeForm.idCheck.value) {
-		alert("중복체크를 해주세요.")
-	} else {
-		document.writeForm.submit();
-	}
-}
-*/
-
 $('#writeFormBtn').click(function(){
 	$('#nameDiv').empty();
 	$('#idDiv').empty();
@@ -78,36 +60,6 @@ function checkIdClose(id) {
 	window.close();
 	opener.writeForm.pwd.focus();
 }
-
-/*function checkLoginForm() {
-	
-	if(document.loginForm.id.value==""){
-		alert("아이디를 입력해주세요.")
-	} else if(document.loginForm.pwd.value=="") {
-		alert("비밀번호를 입력해주세요.")
-	} else {
-		document.loginForm.submit();
-	}
-}*/
-
-/*
-$('#checkLoginBtn').click(function(){
-	$('#idDiv').empty();
-	$('#pwdDiv').empty();
-	
-	if($('#loginId').val()==''){
-		$('#idDiv').text('아이디를 입력해주세요');
-		$('#idDiv').css('color', 'red');
-		$('#idDiv').css('font-size', '8pt');
-		$('#idDiv').css('font-weignt','bold');
-	} else if($('#loginPwd').val()==''){
-		$('#pwdDiv').text('비밀번호를 입력해주세요');
-		$('#pwdDiv').css('color', 'red');
-		$('#pwdDiv').css('font-size', '8pt');
-		$('#pwdDiv').css('font-weignt','bold');
-	}
-});
-*/
 
 if($('#fail').val()=="1") {
 	$('#loginChk').empty();

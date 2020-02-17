@@ -6,8 +6,6 @@
 
 <fmt:requestEncoding value="utf-8"/>
 
-
-
 <link rel="stylesheet" href="../css/member.css">
 
 <form method="post" action="/miniProject/member/checkPost.do">
