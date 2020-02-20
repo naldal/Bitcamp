@@ -23,7 +23,7 @@
 <tr>
 <td colspan="2" align="center">
 <input id="loginFormBtn" type="button" value="로그인">&emsp;
-<input id="signUpBtn" type="button" value="회원가입">
+<input id="signUpBtn" type="button" value="회원가입" onclick="location.href='/miniProject/member/writeForm.do'">
 </td>
 </tr>
 

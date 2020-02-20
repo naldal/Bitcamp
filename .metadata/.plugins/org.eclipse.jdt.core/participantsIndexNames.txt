@@ -21,6 +21,8 @@ D:\java_ee\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\14400
 \testJSP\src
 D:\java_ee\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2509370833.index
 \memberJSP\src
+D:\java_ee\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\816754152.index
+\Ajax\src
 D:\java_ee\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\262641973.index
 \mvcMember\src
 D:\java_ee\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3473918126.index

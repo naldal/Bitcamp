@@ -16,11 +16,11 @@ public class CheckIdAction implements CommandProcess {
 		
 		//DB
 		MemberDAO memberDAO = MemberDAO.getInstance();
-		int exist = memberDAO.isExistId(id);
+		boolean exist = memberDAO.isExistId(id);
 		
 		//응답
 		request.setAttribute("id", id);
-		if(exist>0) {
+		if(exist==false) {
 			return "/member/checkIdFail.jsp";
 		} else {
 			return "/member/checkIdOk.jsp";

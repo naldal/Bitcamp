@@ -54,13 +54,19 @@ public class MemberDAO {
 		sqlSession.close();
 	}
 
-	public int isExistId(String id) {
+	public boolean isExistId(String id) {
+		boolean exist;
 		SqlSession sqlSession = sqlSessionFactory.openSession();
-		int flag = sqlSession.insert("memberSQL.isExistId", id);
+		MemberDTO memberDTO = sqlSession.selectOne("memberSQL.isExistId", id);
+		if(memberDTO!=null) {
+			exist=true;
+		} else {
+			exist=false;
+		}
 		sqlSession.commit();
 		sqlSession.close();
 		
-		return flag;
+		return exist;
 	}
 
 	public MemberDTO login(String id, String pwd) {
@@ -87,26 +93,10 @@ public class MemberDAO {
 	}
 
 	public MemberDTO getMember(String id) {
-		MemberDTO memberDTO = null;
 		SqlSession sqlSession = sqlSessionFactory.openSession();
-		memberDTO = sqlSession.selectOne("memberSQL.getMember", id);
+		MemberDTO memberDTO = sqlSession.selectOne("memberSQL.getMember", id);
 		sqlSession.commit();
 		sqlSession.close();
-
-		if (memberDTO != null) { // 이미 로그인을 하고 들어온 상황이므로 if문은 해줘도 안해줘도 된다.
-			memberDTO.setName(memberDTO.getName());
-			memberDTO.setId(memberDTO.getId());
-			memberDTO.setPwd(memberDTO.getPwd()); // pwd
-			memberDTO.setGender(memberDTO.getGender()); // gender
-			memberDTO.setEmail1(memberDTO.getEmail1()); // email1
-			memberDTO.setEmail2(memberDTO.getEmail2()); // email2
-			memberDTO.setTel1(memberDTO.getTel1()); // tel1
-			memberDTO.setTel2(memberDTO.getTel2()); // tel2
-			memberDTO.setTel3(memberDTO.getTel3()); // tel3
-			memberDTO.setZipcode(memberDTO.getZipcode()); // zipcode
-			memberDTO.setAddr1(memberDTO.getAddr1()); // addr1
-			memberDTO.setAddr2(memberDTO.getAddr2()); // addr2
-		}
 		return memberDTO;
 	}
 

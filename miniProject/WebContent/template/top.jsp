@@ -24,13 +24,11 @@ MVC를 이용한 미니 프로젝트
 
 <div id="topDiv">
 <c:if test="${sessionScope.memId eq null}">
-<a href="/miniProject/member/writeForm.do">회원가입</a>
 </c:if>
 
 
 <c:if test="${sessionScope.memId ne null}">
 <a href="">회원정보수정</a><br>
-<a href="/miniProject/member/logout.do">로그아웃</a>
 <a href="/miniProject/board/boardWriteForm.do">글쓰기</a>
 </c:if>
 
