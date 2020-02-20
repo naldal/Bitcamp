@@ -1,25 +1,29 @@
 package imageboard.dao;
 
+import java.io.Reader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
 import imageboard.bean.ImageboardDTO;
 
-public class ImageboardDAO {
+public class ImageboardDAO<K> {
 	private static ImageboardDAO instance;
-	
-	private Connection conn;
-	private PreparedStatement pstmt;
-	private ResultSet rs;
-	
-	private DataSource ds;
+	private SqlSessionFactory sqlSessionFactory;
 	
 	public static ImageboardDAO getInstance() {
 		if(instance==null) {
@@ -31,43 +35,57 @@ public class ImageboardDAO {
 	}
 	
 	public ImageboardDAO() {
-		Context ctx;
 		try {
-			ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/oracle");
-		} catch(NamingException e) {
+			Reader reader = Resources.getResourceAsReader("mybatis-config.xml");
+			sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public boolean imageboardWrite(ImageboardDTO imageboardDTO) {
-		boolean flag=false;
-		String sql = "insert into imageboard values(seq_imageboard.nextval, ?, ?, ?, ?, ?, ?, sysdate)";
+	public void imageboardWrite(ImageboardDTO imageboardDTO) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		System.out.println(imageboardDTO.getImage1());
+		sqlSession.insert("imageboardSQL.imageboardWrite", imageboardDTO);
+		sqlSession.commit();
+		sqlSession.close();
+	}
+
+	public List<ImageboardDTO> imageboardList(Map<String, Integer> map) {
+		List<ImageboardDTO> list;
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		list = sqlSession.selectList("imageboardSQL.imageboardList", map);
 		
-		try {
-			conn = ds.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, imageboardDTO.getImageid());
-			pstmt.setString(2, imageboardDTO.getImagename());
-			pstmt.setInt(3, imageboardDTO.getImageprice());
-			pstmt.setInt(4, imageboardDTO.getImageqty());
-			pstmt.setString(5, imageboardDTO.getImagecontent());
-			pstmt.setString(6, imageboardDTO.getImage1());
-			
-			flag = pstmt.executeUpdate()>0;
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(pstmt!=null) pstmt.close();
-				if(conn!=null) conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		sqlSession.close();
+		return list;
+	}
+
+	public ImageboardDTO imageboardView(int seq) {
+		ImageboardDTO imageboardDTO = new ImageboardDTO();
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		imageboardDTO = sqlSession.selectOne("imageboardSQL.imageboardView", seq);
 		
-		return flag;
+		return imageboardDTO;
+	}
+
+	public void imageboardDelete(String[] seq) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+//		for(int i=0; i<seq.length; i++) {
+//			sqlSession.delete("imageboardSQL.imageboardDelete", Integer.parseInt(seq[i]));
+//		}
+		Map<String, String[]> map = new HashMap<>();
+		map.put("array", seq);
+		sqlSession.delete("imageboardSQL.imageboardDelete2", map);
+		sqlSession.commit();
+		sqlSession.close();
+		
+	}
+
+	public int getImageboardTotalA() {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		int totalA = sqlSession.selectOne("imageboardSQL.getImageboardTotalA");
+		sqlSession.close();
+		return totalA;
 	}
 	
 }

@@ -1,0 +1,3 @@
+if($('#chkrow').is(":checked")){
+	$('#chkrow1').prop('checked', true);
+}

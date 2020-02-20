@@ -1,13 +1,10 @@
 package imageboard.action;
 
-import java.util.Enumeration;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.control.CommandProcess;
 import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import imageboard.bean.ImageboardDTO;
 import imageboard.dao.ImageboardDAO;
@@ -16,59 +13,36 @@ public class ImageboardWriteAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-		
-		ImageboardDTO imageboardDTO = new ImageboardDTO(); 
+
+		String realFolder = request.getServletContext().getRealPath("/storage");
+		System.out.println("실제 폴더: " + realFolder);
+
+		MultipartRequest multi = new MultipartRequest(request, 
+													realFolder, 
+													1024 * 1024 * 10, 
+													"utf-8");
+		// 데이터
+		String imageId = multi.getParameter("imageId");
+		String imageName = multi.getParameter("imageName");
+		int imagePrice = Integer.parseInt(multi.getParameter("imagePrice"));
+		int imageQty = Integer.parseInt(multi.getParameter("imageQty"));
+		String imageContent = multi.getParameter("imageContent");
+		String image1 = multi.getFilesystemName("image1");
+
+		ImageboardDTO imageboardDTO = new ImageboardDTO();
+		imageboardDTO.setImageId(imageId);
+		imageboardDTO.setImageName(imageName);
+		imageboardDTO.setImagePrice(imagePrice);
+		imageboardDTO.setImageQty(imageQty);
+		imageboardDTO.setImageContent(imageContent);
+		imageboardDTO.setImage1(image1);
+
+		// DB
 		ImageboardDAO imageboardDAO = ImageboardDAO.getInstance();
-		
-		String imageid = "";
-		String imagename = "";
-		int imageprice = 0;
-		int imageqty = 0;
-		String imagecontent = "";
-		String image1 = "";
-		boolean flag = false;
-		
-		String uploadPath = request.getRealPath("/storage");
-		System.out.println("절대경로 : "+uploadPath);
-		
-		try {
-			MultipartRequest multi = new MultipartRequest(
-									request, 
-									uploadPath,
-									1024*1024*10,
-									"utf-8",
-									new DefaultFileRenamePolicy()
-								);
-			
-			imageid = multi.getParameter("imageid");
-			imagename = multi.getParameter("imagename");
-			imageprice = Integer.parseInt(multi.getParameter("imageprice"));
-			imageqty = Integer.parseInt(multi.getParameter("imageqty"));
-			imagecontent = multi.getParameter("imagecontent");
-			
-			//image1 = multi.getFilesystemName("file1");
-			Enumeration<?> files = multi.getFileNames();
-			String file1 = (String)files.nextElement();
-			String filename1 = multi.getFilesystemName(file1);
-			
-			String fullpath = uploadPath+"/"+filename1;
-			
-			
-			imageboardDTO.setImageid(imageid);
-			imageboardDTO.setImagename(imagename);
-			imageboardDTO.setImageprice(imageprice);
-			imageboardDTO.setImageqty(imageqty);
-			imageboardDTO.setImagecontent(imagecontent);
-			imageboardDTO.setImage1(fullpath);
-			
-			flag = imageboardDAO.imageboardWrite(imageboardDTO);
-			System.out.println(flag);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	
-		request.setAttribute("display", "/imageboard/imageboardwriteResult.jsp");
-		return "/main/index.jsp";	
+		imageboardDAO.imageboardWrite(imageboardDTO);
+
+		request.setAttribute("display", "/imageboard/imageboardWrite.jsp");
+		return "/main/index.jsp";
 	}
 
 }

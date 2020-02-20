@@ -1,0 +1,19 @@
+
+2월 18, 2020 13:50:57.43 NEW SESSION
+2월 18, 2020 13:50:57.43 [7056:2444:0218/135057.425:ERROR:socket_stream.cc(218)] Closing stream with result -2
+2월 18, 2020 13:50:58.26 [7056:2444:0218/135058.268:ERROR:socket_stream.cc(218)] Closing stream with result -2
+2월 18, 2020 14:06:01.26 [7056:2444:0218/140557.567:ERROR:connection_factory_impl.cc(420)] Failed to connect to MCS endpoint with error -106
+
+2월 18, 2020 17:12:22.29 NEW SESSION
+2월 18, 2020 17:12:22.29 [1308:1172:0218/171222.264:ERROR:page_load_metrics_update_dispatcher.cc(165)] Invalid first_paint 0.339 s for first_image_paint 0.289 s
+2월 18, 2020 17:12:23.72 [1308:1172:0218/171223.725:ERROR:page_load_metrics_update_dispatcher.cc(165)] Invalid first_paint 0.339 s for first_image_paint 0.289 s
+2월 18, 2020 17:12:26.82 [1308:1172:0218/171226.822:ERROR:page_load_metrics_update_dispatcher.cc(165)] Invalid first_paint 0.339 s for first_image_paint 0.289 s
+2월 18, 2020 17:12:31.30 [1308:1172:0218/171231.299:ERROR:page_load_metrics_update_dispatcher.cc(165)] Invalid first_paint 0.339 s for first_image_paint 0.289 s
+2월 18, 2020 17:12:32.37 [1308:1172:0218/171232.373:ERROR:page_load_metrics_update_dispatcher.cc(165)] Invalid first_paint 0.339 s for first_image_paint 0.289 s
+2월 18, 2020 17:15:16.09 [1308:1172:0218/171516.092:ERROR:page_load_metrics_update_dispatcher.cc(165)] Invalid first_paint 0.339 s for first_image_paint 0.289 s
+2월 18, 2020 17:15:17.58 [1308:1172:0218/171517.584:ERROR:page_load_metrics_update_dispatcher.cc(165)] Invalid first_paint 0.339 s for first_image_paint 0.289 s
+2월 18, 2020 17:17:22.12 [1308:1172:0218/171722.127:ERROR:page_load_metrics_update_dispatcher.cc(165)] Invalid first_paint 0.339 s for first_image_paint 0.289 s
+2월 18, 2020 17:20:32.64 [1308:1172:0218/172032.644:ERROR:page_load_metrics_update_dispatcher.cc(165)] Invalid first_paint 0.339 s for first_image_paint 0.289 s
+2월 18, 2020 19:06:43.95 [1308:4576:0218/190643.957:ERROR:socket_stream.cc(218)] Closing stream with result -2
+2월 18, 2020 19:06:44.77 [1308:4576:0218/190644.779:ERROR:socket_stream.cc(218)] Closing stream with result -2
+2월 18, 2020 19:12:53.25 [1308:4576:0218/191249.653:ERROR:connection_factory_impl.cc(420)] Failed to connect to MCS endpoint with error -106

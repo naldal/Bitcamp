@@ -1,0 +1,9 @@
+
+	$('#chkrow').click(function(){
+		var chk = $(this).is(":checked");
+		if(chk){
+			$('#chkrow1').attr('checked', true);
+		} else {
+			$('#chkrow1').attr('checked', false);
+		}
+	});

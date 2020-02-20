@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="javax.activation.CommandObject"/>
+<fullyQualifiedTypeName name="com.control.CommandProcess"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="board.dao.BoardDAO"/>
+<fullyQualifiedTypeName name="user.main.UserMain"/>
+<fullyQualifiedTypeName name="user.main.UserInsertAction"/>
+<fullyQualifiedTypeName name="user.main.UserSelectAction"/>
+<fullyQualifiedTypeName name="user.main.UserAction"/>
+<fullyQualifiedTypeName name="lombok.Data"/>
+<fullyQualifiedTypeName name="user.main.UserUpdateAction"/>
+<fullyQualifiedTypeName name="user.main.UserDeleteAction"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="user.bean.UserDTO"/>
+<fullyQualifiedTypeName name="user.dao.UserDAO"/>
+<fullyQualifiedTypeName name="user.main.UserSearchAction"/>
+<fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSessionFactory"/>
+<fullyQualifiedTypeName name="org.apache.ibatis.io.Resources"/>
+<fullyQualifiedTypeName name="java.io.Reader"/>
+<fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSessionFactoryBuilder"/>
+<fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSession"/>
+<fullyQualifiedTypeName name="imageboard.dao.ImageboardDAO"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="imageboard.bean.ImageboardDTO"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+</qualifiedTypeNameHistroy>

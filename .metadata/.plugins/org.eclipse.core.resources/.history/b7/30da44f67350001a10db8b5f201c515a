@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<form name="imageBoardForm" action="" method="post" enctype="multipart/form-data">
+    <table border="1">
+        <tr>
+            <td>상품코드</td>
+            <td><input type="text" name="imageid" placeholder="img"></td>
+        </tr>
+        <tr>
+            <td>상품명</td>
+            <td><input type="text" name="imagename" placeholder="상품명 입력"></td>
+        </tr>
+        <tr>
+            <td>단가</td>
+            <td><input type="text" name="imageprice" placeholder="단가 입력"></td>
+        </tr>
+        <tr>
+            <td>갯수</td>
+            <td><input type="text" name="imageqty" placeholder="갯수 입력"></td>
+        </tr>
+        <tr>
+            <td>내용</td>
+            <td><input type="text" name="imagecontent" placeholder="상품명 입력"></td>
+        </tr>
+        <tr colspan="2">
+            <td>
+                <input type="file" name="image1">
+            </td>
+        </tr>
+        <tr colspan="2">
+            <td>
+                <input type="submit" value="이미지 등록">
+                <input type="reset" value="다시 작성">
+            </td>
+        </tr>
+    </table>
+    </form>

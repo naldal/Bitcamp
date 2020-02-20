@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<table border="1" cellpadding="5" width="100%">
+
+	<th>글번호</th>
+	<th>이미지</th>
+	<th>상품평</th>
+	<th>단가</th>
+	<th>개수</th>
+	<th>합계</th>
+
+<c:forEach var="imageDTO" items='${list}'>
+	<tr>
+		<td><c:out value='${imageDTO.seq}'/></td>
+		<td><c:out value='${imageDTO.imageid}'/></td>
+		<td><c:out value='${imageDTO.imagename}'/></td>
+		<td><c:out value='${imageDTO.imageprice}'/></td>
+		<td><c:out value='${imageDTO.imageqty}'/></td>
+		<td><c:out value='${imageDTO.imagecontent}'/></td>
+		<td><img src=<c:out value='${imageDTO.image1}'/>></td>
+		<td><c:out value='${imageDTO.logtime}'/></td>
+	</tr>
+</c:forEach>
+</table>

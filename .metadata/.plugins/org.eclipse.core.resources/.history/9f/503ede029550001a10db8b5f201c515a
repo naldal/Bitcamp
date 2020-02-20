@@ -1,0 +1,22 @@
+package imageboard.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class ImageboardDAO {
+	private static ImageboardDAO instance;
+	
+	private Connection conn;
+	private PreparedStatement pstmt;
+	private ResultSet rs;
+	
+	public static ImageboardDAO getInstance() {
+		if(instance==null) {
+			synchronized (ImageboardDAO.class) {
+				instance = new ImageboardDAO();
+			}
+		}
+	}
+
+}

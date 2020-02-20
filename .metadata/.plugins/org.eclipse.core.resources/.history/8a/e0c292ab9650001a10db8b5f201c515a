@@ -1,0 +1,37 @@
+package imageboard.action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.control.CommandProcess;
+
+import imageboard.bean.ImageboardDTO;
+import imageboard.dao.ImageboardDAO;
+
+public class ImageboardWriteAction implements CommandProcess {
+
+	@Override
+	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+		
+		String imageId = "";
+		String imageName = "";
+		String imagePrice = "";
+		String imageQty = "";
+		String imageContent = "";
+		String image1 = "";
+		
+		String uploadPath = request.getRealPath("storage");
+		
+		try {
+			Multipart 
+		}
+		
+		
+		ImageboardDTO imageboardDTO = new ImageboardDTO(); 
+		ImageboardDAO imageboardDAO = ImageboardDAO.getInstance();
+		
+		
+		return "/main/index.jsp";
+	}
+
+}

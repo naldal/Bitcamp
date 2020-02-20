@@ -1,0 +1,28 @@
+package user.main;
+
+import java.util.Scanner;
+
+import user.dao.UserDAO;
+
+public class UserUpdateAction implements UserAction {
+
+	@Override
+	public void execute() {
+		/*
+		 * 1. 수정할 아이디 입력 : angel 없으면 찾고자 하는 아이디가 없습니다. 
+		 * 2. 수정할 아이디 입력 : hong 이름 아이디 비밀번호  출력 
+		 * 3. 수정할 이름 입력 : 홍당무 수정할 비밀번호 : 333 데이터 수정완료
+		 */
+		Scanner sc = new Scanner(System.in);
+		System.out.println("수정할 아이디를 입력하세요");
+		String id = sc.next();
+		
+		UserDAO userDAO = UserDAO.getInstance();
+		
+		
+			
+			
+
+	}
+
+}

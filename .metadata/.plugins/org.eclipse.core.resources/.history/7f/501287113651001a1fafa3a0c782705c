@@ -1,0 +1,30 @@
+package user.main;
+
+import java.util.Scanner;
+
+import user.bean.UserDTO;
+
+public class UserInsertAction implements UserAction {
+
+	Scanner sc = new Scanner(System.in);
+	
+	@Override
+	public void execute() {
+		//데이터
+		String name = sc.next();
+		String id = sc.next();
+		String password = sc.next();
+		
+		UserDTO userDTO = new UserDTO();
+		userDTO.setName(name);
+		userDTO.setId(id);
+		userDTO.setPassword(password);
+		
+		//db
+		
+		
+		//응답
+
+	}
+
+}

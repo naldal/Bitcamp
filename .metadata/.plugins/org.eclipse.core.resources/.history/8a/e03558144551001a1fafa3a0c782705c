@@ -1,0 +1,42 @@
+package user.dao;
+
+import java.io.IOException;
+import java.io.Reader;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import user.bean.UserDTO;
+
+public class UserDAO {
+	public static UserDAO instance;
+	private SqlSessionFactory sqlSessionFactory;
+	
+	public UserDAO() {
+		
+		//mybatis-config.xml 파일을 읽어서 SqlSessionFactory를 생성한다.
+		try {
+			Reader reader = Resources.getResourceAsReader("mybatis-config.xml");
+			sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static UserDAO getInstance() {
+		if(instance==null) {
+			synchronized (UserDAO.class) {
+				instance = new UserDAO();
+			}	
+		}
+		return instance;
+	}
+
+	public void userWrite(UserDTO userDTO) {
+		
+		
+	}
+
+}

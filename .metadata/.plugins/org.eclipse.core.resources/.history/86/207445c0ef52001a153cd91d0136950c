@@ -1,0 +1,8 @@
+$('#chkrow').each(function(){
+	var chk = $(this).is(":checked");
+	if(chk){
+		$('#chkrow1').prop('checked', true);
+	} else {
+		$('#chkrow1').prop('checked', false);
+	}
+});

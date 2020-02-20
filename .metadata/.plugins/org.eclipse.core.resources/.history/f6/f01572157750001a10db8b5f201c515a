@@ -1,0 +1,45 @@
+package board.action;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.control.CommandProcess;
+
+import board.bean.BoardDTO;
+import board.dao.BoardDAO;
+import member.bean.MemberDTO;
+
+public class BoardListAction implements CommandProcess{
+
+	@Override
+	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+		
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("memId");
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		
+		int pg = 0;
+		if(request.getParameter("pg")!=null)
+			Integer.parseInt(request.getParameter("pg"));
+		else 
+			pg=1;
+		
+		
+		int endNum = pg*5;
+		int startNum = endNum-4;
+		
+		
+		BoardDAO boardDAO = BoardDAO.getInstance();
+		List<BoardDTO> list = boardDAO.getBoardList(startNum, endNum);
+		
+		
+		
+		
+		request.setAttribute("display", "/member/boardList.jsp");
+		return "/main/lndex.jsp";
+	}
+
+}

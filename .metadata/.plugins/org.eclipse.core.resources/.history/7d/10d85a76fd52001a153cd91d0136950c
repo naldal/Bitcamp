@@ -1,0 +1,35 @@
+package imageboard.action;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.control.CommandProcess;
+
+import imageboard.dao.ImageboardDAO;
+
+public class ImageboardDeleteAction implements CommandProcess {
+
+	@Override
+	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+		String[] values = request.getParameterValues("checkArr");
+		String[] rv = values[values.length-1].split(",");
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		for(int i=0; i<rv.length; i++) {
+			//11  -> 11 10 -> 11 10 9
+			System.out.println("rv["+i+"] : "+rv[i]);
+			map.put(i+"a", rv[i]);
+		}
+		
+		ImageboardDAO imageboardDAO = ImageboardDAO.getInstance();
+		imageboardDAO.imageboardDelete(map);
+		
+		request.setAttribute("display", "/imageboard/imageboardDelete.jsp");
+		return "/main/index.jsp";
+	}
+
+}

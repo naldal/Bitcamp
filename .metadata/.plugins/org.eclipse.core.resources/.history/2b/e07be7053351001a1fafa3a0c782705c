@@ -1,0 +1,34 @@
+package user.main;
+
+import java.util.Scanner;
+
+public class UserMain {
+	Scanner sc = new Scanner(System.in);
+
+	public void menu() {
+		System.out.println("input 값을 입력하시오");
+		int input = sc.nextInt();
+
+		while (true) {
+			if (input == 1) {
+				System.out.println("입력하세요");
+			} else if (input == 2) {
+				System.out.println("출력하세요");
+			} else if (input == 3) {
+				System.out.println("수정하세요");
+			} else if (input == 4) {
+				System.out.println("삭제하세요");
+			} else if (input == 5) {
+				System.out.println("검색하세요");
+			} else {
+				System.out.println("시스템 종료");
+				System.exit(0);
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		UserMain main = new UserMain();
+		main.menu();
+	}
+}

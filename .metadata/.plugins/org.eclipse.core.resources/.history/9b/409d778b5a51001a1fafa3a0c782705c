@@ -1,0 +1,20 @@
+package user.main;
+
+import java.util.Scanner;
+
+import user.dao.UserDAO;
+
+public class UserDeleteAction implements UserAction {
+
+	@Override
+	public void execute() {
+		Scanner sc = new Scanner(System.in);
+		UserDAO userDAO = UserDAO.instance;
+		
+		System.out.println("삭제할 아이디를 입력하세요.");
+		String id = sc.next();
+		
+		userDAO.deleteUser(id);
+	}
+
+}

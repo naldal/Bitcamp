@@ -1,6 +1,8 @@
 package board.action;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -21,21 +23,18 @@ public class BoardListAction implements CommandProcess {
 
 		// data
 		HttpSession session = request.getSession();
-		String id = (String) session.getAttribute("memId");
-		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
-		request.setAttribute("memberDTO", memberDTO); //
-		request.setAttribute("id", id); //
-
 		int pg = Integer.parseInt(request.getParameter("pg"));
-		request.setAttribute("pg", pg); //
 
+		// 페이징 1페이장 5개씩
 		int endNum = pg * 5;
 		int startNum = endNum - 4;
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("endNum", endNum);
+		map.put("startNum", startNum);
 
-		// db
+		// DB
 		BoardDAO boardDAO = BoardDAO.getInstance();
-		List<BoardDTO> list = boardDAO.getBoardList(startNum, endNum);
-		request.setAttribute("list", list); //
+		List<BoardDTO> list = boardDAO.getBoardList(map);
 
 		// paging
 		BoardPaging boardPaging = new BoardPaging();
@@ -46,15 +45,18 @@ public class BoardListAction implements CommandProcess {
 		boardPaging.setTotalA(totalA);
 		boardPaging.makePagingHTML();
 
-		request.setAttribute("boardPaging", boardPaging); //
-
 		if (session.getAttribute("memId") != null) {
 			Cookie cookie = new Cookie("memHit", "0");
 			cookie.setMaxAge(30 * 60);
 			response.addCookie(cookie);
 		}
 
-		request.setAttribute("display", "/board/boardList.jsp?");
+		// 응답
+		request.setAttribute("pg", pg);
+		request.setAttribute("list", list);
+		request.setAttribute("boardPaging", boardPaging);
+		request.setAttribute("display", "/board/boardList.jsp");
+
 		return "/main/index.jsp";
 	}
 

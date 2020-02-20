@@ -11,6 +11,7 @@ import com.control.CommandProcess;
 
 import board.dao.BoardDAO;
 
+//원글
 public class BoardWriteAction implements CommandProcess{
 
 	@Override
@@ -25,14 +26,14 @@ public class BoardWriteAction implements CommandProcess{
 		String name = (String)session.getAttribute("memName");
 		String email = (String)session.getAttribute("memEmail");
 		
-		//DB
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
 		map.put("name", name);
 		map.put("email", email);
-		map.put("subject", subject);
+		map.put("subject", subject);          
 		map.put("content", content);
 		
+		//DB
 		BoardDAO boardDAO = BoardDAO.getInstance();
 		boardDAO.boardWrite(map);
 		

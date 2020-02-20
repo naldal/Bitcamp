@@ -1,0 +1,71 @@
+package imageboard.action;
+
+import java.util.Enumeration;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.control.CommandProcess;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import imageboard.bean.ImageboardDTO;
+import imageboard.dao.ImageboardDAO;
+
+public class ImageboardWriteAction implements CommandProcess {
+
+	@Override
+	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+		
+		ImageboardDTO imageboardDTO = new ImageboardDTO(); 
+		ImageboardDAO imageboardDAO = ImageboardDAO.getInstance();
+		
+		String imageid = "";
+		String imagename = "";
+		int imageprice = 0;
+		int imageqty = 0;
+		String imagecontent = "";
+		String image1 = "";
+		boolean flag = false;
+		
+		String uploadPath = request.getRealPath("/storage");
+		System.out.println("절대경로 : "+uploadPath);
+		
+		try {
+			MultipartRequest multi = new MultipartRequest(
+									request, 
+									uploadPath,
+									1024*1024*10,
+									"utf-8",
+									new DefaultFileRenamePolicy()
+								);
+			
+			imageid = multi.getParameter("imageid");
+			imagename = multi.getParameter("imagename");
+			imageprice = Integer.parseInt(multi.getParameter("imageprice"));
+			imageqty = Integer.parseInt(multi.getParameter("imageqty"));
+			imagecontent = multi.getParameter("imagecontent");
+			
+			//image1 = multi.getFilesystemName("file1");
+			Enumeration<?> files = multi.getFileNames();
+			
+			
+			
+			imageboardDTO.setImageid(imageid);
+			imageboardDTO.setImagename(imagename);
+			imageboardDTO.setImageprice(imageprice);
+			imageboardDTO.setImageqty(imageqty);
+			imageboardDTO.setImagecontent(imagecontent);
+			imageboardDTO.setImage1(image1);
+			
+			flag = imageboardDAO.imageboardWrite(imageboardDTO);
+			System.out.println(flag);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		request.setAttribute("display", "/imageboard/imageboardwriteResult.jsp");
+		return "/main/index.jsp";	
+	}
+
+}

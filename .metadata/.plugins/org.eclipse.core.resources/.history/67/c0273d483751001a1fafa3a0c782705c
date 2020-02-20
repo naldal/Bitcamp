@@ -1,0 +1,16 @@
+package user.dao;
+
+public class UserDAO {
+	public static UserDAO instance;
+	
+	public static UserDAO getInstance() {
+		if(instance==null) {
+			instance = new UserDAO();
+		}
+		
+		
+		
+		return null;
+	}
+
+}

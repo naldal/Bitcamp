@@ -3,6 +3,7 @@ package user.dao;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -74,9 +75,9 @@ public class UserDAO {
 		sqlSession.close();
 	}
 	
-	public List<UserDTO> getUserBy(UserDTO userDTO) {
+	public List<UserDTO> getUserBy(Map<String, String> map) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
-		List<UserDTO> list = sqlSession.selectList("userSQL.getUserBy", userDTO);
+		List<UserDTO> list = sqlSession.selectList("userSQL.getUserBy", map);
 		
 		sqlSession.close();
 		return list;

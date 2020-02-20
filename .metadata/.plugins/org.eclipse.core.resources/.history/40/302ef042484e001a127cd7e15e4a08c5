@@ -1,0 +1,16 @@
+/member/writeForm.do=member.action.WriteFormAction
+/member/write.do=member.action.WriteAction
+
+/member/checkId.do=member.action.CheckIdAction
+/member/checkPost.do=member.action.CheckPostAction
+
+/member/loginForm.do=member.action.LoginFormAction
+/member/login.do=member.action.LoginAction
+
+/member/logout.do=member.action.LogoutAction
+/member/checkPost.do=member.action.CheckPost
+/member/modifyForm.do=member.action.ModifyFormAction
+
+/member/boardForm.do=member.acion.BoardFormAction
+/member/board.do=member.action.BoardAction
+/member/gotohome.do=main.action.IndexAction

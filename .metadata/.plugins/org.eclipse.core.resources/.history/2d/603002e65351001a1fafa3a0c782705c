@@ -1,0 +1,11 @@
+package user.main;
+
+public class UserUpdateAction implements UserAction {
+
+	@Override
+	public void execute() {
+		
+
+	}
+
+}

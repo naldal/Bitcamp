@@ -1,0 +1,29 @@
+package imageboard.action;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.control.CommandProcess;
+
+public class ImageboardDeleteAction implements CommandProcess {
+
+	@Override
+	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+		String[] values = request.getParameterValues("checkArr");
+		String[] rv = values[values.length-1].split(",");
+		
+		System.out.println("asdf");
+		
+		for(int i=0; i<rv.length; i++) {
+			//11  -> 11 10 -> 11 10 9
+			System.out.println("rv["+i+"] : "+rv[i]); 
+		}
+		
+		request.setAttribute("display", "/imageboard/imageboardDelete.jsp");
+		return "/main/index.jsp";
+	}
+
+}

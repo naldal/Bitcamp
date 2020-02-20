@@ -1,0 +1,51 @@
+package imageboard.action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.control.CommandProcess;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import imageboard.bean.ImageboardDTO;
+import imageboard.dao.ImageboardDAO;
+
+public class ImageboardWriteAction implements CommandProcess {
+
+	@Override
+	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+		
+		String imageId = "";
+		String imageName = "";
+		int imagePrice = 0;
+		int imageQty = 0;
+		String imageContent = "";
+		String image1 = "";
+		
+		String uploadPath = request.getRealPath("storage");
+		
+		try {
+			MultipartRequest multi = new MultipartRequest(
+									request, 
+									uploadPath,
+									100*1024,
+									"utf-8",
+									new DefaultFileRenamePolicy()
+								);
+			
+			imageId = multi.getParameter("imageId");
+			imageName = multi.getParameter("imageName");
+			imagePrice = Integer.parseInt(multi.getParameter("imagePrice"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		ImageboardDTO imageboardDTO = new ImageboardDTO(); 
+		ImageboardDAO imageboardDAO = ImageboardDAO.getInstance();
+		
+		
+		return "/main/index.jsp";
+	}
+
+}

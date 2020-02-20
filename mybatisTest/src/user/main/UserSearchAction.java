@@ -1,6 +1,8 @@
 package user.main;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import user.bean.UserDTO;
@@ -15,40 +17,35 @@ public class UserSearchAction implements UserAction {
 		 * getUserId> 하나만 사용하기
 		 */
 		Scanner sc = new Scanner(System.in);
-		UserDTO userDTO = new UserDTO();
 		UserDAO userDAO = UserDAO.getInstance();
 
 		System.out.println("1. 이름검색");
 		System.out.println("2. 아이디 검색");
 		int num = sc.nextInt();
-		String str;
+		String value = null;
+		String columnName = null;
+		
 		if (num == 1) {
 			System.out.println("이름검색");
-			str = sc.next();
-			userDTO.setName(str);
-			List<UserDTO> list = userDAO.getUserBy(userDTO);
-
-			if (list == null) {
-				System.out.println("찾고자 하는 이름이 없습니다.");
-			} else {
-				for (UserDTO data : list) {
-					System.out.println(data.getName() + "\t" + data.getId() + "\t" + data.getPwd());
-				}
-			}
+			value = sc.next();
+			columnName = "name";
+		
 		} else if (num == 2) {
 			System.out.println("아이디검색");
-			str = sc.next();
-			userDTO.setId(str);
-			List<UserDTO> list = userDAO.getUserBy(userDTO);
-			
-			if (list == null) {
-				System.out.println("찾고자 하는 아이디가 없습니다.");
-			} else {
-				for (UserDTO data : list) {
-					System.out.println(data.getName() + "\t" + data.getId() + "\t" + data.getPwd());
-				}
-			}
+			value = sc.next();
+			columnName = "id";
 		}
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("columnName", columnName);
+		map.put("value", value);
+		
+		List<UserDTO> list = userDAO.getUserBy(map);
+		
+		for(UserDTO userDTO: list) {
+			System.out.println(userDTO.getName() +"\t"+userDTO.getId()+"\t"+userDTO.getPwd());
+		}
+		
 
 	}
 

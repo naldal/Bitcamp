@@ -1,0 +1,11 @@
+package user.main;
+
+public class UserDeleteAction implements UserAction {
+
+	@Override
+	public void execute() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,47 @@
+package user.main;
+
+import java.util.Scanner;
+
+public class UserMain {
+	Scanner sc = new Scanner(System.in);
+	UserAction useraction = null;
+	
+	public void menu() {
+		System.out.println("input 값을 입력하시오");
+		int input = sc.nextInt();
+
+		System.out.println("***********");
+		System.out.println("1.입력");
+		System.out.println("2.출력");
+		System.out.println("3.수정");
+		System.out.println("4.삭제");
+		System.out.println("5.검색");
+		System.out.println("6.종료");
+		System.out.println("***********");
+		
+		while (true) {
+			if (input == 1) {
+				new UserInsertAction();
+				
+			} else if (input == 2) {				
+				new UserSelectAction();
+				
+			} else if (input == 3) {
+				System.out.println("수정하세요");
+			} else if (input == 4) {
+				System.out.println("삭제하세요");
+			} else if (input == 5) {
+				System.out.println("검색하세요");
+			} else if(input == 6) {
+				break;
+			}
+			
+			
+		}
+	}
+
+	public static void main(String[] args) {
+		new UserMain().menu();
+		System.out.println("프로그램을 종료합니다.");
+	}
+}

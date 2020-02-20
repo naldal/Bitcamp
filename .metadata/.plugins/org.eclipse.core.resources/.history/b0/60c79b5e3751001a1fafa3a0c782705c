@@ -1,0 +1,15 @@
+package user.dao;
+
+public class UserDAO {
+	public static UserDAO instance;
+	
+	public static UserDAO getInstance() {
+		if(instance==null) {
+			synchronized (instance) {
+				instance = new UserDAO();
+			}	
+		}
+		return instance;
+	}
+
+}
