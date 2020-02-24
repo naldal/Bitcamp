@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="DAO"/>
+		<item key="selection" value="Write"/>
 		<list key="findhistory">
+			<item value="write"/>
 			<item value="check"/>
 			<item value="dao"/>
 			<item value="boardModify.jsp"/>
@@ -15,7 +16,6 @@
 			<item value="delete"/>
 			<item value="Update"/>
 			<item value="update"/>
-			<item value="de"/>
 		</list>
 		<list key="replacehistory">
 		</list>

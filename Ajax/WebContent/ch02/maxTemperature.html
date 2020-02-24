@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ 최근 4일간 최고기온 : <span id="maxtemp"></span>
+</body>
+<!-- <script type="text/javascript" src="httpRequest.js"></script> -->
+<script type="text/javascript">
+window.onload = function(){
+	loadList();
+}
+
+xhr = null;
+
+function loadList() {
+	xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = loadedList;
+	
+	xhr.open("GET", "getMaxTemperature.jsp", true);
+	xhr.send();
+}
+
+function loadedList() {
+	if(xhr.readyState==4){
+		if(xhr.status==200) {
+			let csvStr = xhr.responseText;
+			
+			//콤마로 읽어온 값을 분리
+			let temperatureStrs = csvStr.split(",");
+			
+			let temperatures = new Array(temperatureStrs.length);
+			for(i = 0; i < temperatureStrs.length; i++) {
+				temperatures[i] = parseFloat(temperatureStrs[i]);
+			}
+			
+			let max = temperatures[0];
+			for(i=1 ; i<temperatureStrs.length; i++) {
+				if(temperatures[i] > max) {
+					max = temperatures[i];
+				}
+			}
+	
+			let maxtemp = document.getElementById("maxtemp");
+			maxtemp.innerHTML = "<strong>"+max+"</strong>"; 
+		}
+	}
+}
+
+</script>
+</html>

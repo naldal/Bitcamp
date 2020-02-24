@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="post" name="testAppForm">
+이름 <input type="text" name="name">
+생년원일 <input type="text" name="date">
+<input type="button" value="보내기" onclick="testToServer()">
+</form>
+</body>
+
+<script type="text/javascript">
+
+let xhr = null;
+
+function testToServer() {
+	let name = encodeURIComponent(document.testAppForm.name.value);
+	let date = document.testAppForm.date.value;
+	
+	xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = testFromServer;
+	
+	xhr.open("POST", "test.jsp", true);
+	xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	xhr.send("name="+name+"&date="+date);
+
+}
+
+function testFromServer() {
+	if(xhr.readyState==4){
+		if(xhr.status==200){
+			alert(xhr.responseText);
+		}
+	}
+}
+
+
+</script>
+</html>

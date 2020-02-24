@@ -17,3 +17,35 @@
 2월 18, 2020 19:06:43.95 [1308:4576:0218/190643.957:ERROR:socket_stream.cc(218)] Closing stream with result -2
 2월 18, 2020 19:06:44.77 [1308:4576:0218/190644.779:ERROR:socket_stream.cc(218)] Closing stream with result -2
 2월 18, 2020 19:12:53.25 [1308:4576:0218/191249.653:ERROR:connection_factory_impl.cc(420)] Failed to connect to MCS endpoint with error -106
+
+2월 21, 2020 13:49:27.11 NEW SESSION
+2월 21, 2020 13:49:27.11 [2312:1168:0221/134927.098:ERROR:socket_stream.cc(218)] Closing stream with result -2
+2월 21, 2020 13:49:27.93 [2312:1168:0221/134927.935:ERROR:socket_stream.cc(218)] Closing stream with result -2
+2월 21, 2020 14:03:05.23 [2312:1168:0221/140301.396:ERROR:connection_factory_impl.cc(420)] Failed to connect to MCS endpoint with error -106
+2월 21, 2020 14:17:04.86 [2880:6980:0221/141704.860:ERROR:CONSOLE(61)] "URIError: URI malformed URIError: URI malformed
+2월 21, 2020 14:17:04.86     at decodeURI (<anonymous>)
+2월 21, 2020 14:17:04.86     at Automapping._createBinding (devtools://devtools/bundled/persistence/Automapping.js:48:29)
+2월 21, 2020 14:17:04.86     at Automapping._computeNetworkStatus (devtools://devtools/bundled/persistence/Automapping.js:25:33)
+2월 21, 2020 14:17:04.86     at Automapping._onUISourceCodeAdded (devtools://devtools/bundled/persistence/Automapping.js:17:198)
+2월 21, 2020 14:17:04.86     at devtools://devtools/bundled/persistence/Automapping.js:1:784
+2월 21, 2020 14:17:04.86     at WorkspaceImpl.dispatchEventToListeners (devtools://devtools/bundled/common/Object.js:12:173)
+2월 21, 2020 14:17:04.86     at ContentProviderBasedProject.addUISourceCode (devtools://devtools/bundled/workspace/WorkspaceImpl.js:37:157)
+2월 21, 2020 14:17:04.86     at ContentProviderBasedProject.addUISourceCodeWithProvider (devtools://devtools/bundled/bindings/ContentProviderBasedProject.js:25:207)
+2월 21, 2020 14:17:04.86     at new Binding (devtools://devtools/bundled/bindings/ResourceMapping.js:44:327)
+2월 21, 2020 14:17:04.86     at ModelInfo._resourceAdded (devtools://devtools/bundled/bindings/ResourceMapping.js:35:67)", source: devtools://devtools/bundled/host/InspectorFrontendHost.js (61)
+2월 21, 2020 14:17:04.86 [2880:6980:0221/141704.861:ERROR:CONSOLE(61)] "URIError: URI malformed URIError: URI malformed
+2월 21, 2020 14:17:04.86     at decodeURI (<anonymous>)
+2월 21, 2020 14:17:04.86     at Automapping._createBinding (devtools://devtools/bundled/persistence/Automapping.js:48:29)
+2월 21, 2020 14:17:04.86     at Automapping._computeNetworkStatus (devtools://devtools/bundled/persistence/Automapping.js:25:33)
+2월 21, 2020 14:17:04.86     at Automapping._onUISourceCodeAdded (devtools://devtools/bundled/persistence/Automapping.js:17:198)
+2월 21, 2020 14:17:04.86     at devtools://devtools/bundled/persistence/Automapping.js:1:784
+2월 21, 2020 14:17:04.86     at WorkspaceImpl.dispatchEventToListeners (devtools://devtools/bundled/common/Object.js:12:173)
+2월 21, 2020 14:17:04.86     at ContentProviderBasedProject.addUISourceCode (devtools://devtools/bundled/workspace/WorkspaceImpl.js:37:157)
+2월 21, 2020 14:17:04.86     at ContentProviderBasedProject.addUISourceCodeWithProvider (devtools://devtools/bundled/bindings/ContentProviderBasedProject.js:25:207)
+2월 21, 2020 14:17:04.86     at new Binding (devtools://devtools/bundled/bindings/ResourceMapping.js:44:327)
+2월 21, 2020 14:17:04.86     at ModelInfo._resourceAdded (devtools://devtools/bundled/bindings/ResourceMapping.js:35:67)", source: devtools://devtools/bundled/host/InspectorFrontendHost.js (61)
+
+2월 23, 2020 13:23:50.15 NEW SESSION
+2월 23, 2020 13:23:50.15 [17264:16144:0223/132350.152:ERROR:socket_stream.cc(218)] Closing stream with result -2
+2월 23, 2020 13:37:16.28 [17264:16144:0223/132350.946:ERROR:socket_stream.cc(218)] Closing stream with result -2
+2월 23, 2020 13:37:16.28 [17264:16144:0223/133712.673:ERROR:connection_factory_impl.cc(420)] Failed to connect to MCS endpoint with error -106
