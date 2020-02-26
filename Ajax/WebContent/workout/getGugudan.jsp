@@ -1,7 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-/* 서버에서 5*1=1 을 클라이언트로 보내기
-1. <% %>
-2. JSTL
-
-*/
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<div id="divv">
+<c:forEach var="i" begin="1" end="9">
+${param.dan} * ${i} = ${param.dan*i} <br>
+</c:forEach>
+</div>

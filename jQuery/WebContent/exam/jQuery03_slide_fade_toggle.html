@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<button id="btn1">slideUp</button>
+<button id="btn2">slideDown</button>&nbsp;&nbsp;&nbsp;
+
+<button id="btn3">fadeIn</button>
+<button id="btn4">fadeOut</button>&nbsp;&nbsp;&nbsp;
+
+<button id="btn5">slide toggle</button>
+<button id="btn6">fade toggle</button>
+<button id="btn7">toggle</button>
+
+<p>이미지</p>
+<img width="300px" height="300px" src="../image/gril.jpg">
+
+</body>
+<script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+//slideUp(speed) : speed값을 지정해서 슬라이드 업 효과를 줄 수 있다.
+//speed : "slow" or "fast" or millisecond(1/1000초)
+$('#btn1').click(function(){
+	/* $('img').slideUp(1000); */
+	$('img').slideUp('slow');
+});
+
+$('#btn2').click(function(){
+	/* $('img').slideDown(1000); */
+	$('img').slideDown('fast');
+});
+
+$('#btn3').bind('click', function(){
+	$('img').fadeIn(1000); //이미지가 천천히 나타난다.
+});
+
+$('#btn4').bind('click', function(){
+	$('img').fadeOut(1000); //이미지가 천천히 사라진다.
+});
+
+$('#btn5').bind('click', function(){
+	$('img').slideToggle(1000); //slideUp, slideDwon 번갈아
+});
+
+$('#btn6').bind('click', function(){
+	$('img').fadeToggle(1000); //fadeIn, fadeOut 번갈아
+});
+
+$('#btn7').bind('click', function(){
+	//slideUp, slideDown, fadeIn, fadeOut 섞여있다
+	//색깔이 흐려지면서 slideUp, slideDown
+	$('img').toggle(1000);
+});
+
+</script>
+</html>

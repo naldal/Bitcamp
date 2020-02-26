@@ -3,8 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+#divv{
+	border:red 1px dotted;
+}
+</style>
 </head>
 <body>
-<div style="border:1px dotted red;"></div>
+<div>단 <input type="text" id="dan"> <input type="button" value="입력" onclick="gugudanRequest()"></div>
+<div id="result"></div>
+
 </body>
+<script type="text/javascript">
+	var xhr = null;
+	function gugudanRequest() {
+		let dan = document.getElementById("dan").value;
+		xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = gugudanResponse;
+		xhr.open("GET", "getGugudan.jsp?dan="+dan, true);
+		xhr.send(null);
+	}
+
+	function gugudanResponse() {
+		if (xhr.readyState == 4) {
+			if (xhr.status == 200) {
+				let result = document.getElementById("result");
+				result.innerHTML = xhr.responseText; 
+			}
+		}
+	}
+</script>
 </html>

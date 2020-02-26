@@ -5,6 +5,8 @@ D:\java_ee\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\39900
 \miniProject\src
 D:\java_ee\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3178242702.index
 \miniProject\src
+D:\java_ee\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3735080132.index
+\Ajax\src
 D:\java_ee\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3872345510.index
 \memberJSP\src
 D:\java_ee\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\637359472.index
@@ -43,5 +45,7 @@ D:\java_ee\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\24469
 \memberJSP\src
 D:\java_ee\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3922882927.index
 \Ajax\src
+D:\java_ee\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\918528223.index
+\jQuery\src
 D:\java_ee\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2725134034.index
 \memberJSP\src
