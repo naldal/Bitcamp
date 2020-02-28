@@ -1,0 +1,30 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <style>
+        .redColor {
+            color: red;
+        }
+    </style>
+    <body>
+        <div id="mainMenu">
+            <div id="naver" class="redColor">네이버</div>
+            <div id="daum" class="redColor">다음</div>
+            <div id="google" class="redColor">구글</div>
+        </div>
+    </body>
+    <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        // 항목을 클릭하면 alert() 로 div의 문자열을 선택된 항목은 빨강, 나머지는 검정으로
+        $().ready(function() {
+            $("#mainMenu div").click(function() {
+                alert($(this).text());
+                $("#mainMenu div").removeClass("redColor");
+                $(this).addClass("redColor");
+            });
+        });
+    </script>
+</html>

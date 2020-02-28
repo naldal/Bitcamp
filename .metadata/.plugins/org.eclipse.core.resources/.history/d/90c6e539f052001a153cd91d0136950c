@@ -1,5 +1,0 @@
-$('#chkrow').click(function(){
-	$('#chkrow').each(function(){
-		$(this).attr("checked", true);
-	});
-});

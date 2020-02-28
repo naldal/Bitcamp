@@ -1,6 +1,0 @@
-$('#chkrow').each(function(){
-	this.checked = true;
-	if(this.checked){
-		alert(this.value);
-	}
-});

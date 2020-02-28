@@ -1,0 +1,36 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <img id="zoom" src="../image/dwn3.jpg" width="30" height="30" /><br />
+        <img src="../image/gril.jpg" width="200" height="200" />
+    </body>
+    <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $("img")
+            .mouseover(function() {
+                $(this).attr("src", "../image/dwn1.jpg");
+            })
+            .mouseout(function() {
+                $(this).attr("src", "../image/dwn2.jpg");
+            });
+
+        $("#zoom").click(function() {
+            let url = "http://192.168.0.6:5500/WebContent/image/dwn2.jpg";
+            window.open(url, "", "width=500 height=500");
+        });
+    </script>
+    <script type="text/javascript">
+        function bigImage() {
+            let newWindow = window.open("", "", "width=500 height=500");
+            let img = newWindow.document.createElement("img");
+            img.setAttribute("src", "http://192.168.0.6:5500/WebContent/image/dwn2.jpg");
+            img.setAttribute("width", "500");
+            img.setAttribute("height", "500");
+            newWindow.document.body.appendChild(img);
+        }
+    </script>
+</html>

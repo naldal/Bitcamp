@@ -1,0 +1,52 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <style>
+        #button {
+            margin: 0;
+            background: #ccc;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #info {
+            height: 150px;
+            margin: 0;
+            padding: 10px;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        #info p {
+            font-size: 15px;
+            color: #ff0000;
+        }
+    </style>
+    <body>
+        <h1 id="button">button</h1>
+        <div id="info">
+            <p>button을 클릭하면 info부분을 보여줍니다... 보여주는 방식은 slideToggle()입니다...</p>
+            <p>button을 클릭하면 info부분을 보여줍니다... 보여주는 방식은 slideToggle()입니다...</p>
+            <p>button을 클릭하면 info부분을 보여줍니다... 보여주는 방식은 slideToggle()입니다...</p>
+            <p>button을 클릭하면 info부분을 보여줍니다... 보여주는 방식은 slideToggle()입니다...</p>
+            <p>button을 클릭하면 info부분을 보여줍니다... 보여주는 방식은 slideToggle()입니다...</p>
+            <p>button을 클릭하면 info부분을 보여줍니다... 보여주는 방식은 slideToggle()입니다...</p>
+            <p>button을 클릭하면 info부분을 보여줍니다... 보여주는 방식은 slideToggle()입니다...</p>
+            <p>button을 클릭하면 info부분을 보여줍니다... 보여주는 방식은 slideToggle()입니다...</p>
+            <p>button을 클릭하면 info부분을 보여줍니다... 보여주는 방식은 slideToggle()입니다...</p>
+            <p>button을 클릭하면 info부분을 보여줍니다... 보여주는 방식은 slideToggle()입니다...</p>
+        </div>
+    </body>
+    <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#info").hide();
+            $("#button").click(function() {
+                $("#info").slideToggle();
+            });
+        });
+    </script>
+</html>
