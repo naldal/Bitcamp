@@ -11,7 +11,7 @@
     </body>
     <script type="text/javascript" src="../js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript">
-        $("textarea").keyup(function() {
+        $("textarea").keydown(function() {
             var length = $(this).val().length;
 
             $("h1").html(length + "/50");
